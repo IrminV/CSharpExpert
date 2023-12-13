@@ -11,7 +11,7 @@ namespace Yayen.Framework.GameObjects
     public class GameObject
     {
         #region Component Fields
-        private List<BaseComponent> _components;
+        private List<Component> _components;
         #endregion
 
         public void Update(GameTime pGameTime)

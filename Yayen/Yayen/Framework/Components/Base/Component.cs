@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Yayen.Framework.Components.Base
 {
-    public class BaseComponent
+    public class Component
     {
     }
 }
