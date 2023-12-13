@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 using Yayen.Framework.GameObjects;
 using Yayen.Framework.MonoGameBase;
 
-namespace Yayen.Framework.Scenes
+namespace Yayen.Framework.Scenes.Base
 {
     /// <summary>
     /// The Blueprint for every other Scene
     /// </summary>
-    public class BaseScene
+    public class Scene
     {
         protected string _sceneName = "Scene";
         protected List<GameObject> _GameObjects = new();
@@ -26,7 +26,7 @@ namespace Yayen.Framework.Scenes
 
         public string SceneName { get { return _sceneName; } }
 
-        public BaseScene(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene")
+        public Scene(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene")
         {
             _sceneSystem = sceneSystem;
             _content = content;

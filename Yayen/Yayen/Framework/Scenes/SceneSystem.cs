@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Framework.MonoGameBase;
+using Yayen.Framework.Scenes.Base;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace Yayen.Framework.Scenes
@@ -17,12 +18,12 @@ namespace Yayen.Framework.Scenes
     /// </summary>
     public class SceneSystem
     {
-        public BaseScene previousScene;
-        List<BaseScene> _scenes = new();
+        public Scene previousScene;
+        List<Scene> _scenes = new();
         /// <summary>
         /// I made _loadedScenes a list to be able to expand it to use multiple scenes at the same time in the future. for now the only interesting index is 0 for the currently active scene.
         /// </summary>
-        List<BaseScene> _loadedScenes = new();
+        List<Scene> _loadedScenes = new();
         ContentManager _content;
         Game1 _game1;
 
@@ -62,7 +63,7 @@ namespace Yayen.Framework.Scenes
         /// Add scene to be managed by SceneSystem
         /// </summary>
         /// <param name="scene"></param>
-        public void AddScene(BaseScene scene)
+        public void AddScene(Scene scene)
         {
             _scenes.Add(scene);
             scene.ResetScene(_content, _game1);
@@ -85,7 +86,7 @@ namespace Yayen.Framework.Scenes
         /// <param name="name"></param>
         public void SwitchScene(string name)
         {
-            BaseScene sceneToLoad = GetSceneByName(name);
+            Scene sceneToLoad = GetSceneByName(name);
             if (sceneToLoad == null)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -102,7 +103,7 @@ namespace Yayen.Framework.Scenes
         /// Switch current scene with scene by reference.
         /// </summary>
         /// <param name="scene"></param>
-        public void SwitchScene(BaseScene scene)
+        public void SwitchScene(Scene scene)
         {
             _loadedScenes.Clear();
             _loadedScenes.Add(scene);
@@ -114,7 +115,7 @@ namespace Yayen.Framework.Scenes
         /// </summary>
         public void NextScene()
         {
-            BaseScene currentScene = _loadedScenes[0];
+            Scene currentScene = _loadedScenes[0];
             SwitchScene(_scenes.IndexOf(currentScene) + 1);
         }
         /// <summary>
@@ -122,7 +123,7 @@ namespace Yayen.Framework.Scenes
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public BaseScene GetSceneByName(string name)
+        public Scene GetSceneByName(string name)
         {
             // Search for scene by name and return
             for (int i = 0; i < _scenes.Count; i++)
@@ -139,9 +140,9 @@ namespace Yayen.Framework.Scenes
         /// Get next scene in scenes list.
         /// </summary>
         /// <returns></returns>
-        public BaseScene GetNextScene()
+        public Scene GetNextScene()
         {
-            BaseScene currentScene = _loadedScenes[0];
+            Scene currentScene = _loadedScenes[0];
             return _scenes[_scenes.IndexOf(currentScene) + 1];
         }
 
@@ -160,7 +161,7 @@ namespace Yayen.Framework.Scenes
         /// <param name="name"></param>
         public void ResetScene(string name)
         {
-            BaseScene sceneToReset = GetSceneByName(name);
+            Scene sceneToReset = GetSceneByName(name);
             if (sceneToReset == null)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -175,7 +176,7 @@ namespace Yayen.Framework.Scenes
         /// Reset scene by references.
         /// </summary>
         /// <param name="scene"></param>
-        public void ResetScene(BaseScene scene)
+        public void ResetScene(Scene scene)
         {
             scene.ResetScene(_content, _game1);
         }
@@ -184,7 +185,7 @@ namespace Yayen.Framework.Scenes
         /// Get currently loaded scene.
         /// </summary>
         /// <returns></returns>
-        public BaseScene GetScene()
+        public Scene GetScene()
         {
             return _loadedScenes[0];
         }

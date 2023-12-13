@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Yayen.Framework.GameObjects;
 using Yayen.Framework.MonoGameBase;
 using Yayen.Framework.Scenes;
+using Yayen.Framework.Scenes.Base;
 
 namespace Yayen.Gameplay.Scenes
 {

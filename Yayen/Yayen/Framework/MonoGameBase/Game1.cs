@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Security.AccessControl;
 using Yayen.Framework.Scenes;
+using Yayen.Gameplay.Scenes;
 
 namespace Yayen.Framework.MonoGameBase
 {
@@ -32,6 +33,10 @@ namespace Yayen.Framework.MonoGameBase
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            GameObjectTesting _gameObjectTesting = new(_sceneSystem, Content, this);
+            _sceneSystem.AddScene(_gameObjectTesting);
+
+
 
             // TODO: use this.Content to load your game content here
         }
