@@ -128,8 +128,12 @@ namespace Yayen.Framework.Scenes.Base
         {
             for (int i = 0; i < _GameObjects.Count; i++)
             {
-                if (_GameObjects[i] == null) continue;
-                //_GameObjects[i].Draw(spriteBatch);
+                if (_GameObjects[i] == null)
+                {
+                    Console.WriteLine($"Warning: {_GameObjects[i]} of index {i} was null");
+                    continue;
+                }
+                _GameObjects[i].Draw(spriteBatch);
             }
         }
 

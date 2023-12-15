@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yayen.Framework.Components.Base;
 
 namespace Yayen.Framework.Components
 {
@@ -42,17 +42,17 @@ namespace Yayen.Framework.Components
         #region Update Global Values
         private void UpdateGlobalPosition()
         {
-            _position = (_localPosition * _parent.Scale) + _parent.Position;
+            _position = _parent == null ? _localPosition :  (_localPosition * _parent.Scale) + _parent.Position;
         }
 
         private void UpdateGlobalRotation()
         {
-            _rotation = _localRotation + _parent.Rotation;
+            _rotation = _parent == null ? _localRotation : _localRotation + _parent.Rotation;
         }
 
         private void UpdateGlobalScale()
         {
-            _scale = _localScale + _parent.Scale;
+            _scale = _parent == null ? _localScale : _localScale + _parent.Scale;
         }
         #endregion
     }

@@ -55,8 +55,12 @@ namespace Yayen.Framework.MonoGameBase
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            _spriteBatch.Begin();
+
             // TODO: Add your drawing code here
             _sceneSystem.Draw(_spriteBatch);
+
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }

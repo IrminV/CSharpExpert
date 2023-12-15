@@ -2,10 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yayen.Framework.Components.Base;
 
 namespace Yayen.Framework.Components
 {
@@ -23,13 +23,14 @@ namespace Yayen.Framework.Components
          * 
          */
 
-        private Texture2D _sprite;
+        public Texture2D _sprite;
         private SpriteEffects _spriteEffects = SpriteEffects.None;
-        private Color _colorMask = new(0, 0, 0, 0);
+        private Color _colorMask = Color.White;
         private float _layerDepth = 0;
         private Vector2 _origin;
 
         //public Texture2D Sprite { get { return _sprite; } }
+
         /// <summary>
         /// Base constructor, which can already work with just a sprite.
         /// </summary>
@@ -42,13 +43,14 @@ namespace Yayen.Framework.Components
         {
             _sprite = pSprite;
             _spriteEffects = pSpriteEffects;
-            _colorMask = new Color(0, 0, 0, 0);
+            //_colorMask = new Color(0, 0, 0, 255);
             _layerDepth = pLayerDepth;
             _origin = new Vector2(pOriginX, pOriginY);
         }
 
         public void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
         {
+            Console.WriteLine($"SR is drawing at {pTransform.GlobalPosition} with origin {new Vector2(_sprite.Width * _origin.X, _sprite.Height * _origin.Y)}");
             pSpriteBatch.Draw(_sprite,
                 new Vector2(pTransform.GlobalPosition.X, pTransform.GlobalPosition.Y),
                 null,
