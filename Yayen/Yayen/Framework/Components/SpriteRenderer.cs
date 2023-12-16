@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Framework.Components.Base;
+using Yayen.Framework.GameObjects;
 
 namespace Yayen.Framework.Components
 {
@@ -23,7 +24,7 @@ namespace Yayen.Framework.Components
          * 
          */
 
-        public Texture2D _sprite;
+        private Texture2D _sprite;
         private SpriteEffects _spriteEffects = SpriteEffects.None;
         private Color _colorMask = Color.White;
         private float _layerDepth = 0;
@@ -39,18 +40,17 @@ namespace Yayen.Framework.Components
         /// <param name="pLayerDepth">Layerdepth for the order of drawing things.</param>
         /// <param name="pOriginX">Draw origin X.</param>
         /// <param name="pOriginY">Draw origin Y.</param>
-        public SpriteRenderer(Texture2D pSprite, SpriteEffects pSpriteEffects = SpriteEffects.None, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f)
+        public SpriteRenderer(Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
         {
             _sprite = pSprite;
-            _spriteEffects = pSpriteEffects;
             //_colorMask = new Color(0, 0, 0, 255);
             _layerDepth = pLayerDepth;
             _origin = new Vector2(pOriginX, pOriginY);
+            _spriteEffects = pSpriteEffects;
         }
 
         public void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
         {
-            Console.WriteLine($"SR is drawing at {pTransform.GlobalPosition} with origin {new Vector2(_sprite.Width * _origin.X, _sprite.Height * _origin.Y)}");
             pSpriteBatch.Draw(_sprite,
                 new Vector2(pTransform.GlobalPosition.X, pTransform.GlobalPosition.Y),
                 null,

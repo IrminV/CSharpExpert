@@ -14,7 +14,7 @@ namespace Yayen.Framework.GameObjects
     {
         #region Component Fields
         Transform2D _transform;
-        public SpriteRenderer _spriteRenderer;
+        private SpriteRenderer _spriteRenderer;
         private List<Component> _components;
         #endregion
 
@@ -54,6 +54,7 @@ namespace Yayen.Framework.GameObjects
         {
             if (!HasComponentOfType(pComponent))
             {
+                pComponent.GameObject = this;
                 _components.Add(pComponent);
                 // TODO: Make it so we don't have to check types here
                 if (pComponent is SpriteRenderer)

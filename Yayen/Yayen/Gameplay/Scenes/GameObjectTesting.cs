@@ -21,11 +21,10 @@ namespace Yayen.Gameplay.Scenes
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject = new(0, 0);
-            Component newSpriteRenderer = new SpriteRenderer(pContent.Load<Texture2D>("GreyBlock64"));
+            GameObject newGameObject = new(96, 96);
+            Component newSpriteRenderer = new SpriteRenderer(pContent.Load<Texture2D>("GreyBlock64"), 0f);
             newGameObject.AddComponent(newSpriteRenderer);
             _GameObjects.Add(newGameObject);
-            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
