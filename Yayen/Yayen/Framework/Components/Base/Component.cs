@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -23,19 +21,23 @@ namespace Yayen.Framework.Components.Base
                 {
                     _gameObject = value;
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"WARNING: tried to rebind {value} already bound component {value}");
+                    Console.WriteLine($"WARNING: tried to rebind component {this.GetType()} to {value} already bound component {value}");
                 }
             } 
         }
 
-        public virtual void Update(GameTime pGameTime)
+        public virtual void OnComponentAdded(GameObject pGameObject)
         {
 
         }
 
-        public virtual void Draw(SpriteBatch pSpriteBatch)
+        public virtual void OnComponentRemoved(GameObject pGameObject)
         {
 
         }
+
+        
+
+
     }
 }
