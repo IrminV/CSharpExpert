@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -24,6 +26,16 @@ namespace Yayen.Framework.Components.Base
                     Console.WriteLine($"WARNING: tried to rebind {value} already bound component {value}");
                 }
             } 
+        }
+
+        public virtual void Update(GameTime pGameTime)
+        {
+
+        }
+
+        public virtual void Draw(SpriteBatch pSpriteBatch)
+        {
+
         }
     }
 }

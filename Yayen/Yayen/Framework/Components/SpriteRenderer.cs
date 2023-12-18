@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,9 @@ namespace Yayen.Framework.Components
         private float _layerDepth = 0;
         private Vector2 _origin;
 
+        ContentManager _content;
+        private Timer _testTimer = new(10f);
+
         //public Texture2D Sprite { get { return _sprite; } }
 
         /// <summary>
@@ -40,13 +44,23 @@ namespace Yayen.Framework.Components
         /// <param name="pLayerDepth">Layerdepth for the order of drawing things.</param>
         /// <param name="pOriginX">Draw origin X.</param>
         /// <param name="pOriginY">Draw origin Y.</param>
-        public SpriteRenderer(Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
+        public SpriteRenderer(ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
         {
+            _content = pContent;
             _sprite = pSprite;
             //_colorMask = new Color(0, 0, 0, 255);
             _layerDepth = pLayerDepth;
             _origin = new Vector2(pOriginX, pOriginY);
             _spriteEffects = pSpriteEffects;
+
+            _testTimer.OnTimeElapsed += UnloadSprite;
+            _testTimer.StartTimer();
+        }
+
+        public override void Update(GameTime pGameTime)
+        {
+            base.Update(pGameTime);
+            _testTimer.Update(pGameTime);
         }
 
         public void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
@@ -60,6 +74,12 @@ namespace Yayen.Framework.Components
                 pTransform.Scale,
                 _spriteEffects,
                 _layerDepth);
+        }
+
+        public void UnloadSprite()
+        {
+            Console.WriteLine("Unloading Sprite");
+            _content.Unload();
         }
     }
 }

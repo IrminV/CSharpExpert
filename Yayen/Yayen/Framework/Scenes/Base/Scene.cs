@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
@@ -115,7 +116,7 @@ namespace Yayen.Framework.Scenes.Base
             for (int i = 0; i < _GameObjects.Count; i++)
             {
                 if (_GameObjects[i] == null) continue;
-                //_GameObjects[i].Update(gameTime);
+                _GameObjects[i].Update(gameTime);
             }
             //_collisionSystem.Update();
         }

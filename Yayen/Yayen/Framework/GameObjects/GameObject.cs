@@ -46,7 +46,7 @@ namespace Yayen.Framework.GameObjects
         {
             for (int i = 0; i < _components.Count; i++)
             {
-                //_components[i].Update(pGameTime);
+                _components[i].Update(pGameTime);
             }
         }
         // We might want to make this private later

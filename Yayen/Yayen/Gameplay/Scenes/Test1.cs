@@ -14,15 +14,15 @@ using Yayen.Framework.Components.Base;
 
 namespace Yayen.Gameplay.Scenes
 {
-    public class GameObjectTesting : Scene
+    public class Test1 : Scene
     {
-        public GameObjectTesting(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
+        public Test1(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject = new(96, 96);
-            Component newSpriteRenderer = new SpriteRenderer(pContent.Load<Texture2D>("GreyBlock64"), 0f);
+            GameObject newGameObject = new(96, 96, 0);
+            Component newSpriteRenderer = new SpriteRenderer(pContent ,pContent.Load<Texture2D>("GreyBlock64"), 0f);
             newGameObject.AddComponent(newSpriteRenderer);
             _GameObjects.Add(newGameObject);
         }
