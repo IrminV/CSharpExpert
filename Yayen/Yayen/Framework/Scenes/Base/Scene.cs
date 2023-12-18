@@ -9,6 +9,8 @@ using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using Yayen.Framework.CollisionSystem;
+using Yayen.Framework.Components.Colliders.Base;
 using Yayen.Framework.GameObjects;
 using Yayen.Framework.MonoGameBase;
 
@@ -24,6 +26,7 @@ namespace Yayen.Framework.Scenes.Base
         protected SceneSystem _sceneSystem;
         protected Game1 _game1;
         protected ContentManager _content;
+        protected RectangleCollisionSystem _RectangleCollisionSystem = new();
 
         public string SceneName { get { return _sceneName; } }
 
@@ -76,6 +79,10 @@ namespace Yayen.Framework.Scenes.Base
         /// <param name="game1"></param>
         public virtual void ResetScene(ContentManager content, Game1 game1)
         {
+            for (int i = 0; i < _GameObjects.Count; i++)
+            {
+                _GameObjects[i].Destroy();
+            }
             _GameObjects.Clear();
             LoadContent(content, game1);
             //_collisionSystem = new CollisionSystem();
@@ -97,16 +104,6 @@ namespace Yayen.Framework.Scenes.Base
         }
 
         /// <summary>
-        /// Value * 64. Actually a workaround to work with units of 64 by 64 without changing gameobject or creating something new.
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        //protected float Unit64(float input)
-        //{
-        //    return input * 64;
-        //}
-
-        /// <summary>
         /// Call to update all gameobjects in the scene
         /// </summary>
         /// <param name="gameTime"></param>
@@ -118,7 +115,7 @@ namespace Yayen.Framework.Scenes.Base
                 if (_GameObjects[i] == null) continue;
                 _GameObjects[i].Update(gameTime);
             }
-            //_collisionSystem.Update();
+            _RectangleCollisionSystem.Update();
         }
 
         /// <summary>
@@ -146,65 +143,5 @@ namespace Yayen.Framework.Scenes.Base
         {
             _GameObjects.Remove(gameObject);
         }
-
-        /// <summary>
-        /// Quick method to create stairs.
-        /// </summary>
-        /// <param name="origin"></param>
-        /// <param name="height"></param>
-        /// <param name="flipX"></param>
-        /// <param name="flipY"></param>
-        /// <param name="unitSize"></param>
-        //protected void CreateStairs(Vector3 origin, int height, bool flipX = false, bool flipY = false, int unitSize = 64)
-        //{
-        //    int width = height;
-        //    int rowsDone = 0;
-
-
-        //    if (flipY)
-        //    {
-        //        for (int y = 0; y < height; y++)
-        //        {
-        //            for (int x = 0 + rowsDone; x < width; x++)
-        //            {
-        //                _GameObjects.Add(new(this, _content.Load<Texture2D>("GreyBlock64"), origin + new Vector3(flipX ? Unit64(-x) : Unit64(x), Unit64(y), 0), 0, Color.White, true, true, new Vector2(1, 1)));
-        //            }
-        //            rowsDone++;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        for (int y = 0; y < height; y++)
-        //        {
-        //            for (int x = 0 + rowsDone; x < width; x++)
-        //            {
-        //                _GameObjects.Add(new(this, _content.Load<Texture2D>("GreyBlock64"), origin + new Vector3(flipX ? Unit64(-x) : Unit64(x), Unit64(-y), 0), 0, Color.White, true, true, new Vector2(1, 1)));
-        //            }
-        //            rowsDone++;
-        //        }
-        //    }
-        //}
-
-        /// <summary>
-        /// Quick method to make the creation of MovingPlatforms smaller and easier.
-        /// </summary>
-        /// <param name="checkpoints"></param>
-        /// <param name="leverPos"></param>
-        /// <param name="scale"></param>
-        /// <param name="startMoving"></param>
-        /// <param name="startDelay"></param>
-        /// <returns></returns>
-        //protected MovingPlatform CreateMovingPlatform(List<Vector2> checkpoints, Vector2? leverPos = null, Vector2? scale = null, bool startMoving = false, float startDelay = 0f)
-        //{
-        //    MovingPlatform movingPlatform = new MovingPlatform(this, _content.Load<Texture2D>("GreyBlock64"), new Vector3(checkpoints[0].X, checkpoints[0].Y, 0), 0, Color.Cyan, true, true, checkpoints, startMoving, startDelay, scale);
-        //    _GameObjects.Add(movingPlatform);
-
-        //    if (leverPos != null)
-        //    {
-        //        _GameObjects.Add(new LeverSystem.Lever(this, _content.Load<Texture2D>("Lever-Up"), new Vector3(Unit64(((Vector2)leverPos).X), Unit64(((Vector2)leverPos).Y), 0), true, true, movingPlatform));
-        //    }
-
-        //    return movingPlatform;
-        //}
     }
 }

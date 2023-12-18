@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Yayen.Framework.CollisionSystem;
 using Yayen.Framework.Components.Colliders.Base;
 using Yayen.Framework.GameObjects;
 
@@ -12,63 +13,53 @@ namespace Yayen.Framework.Components.Colliders.RectangleCollision
 {
     public class RectangleCollider : Collider
     {
-        private GameObject _connectedGameObject;
+        //private GameObject _gameObject;
         //private List<CollisionRectangle> _collidingRectangles = new();
         //private bool _hasBeenDestroyed = false;
 
         // REMINDER: In Monogame the 0, 0 point is in the top left, the starting point of this script
         // should also be in the top left of the sprite you want to add collision to
+        private Vector2 _origin;
         private Vector2 _startingPoint;
         private Vector2 _endPoint;
         private Vector2 _midPoint;
-        private float _width;
-        private float _height;
+        private float _width = 2;
+        private float _height = 2;
 
         //public List<CollisionRectangle> CollidingRectangles { get { return _collidingRectangles; } }
         //public bool HasBeenDestroyed { get { return _hasBeenDestroyed; } }
-        public GameObject ConnectedGameObject
-        {
-            get { return _connectedGameObject; }
-        }
+        //public GameObject ConnectedGameObject
+        //{
+        //    get { return _gameObject; }
+        //}
 
         public Vector2 MidPoint
         {
             get { return _midPoint; }
         }
 
-        public float Width { get { return _width; } }
-        public float Height { get { return _height; } }
+        public float Width { get { return _width; } set { _width = value; } }
+        public float Height { get { return _height; } set { _height = value; } }
 
-        public RectangleCollider(float width, float height, GameObject pconnectedGameObject)
+        public RectangleCollider(RectangleCollisionSystem pRectangleCollisionSystem, float pOriginX = 0.5f, float pOriginY = 0.5f)
         {
-            _width = width;
-            _height = height;
-            _connectedGameObject = pconnectedGameObject;
+            pRectangleCollisionSystem.AddCollider(this);
+            _origin.X = pOriginX;
+            _origin.Y = pOriginY;
         }
 
-        public RectangleCollider(Texture2D ptextureForBounds, GameObject pconnectedGameObject)
+        public override void Update(GameTime pGameTime, Transform2D pTransform)
         {
-            _connectedGameObject = pconnectedGameObject;
-            if (ptextureForBounds != null)
-            {
-                _width = ptextureForBounds.Width;
-                _height = ptextureForBounds.Height;
-            }
-            else
-            {
-                //Console.WriteLine($"Object with name {_connectedGameObject.ObjectName} has no texureBounds for it's CollisionRectangle. Is this intentional? Default collisionbounds apply");
-                _width = 2;
-                _height = 2;
-            }
-        }
-
-
-
-        public void Update(Vector2 startingPoint)
-        {
-            _startingPoint = startingPoint;
-            _endPoint = new Vector2(startingPoint.X + _width, startingPoint.Y + _height);
+            base.Update(pGameTime, pTransform);
+            _startingPoint = new Vector2(pTransform.GlobalPosition.X - (_origin.X * _width),pTransform.GlobalPosition.Y - (_origin.Y * _height));
+            _endPoint = new Vector2(_startingPoint.X + _width, _startingPoint.Y + _height);
             _midPoint = GetMidPoint();
+        }
+
+        public override void OnComponentAdded(GameObject pGameObject)
+        {
+            base.OnComponentAdded(pGameObject);
+            SetSizeToRenderBounds();
         }
 
 
@@ -115,6 +106,13 @@ namespace Yayen.Framework.Components.Colliders.RectangleCollision
         public float GetBottomYCollisionEdge()
         {
             return _endPoint.Y;
+        }
+
+        public void SetSizeToRenderBounds()
+        {
+            Vector2 renderBounds = GameObject.GetRenderBounds();
+            Width = renderBounds.X;
+            Height = renderBounds.Y;
         }
 
         //public void Destroy()

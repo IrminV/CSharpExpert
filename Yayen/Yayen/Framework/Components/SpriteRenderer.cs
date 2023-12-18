@@ -52,18 +52,15 @@ namespace Yayen.Framework.Components
             _layerDepth = pLayerDepth;
             _origin = new Vector2(pOriginX, pOriginY);
             _spriteEffects = pSpriteEffects;
-
-            _testTimer.OnTimeElapsed += UnloadSprite;
-            _testTimer.StartTimer();
         }
 
-        public override void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime, Transform2D pTransform)
         {
-            base.Update(pGameTime);
+            base.Update(pGameTime, pTransform);
             _testTimer.Update(pGameTime);
         }
 
-        public void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
+        public override void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
         {
             pSpriteBatch.Draw(_sprite,
                 new Vector2(pTransform.GlobalPosition.X, pTransform.GlobalPosition.Y),
@@ -76,10 +73,9 @@ namespace Yayen.Framework.Components
                 _layerDepth);
         }
 
-        public void UnloadSprite()
+        public Vector2 GetSpriteBounds()
         {
-            Console.WriteLine("Unloading Sprite");
-            _content.Unload();
+            return new Vector2(_sprite.Width, _sprite.Height);
         }
     }
 }

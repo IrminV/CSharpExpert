@@ -11,6 +11,7 @@ using Yayen.Framework.Scenes.Base;
 using Yayen.Framework.Components;
 using Microsoft.Xna.Framework.Graphics;
 using Yayen.Framework.Components.Base;
+using Yayen.Framework.Components.Colliders.RectangleCollision;
 
 namespace Yayen.Gameplay.Scenes
 {
@@ -21,10 +22,22 @@ namespace Yayen.Gameplay.Scenes
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject = new(96, 96, 0);
+            GameObject newGameObject = new(this ,96, 96, 0);
             Component newSpriteRenderer = new SpriteRenderer(pContent ,pContent.Load<Texture2D>("GreyBlock64"), 0f);
             newGameObject.AddComponent(newSpriteRenderer);
+            newGameObject.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
             _GameObjects.Add(newGameObject);
+
+
+            // Mouse Object
+            GameObject mouse = new(this,96 + 128, 96 + 128, 0);
+            Component mouseSpriteRenderer = new SpriteRenderer(pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f);
+            mouse.AddComponent(mouseSpriteRenderer);
+            mouse.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
+            mouse.AddComponent(new MouseSelector());
+            _GameObjects.Add(mouse);
+
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)

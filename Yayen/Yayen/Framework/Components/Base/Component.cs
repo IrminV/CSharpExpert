@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -36,6 +38,15 @@ namespace Yayen.Framework.Components.Base
 
         }
 
+        public virtual void Update(GameTime pGameTime, Transform2D pTransform)
+        {
+
+        }
+
+        public virtual void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
+        {
+
+        }
         
 
 

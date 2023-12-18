@@ -12,11 +12,10 @@ namespace Yayen.Framework.CollisionSystem
 {
     public class RectangleCollisionSystem
     {
-        private List<RectangleCollider> _collidersToCheck;
+        private List<RectangleCollider> _collidersToCheck = new();
 
-        public RectangleCollisionSystem(List<RectangleCollider> pCollidersToCheck)
+        public RectangleCollisionSystem()
         {
-            _collidersToCheck = pCollidersToCheck;
         }
 
         public void Update()
@@ -61,6 +60,19 @@ namespace Yayen.Framework.CollisionSystem
                 }
             }
         }
+
+        public void AddCollider(RectangleCollider pRectangleCollider)
+        {
+            if (_collidersToCheck.Contains(pRectangleCollider))
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("WARNING: Tried to add already added collider");
+                Console.ResetColor();
+                return;
+            }
+            _collidersToCheck.Add(pRectangleCollider);
+        }
+
 
         // The method below here are optimized for Rectangle coliders. We want ot make these more dynamic
         private bool CheckIfCollidingOnX(RectangleCollider colOne, RectangleCollider colTwo)

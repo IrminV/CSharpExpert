@@ -16,10 +16,10 @@ namespace Yayen.Framework.Components
         float _fontSize;
         Vector2 _position;
 
-    //    public override void Draw(SpriteBatch pSpriteBatch)
-    //    {
-    //        base.Draw(pSpriteBatch);
-    //        pSpriteBatch.DrawString(_font, _text, GameObjec);
-    //    }
-    //}
+        //    public override void Draw(SpriteBatch pSpriteBatch)
+        //    {
+        //        base.Draw(pSpriteBatch);
+        //        pSpriteBatch.DrawString(_font, _text, GameObjec);
+        //    }
+    }
 }
