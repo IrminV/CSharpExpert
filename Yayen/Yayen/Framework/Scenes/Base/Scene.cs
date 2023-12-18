@@ -53,6 +53,7 @@ namespace Yayen.Framework.Scenes.Base
         /// </summary>
         public virtual void EnterScene()
         {
+            Console.WriteLine("Entering Scene");
             //_collisionSystem.UpdateGameObjects(_GameObjects);
             if (_sceneSystem.previousScene != null && _sceneSystem.previousScene.SceneName == SceneName)
             {
@@ -60,6 +61,7 @@ namespace Yayen.Framework.Scenes.Base
             }
             else
             {
+                Console.WriteLine("Resetting Scene on enter:");
                 ResetScene(_content, _game1);
             }
         }
@@ -79,6 +81,7 @@ namespace Yayen.Framework.Scenes.Base
         /// <param name="game1"></param>
         public virtual void ResetScene(ContentManager content, Game1 game1)
         {
+            Console.WriteLine("Resetting Scene");
             for (int i = 0; i < _GameObjects.Count; i++)
             {
                 _GameObjects[i].Destroy();

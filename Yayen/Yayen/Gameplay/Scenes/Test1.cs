@@ -22,7 +22,7 @@ namespace Yayen.Gameplay.Scenes
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject = new(this ,96, 96, 0);
+            GameObject newGameObject = new(this, "Block", 96, 96, 0);
             Component newSpriteRenderer = new SpriteRenderer(pContent ,pContent.Load<Texture2D>("GreyBlock64"), 0f);
             newGameObject.AddComponent(newSpriteRenderer);
             newGameObject.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
@@ -30,7 +30,7 @@ namespace Yayen.Gameplay.Scenes
 
 
             // Mouse Object
-            GameObject mouse = new(this,96 + 128, 96 + 128, 0);
+            GameObject mouse = new(this, "Mouse", 96 + 128, 96 + 128, 0);
             Component mouseSpriteRenderer = new SpriteRenderer(pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f);
             mouse.AddComponent(mouseSpriteRenderer);
             mouse.AddComponent(new RectangleCollider(_RectangleCollisionSystem));

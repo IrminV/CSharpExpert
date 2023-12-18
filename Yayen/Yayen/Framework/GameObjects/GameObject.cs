@@ -14,17 +14,21 @@ namespace Yayen.Framework.GameObjects
 {
     public class GameObject
     {
+        private Scene _scene;
+        private string _name = "GameObject";
+
         #region Component Fields
         private Transform2D _transform;
         private SpriteRenderer _spriteRenderer;
-        private List<Component> _components;
-        private Scene _scene;
+        private List<Component> _components = new();
         #endregion
 
+        public string Name { get { return _name; } }
+
+        #region Constructors
         public GameObject(Scene pScene, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY =1)
         {
             _scene = pScene;
-            _components = new List<Component>();
 
             Transform2D _newTransform = new(pX, pY, pRotation, pScaleX, pScaleY);
             if (_newTransform == null)
@@ -34,6 +38,8 @@ namespace Yayen.Framework.GameObjects
             AddComponent(_newTransform);
             
         }
+        public GameObject(Scene pScene, string pName, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY = 1) : this (pScene, pX, pY, pRotation, pScaleX, pScaleY) { _name = pName; }
+        #endregion
 
         public void Update(GameTime pGameTime)
         {
@@ -73,13 +79,13 @@ namespace Yayen.Framework.GameObjects
                 // TODO: Make it so we don't have to check types here
                 if (pComponent is SpriteRenderer)
                 {
-                    Console.WriteLine("Added SR");
+                    //Console.WriteLine("Added SR");
                     _spriteRenderer = (SpriteRenderer)pComponent;
                 }
 
                 if (pComponent is Transform2D)
                 {
-                    Console.WriteLine("Added Transform");
+                    //Console.WriteLine("Added Transform");
                     _transform = (Transform2D)pComponent;
                 }
 

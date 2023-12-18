@@ -22,8 +22,12 @@ namespace Yayen.Framework.Components.Base
                 if (_gameObject == null)
                 {
                     _gameObject = value;
+                }
+                else
+                {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"WARNING: tried to rebind component {this.GetType()} to {value} already bound component {value}");
+                    Console.WriteLine($"WARNING: tried to rebind component {this.GetType()} to {value.Name} already bound component {value.Name}");
+                    Console.ResetColor();
                 }
             } 
         }
