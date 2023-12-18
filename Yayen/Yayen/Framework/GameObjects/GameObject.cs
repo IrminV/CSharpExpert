@@ -68,6 +68,8 @@ namespace Yayen.Framework.GameObjects
                     Console.WriteLine("Added Transform");
                     _transform = (Transform2D)pComponent;
                 }
+
+                pComponent.OnComponentAdded(this);
             }
         }
 

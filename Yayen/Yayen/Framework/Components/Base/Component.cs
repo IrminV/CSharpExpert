@@ -21,9 +21,23 @@ namespace Yayen.Framework.Components.Base
                 {
                     _gameObject = value;
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"WARNING: tried to rebind {value} already bound component {value}");
+                    Console.WriteLine($"WARNING: tried to rebind component {this.GetType()} to {value} already bound component {value}");
                 }
             } 
         }
+
+        public virtual void OnComponentAdded(GameObject pGameObject)
+        {
+
+        }
+
+        public virtual void OnComponentRemoved(GameObject pGameObject)
+        {
+
+        }
+
+        
+
+
     }
 }

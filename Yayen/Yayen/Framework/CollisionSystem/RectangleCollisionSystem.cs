@@ -5,15 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Framework.Components.Colliders.Base;
+using Yayen.Framework.Components.Colliders.RectangleCollision;
 using Yayen.Framework.GameObjects;
 
 namespace Yayen.Framework.CollisionSystem
 {
-    public class CollisionSystem
+    public class RectangleCollisionSystem
     {
-        private List<Collider> _collidersToCheck;
+        private List<RectangleCollider> _collidersToCheck;
 
-        public CollisionSystem(List<Collider> pCollidersToCheck)
+        public RectangleCollisionSystem(List<RectangleCollider> pCollidersToCheck)
         {
             _collidersToCheck = pCollidersToCheck;
         }
@@ -27,11 +28,11 @@ namespace Yayen.Framework.CollisionSystem
         {
             for (int i = 0; i < _collidersToCheck.Count; i++)
             {
-                Collider colOne = _collidersToCheck[i];
+                RectangleCollider colOne = _collidersToCheck[i];
                 for (int j = i; j < _collidersToCheck.Count - 1; j++)
                 {
                     bool collisionShouldExists = false;
-                    Collider colTwo = _collidersToCheck[j + 1];
+                    RectangleCollider colTwo = _collidersToCheck[j + 1];
                     if (colOne.GetCopyCurrentCollisions().Contains(colTwo) && colTwo.GetCopyCurrentCollisions().Contains(colOne))
                     {
                         collisionShouldExists = true;
@@ -62,7 +63,7 @@ namespace Yayen.Framework.CollisionSystem
         }
 
         // The method below here are optimized for Rectangle coliders. We want ot make these more dynamic
-        private bool CheckIfCollidingOnX(Collider colOne, Collider colTwo)
+        private bool CheckIfCollidingOnX(RectangleCollider colOne, RectangleCollider colTwo)
         {
             bool collidingOnX = false;
             // If we are to the left of the object and our right edge is past/within their left edge
@@ -81,7 +82,7 @@ namespace Yayen.Framework.CollisionSystem
             return collidingOnX;
         }
 
-        private bool CheckIfCollidingOnY(CollisionRectangle colOne, CollisionRectangle colTwo)
+        private bool CheckIfCollidingOnY(RectangleCollider colOne, RectangleCollider colTwo)
         {
             bool collidingOnY = false;
             // If we are above the object and our bottom edge is past/within than their upper edge
