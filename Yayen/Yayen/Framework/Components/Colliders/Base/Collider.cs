@@ -14,15 +14,18 @@ namespace Yayen.Framework.Components.Colliders.Base
         // List of all colliding object for which this object is colliding
         private List<Collider> _collidingColliders = new();
 
-        public delegate void CollisionDelegate(RectangleCollider pCollidingObject);
+        public delegate void CollisionDelegate(Collider pCollider);
         public event CollisionDelegate OnCollisionEnter;
         public event CollisionDelegate OnCollisionExit;
+
+        public Collider(GameObject pGameObject) : base(pGameObject) { }
 
         public void AddObjectToCollidingList(Collider pcollidingWithThis)
         {
             if (!_collidingColliders.Contains(pcollidingWithThis))
             {
                 _collidingColliders.Add(pcollidingWithThis);
+                OnCollisionEnter?.Invoke(pcollidingWithThis);
                 //_connectedGameObject.CollidedWithCollider(pcollidingWithThis);
             }
         }
@@ -30,6 +33,7 @@ namespace Yayen.Framework.Components.Colliders.Base
         public void RemoveObjectFromCollidingList(Collider pNotCollidingWithThis)
         {
             _collidingColliders.Remove(pNotCollidingWithThis);
+            OnCollisionExit?.Invoke(pNotCollidingWithThis);
             //_connectedGameObject.StoppedOverlappingWithThis(pNotCollidingWithThis.ConnectedGameObject);
         }
 

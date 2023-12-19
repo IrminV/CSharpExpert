@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Framework.Components.Base;
+using Yayen.Framework.GameObjects;
 
 namespace Yayen.Framework.Components
 {
@@ -14,7 +15,7 @@ namespace Yayen.Framework.Components
         private MouseState _mouseState = new MouseState();
 
 
-        public MouseSelector() 
+        public MouseSelector(GameObject pGameObject) : base(pGameObject) 
         { 
         
         }

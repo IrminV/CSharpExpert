@@ -41,7 +41,7 @@ namespace Yayen.Framework.Components.Colliders.RectangleCollision
         public float Width { get { return _width; } set { _width = value; } }
         public float Height { get { return _height; } set { _height = value; } }
 
-        public RectangleCollider(RectangleCollisionSystem pRectangleCollisionSystem, float pOriginX = 0.5f, float pOriginY = 0.5f)
+        public RectangleCollider(GameObject pGameObject, RectangleCollisionSystem pRectangleCollisionSystem, float pOriginX = 0.5f, float pOriginY = 0.5f) : base(pGameObject)
         {
             pRectangleCollisionSystem.AddCollider(this);
             _origin.X = pOriginX;

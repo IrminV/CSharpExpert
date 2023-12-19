@@ -33,8 +33,11 @@ namespace Yayen.Framework.MonoGameBase
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Test1 _Test1 = new(_sceneSystem, Content, this);
-            _sceneSystem.AddScene(_Test1);
+            Test1 _test1 = new(_sceneSystem, Content, this, "Test1");
+            Test2 _test2 = new(_sceneSystem, Content, this, "Test2");
+            _sceneSystem.AddScene(_test1);
+            _sceneSystem.AddScene(_test2);
+            _sceneSystem.SwitchScene(_test1);
 
 
 

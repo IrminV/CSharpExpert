@@ -17,6 +17,7 @@ namespace Yayen.Framework.GameObjects
         private Scene _scene;
         private string _name = "GameObject";
 
+
         #region Component Fields
         private Transform2D _transform;
         private SpriteRenderer _spriteRenderer;
@@ -30,7 +31,7 @@ namespace Yayen.Framework.GameObjects
         {
             _scene = pScene;
 
-            Transform2D _newTransform = new(pX, pY, pRotation, pScaleX, pScaleY);
+            Transform2D _newTransform = new(this, pX, pY, pRotation, pScaleX, pScaleY);
             if (_newTransform == null)
             {
                 Console.WriteLine("_newTransform is null");
@@ -74,7 +75,7 @@ namespace Yayen.Framework.GameObjects
         {
             if (!HasComponentOfType(pComponent))
             {
-                pComponent.GameObject = this;
+                //pComponent.GameObject = this;
                 _components.Add(pComponent);
                 // TODO: Make it so we don't have to check types here
                 if (pComponent is SpriteRenderer)
@@ -93,7 +94,7 @@ namespace Yayen.Framework.GameObjects
             }
         }
 
-        private bool HasComponentOfType(Component pComponent)
+        public bool HasComponentOfType(Component pComponent)
         {
             //if (_components == null || _components.Count == 0) return false;
             for (int i = 0; i < _components.Count; i++)
@@ -106,10 +107,35 @@ namespace Yayen.Framework.GameObjects
             return false;
         }
 
+        public bool HasComponentOfType(Type pType)
+        {
+            //if (_components == null || _components.Count == 0) return false;
+            for (int i = 0; i < _components.Count; i++)
+            {
+                if (pType == _components[i].GetType())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public Vector2 GetRenderBounds()
         {
             if (_spriteRenderer == null) return Vector2.Zero;
             return _spriteRenderer.GetSpriteBounds();
+        }
+
+        public Component GetComponent<tValue>()
+        {
+            for (int i = 0; i < _components.Count; i++)
+            {
+                if (typeof(tValue) == _components[i].GetType())
+                {
+                    return _components[i];
+                }
+            }
+            return null;
         }
 
         #endregion

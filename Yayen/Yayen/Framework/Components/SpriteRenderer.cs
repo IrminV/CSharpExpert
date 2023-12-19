@@ -44,7 +44,7 @@ namespace Yayen.Framework.Components
         /// <param name="pLayerDepth">Layerdepth for the order of drawing things.</param>
         /// <param name="pOriginX">Draw origin X.</param>
         /// <param name="pOriginY">Draw origin Y.</param>
-        public SpriteRenderer(ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
+        public SpriteRenderer(GameObject pGameObject, ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None) : base(pGameObject)
         {
             _content = pContent;
             _sprite = pSprite;

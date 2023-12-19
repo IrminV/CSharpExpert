@@ -32,6 +32,11 @@ namespace Yayen.Framework.Components.Base
             } 
         }
 
+        public Component(GameObject pGameObject)
+        {
+            _gameObject = pGameObject;
+        }
+
         public virtual void OnComponentAdded(GameObject pGameObject)
         {
 
