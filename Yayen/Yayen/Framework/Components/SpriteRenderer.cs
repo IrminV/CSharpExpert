@@ -21,8 +21,6 @@ namespace Yayen.Framework.Components
          * It uses layerDepth to make us able to decide drawing order.
          * 
          * We can use an origin to decide where to draw form position point.
-         * 
-         * 
          */
 
         private Texture2D _sprite;
@@ -30,6 +28,7 @@ namespace Yayen.Framework.Components
         private Color _colorMask = Color.White;
         private float _layerDepth = 0;
         private Vector2 _origin;
+        private Transform2D _transform;
 
         ContentManager _content;
         private Timer _testTimer = new(10f);
@@ -44,6 +43,7 @@ namespace Yayen.Framework.Components
         /// <param name="pLayerDepth">Layerdepth for the order of drawing things.</param>
         /// <param name="pOriginX">Draw origin X.</param>
         /// <param name="pOriginY">Draw origin Y.</param>
+        /// <param name="pSpriteEffects">MonoGame SpriteEffects, used to mirror sprites.</param>
         public SpriteRenderer(GameObject pGameObject, ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None) : base(pGameObject)
         {
             _content = pContent;
@@ -52,6 +52,8 @@ namespace Yayen.Framework.Components
             _layerDepth = pLayerDepth;
             _origin = new Vector2(pOriginX, pOriginY);
             _spriteEffects = pSpriteEffects;
+
+            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
         }
 
         public override void Update(GameTime pGameTime, Transform2D pTransform)
@@ -73,9 +75,13 @@ namespace Yayen.Framework.Components
                 _layerDepth);
         }
 
+        /// <summary>
+        /// Gets the width and height of a spriteRenderer sprite with scaling included.
+        /// </summary>
+        /// <returns>the width and height of the spriteRenderer sprite with scaling included.</returns>
         public Vector2 GetSpriteBounds()
         {
-            return new Vector2(_sprite.Width, _sprite.Height);
+            return new Vector2(_sprite.Width * _transform.Scale.X, _sprite.Height * _transform.Scale.Y);
         }
     }
 }

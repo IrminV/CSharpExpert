@@ -17,7 +17,10 @@ namespace Yayen.Framework.Components.Colliders.Base
         public delegate void CollisionDelegate(Collider pCollider);
         public event CollisionDelegate OnCollisionEnter;
         public event CollisionDelegate OnCollisionExit;
-
+        /// <summary>
+        /// Create a Base Collider.
+        /// </summary>
+        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         public Collider(GameObject pGameObject) : base(pGameObject) { }
 
         public void AddObjectToCollidingList(Collider pcollidingWithThis)

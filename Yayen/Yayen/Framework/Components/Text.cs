@@ -10,6 +10,9 @@ using Yayen.Framework.GameObjects;
 
 namespace Yayen.Framework.Components
 {
+    /// <summary>
+    /// Text Component. Displays text at position local to GameObject.
+    /// </summary>
     public class Text : Component
     {
         SpriteFont _font;
@@ -21,7 +24,14 @@ namespace Yayen.Framework.Components
         Vector2 _position;
 
         public Color Color { get { return _color; } set { _color = value; } }
-
+        /// <summary>
+        /// Create a Text component which displays text at a position local to the GameObject it is part of.
+        /// </summary>
+        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
+        /// <param name="pFont">Font to use when drawing text.</param>
+        /// <param name="text">String of text to display.</param>
+        /// <param name="posX">Position on the X axis.</param>
+        /// <param name="posY">Position on the Y axis</param>
         public Text(GameObject pGameObject, SpriteFont pFont, string text, float posX = 0, float posY = 0) : base(pGameObject)
         {
             _font = pFont;

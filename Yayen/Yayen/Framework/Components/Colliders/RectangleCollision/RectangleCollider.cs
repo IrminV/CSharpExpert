@@ -51,7 +51,7 @@ namespace Yayen.Framework.Components.Colliders.RectangleCollision
         public override void Update(GameTime pGameTime, Transform2D pTransform)
         {
             base.Update(pGameTime, pTransform);
-            _startingPoint = new Vector2(pTransform.GlobalPosition.X - (_origin.X * _width) * pTransform.Scale.X, pTransform.GlobalPosition.Y - (_origin.Y * _height) * pTransform.Scale.Y);
+            _startingPoint = new Vector2(pTransform.GlobalPosition.X - (_origin.X * _width), pTransform.GlobalPosition.Y - (_origin.Y * _height));
             _endPoint = new Vector2(_startingPoint.X + _width, _startingPoint.Y + _height);
             _midPoint = GetMidPoint();
         }

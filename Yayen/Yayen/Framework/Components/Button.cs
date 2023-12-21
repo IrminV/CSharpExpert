@@ -26,7 +26,13 @@ namespace Yayen.Framework.Components
         public delegate void ButtonDelegate();
         public event ButtonDelegate OnButtonPressed;
 
-
+        /// <summary>
+        /// Create a Button Component, designating the GameObject this is part of as the Button.
+        /// </summary>
+        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
+        /// <param name="pHoverColor">Colormask the button has when it's being hovered by a selector.</param>
+        /// <param name="pPressedColor">Colormask the button has when being pressed.</param>
+        /// <param name="pDisabledColor">Colormask the button has when disabled.</param>
         public Button(GameObject pGameObject, Color pHoverColor, Color pPressedColor, Color pDisabledColor) : base(pGameObject)
         {
             _hoverColor = pHoverColor;
@@ -35,6 +41,10 @@ namespace Yayen.Framework.Components
             ConstructInitialize();
         }
 
+        /// <summary>
+        /// Create a Button Component, designating the GameObject this is part of as the Button. 
+        /// </summary>
+        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         public Button(GameObject pGameObject) :base(pGameObject) { ConstructInitialize(); }
 
         public void ConstructInitialize()
@@ -58,6 +68,10 @@ namespace Yayen.Framework.Components
             _collider = (Collider)GameObject.GetComponent<RectangleCollider>();
         }
 
+        /// <summary>
+        /// Checks if MouseSelector is colliding with this button.
+        /// </summary>
+        /// <param name="pCollider">Collider colliding with this GameObject</param>
         public void CollisionMouseCheck(Collider pCollider)
         {
             if (pCollider.GameObject.HasComponentOfType(typeof(MouseSelector)))
@@ -67,15 +81,22 @@ namespace Yayen.Framework.Components
             }
         }
 
+        /// <summary>
+        /// Checks if MouseSelector is no longer colliding with this button if mouse was colliding before.
+        /// </summary>
+        /// <param name="pCollider">Collider no longer colliding with this GameObject</param>
         public void ExitCollisionMouseCheck(Collider pCollider)
         {
-            if (pCollider.GameObject.HasComponentOfType(typeof(MouseSelector)))
+            if (_mouseOverlap && pCollider.GameObject.HasComponentOfType(typeof(MouseSelector)))
             {
                 Console.WriteLine($"Button {GameObject.Name} detected mouse exiting overlap");
                 _mouseOverlap = false;
             }
         }
 
+        /// <summary>
+        /// Checks if the mouse has clicked and if so, invokes OnButtonPressed event. Should only update when mouse is hovering.
+        /// </summary>
         private void CheckClick()
         {
             _mouseState = Mouse.GetState();
@@ -86,13 +107,19 @@ namespace Yayen.Framework.Components
             }
         }
 
-        #region PressCoolDownTimer
+        #region PressCoolDownTimerMethods
+        /// <summary>
+        /// Allows this button to be pressed again.
+        /// </summary>
         private void AllowPress()
         {
             _canPress = true;
             _pressCooldownTimer.ResetTimer();
         }
 
+        /// <summary>
+        /// Activate a press cooldown, temporarily preventing this button from being pressed.
+        /// </summary>
         private void PressCooldown()
         {
             _canPress = false;

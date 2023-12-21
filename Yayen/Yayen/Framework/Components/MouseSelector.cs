@@ -10,11 +10,17 @@ using Yayen.Framework.GameObjects;
 
 namespace Yayen.Framework.Components
 {
+    /// <summary>
+    /// Mouse GameObject
+    /// </summary>
     public class MouseSelector : Component
     {
         private MouseState _mouseState = new MouseState();
 
-
+        /// <summary>
+        /// Create a MouseSelector component which designates the GameObject it is part of as a mouse.
+        /// </summary>
+        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         public MouseSelector(GameObject pGameObject) : base(pGameObject) 
         { 
         

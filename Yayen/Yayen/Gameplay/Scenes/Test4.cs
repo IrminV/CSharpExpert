@@ -23,10 +23,10 @@ namespace Yayen.Gameplay.Scenes
         {
             // Next Test Button
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 1, 1);
+            GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 2, 1);
             newGameObject.AddComponent(new SpriteRenderer(newGameObject, pContent ,pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject.AddComponent(new RectangleCollider(newGameObject, _RectangleCollisionSystem));
-            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "Test1"));
+            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Rotation Test"));
             newGameObject.AddComponent(new Button(newGameObject));
             newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "Test1"));
             _GameObjects.Add(newGameObject);
@@ -40,9 +40,14 @@ namespace Yayen.Gameplay.Scenes
             mouse.AddComponent(new MouseSelector(mouse));
             _GameObjects.Add(mouse);
 
-            // Test Objects
-            
+            // Scene Description
+            GameObject SceneDescription = new(this, "SceneDescription", _graphicsDevice.Viewport.Width / 2, 32, 0, 0.5f, 0.5f);
+            //SceneDescription.AddComponent(new SpriteRenderer(SceneDescription, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            //SceneDescription.AddComponent(new RectangleCollider(SceneDescription, _RectangleCollisionSystem));
+            SceneDescription.AddComponent(new Text(SceneDescription, pContent.Load<SpriteFont>("DefaultSpritefont"), "Origin Test", 0, 0));
+            _GameObjects.Add(SceneDescription);
 
+            // Test Objects
             GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 128, 0, 0.5f, 0.5f);
             obj2.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("StarIndicators"), 0f, 0, 0));
             obj2.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
