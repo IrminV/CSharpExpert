@@ -35,11 +35,14 @@ namespace Yayen.Framework.MonoGameBase
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Test1 _test1 = new(_sceneSystem, Content, this, "Test1");
             Test2 _test2 = new(_sceneSystem, Content, this, "Test2");
+            Test3 _test3 = new(_sceneSystem, Content, this, "Test3");
+            Test4 _test4 = new(_sceneSystem, Content, this, "Test4");
+            
             _sceneSystem.AddScene(_test1);
             _sceneSystem.AddScene(_test2);
+            _sceneSystem.AddScene(_test3);
+            _sceneSystem.AddScene(_test4);
             _sceneSystem.SwitchScene(_test1);
-
-
 
             // TODO: use this.Content to load your game content here
         }

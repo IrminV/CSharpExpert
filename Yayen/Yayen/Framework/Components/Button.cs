@@ -18,6 +18,9 @@ namespace Yayen.Framework.Components
         Color _disabledColor = Color.Gray;
         Collider _collider;
 
+        private Timer _pressCooldownTimer = new(0.5f, "PressCooldownTimer");
+        private bool _canPress = false;
+
         private bool _mouseOverlap = false;
 
         public delegate void ButtonDelegate();
@@ -39,12 +42,15 @@ namespace Yayen.Framework.Components
             GetCollider();
             _collider.OnCollisionEnter += CollisionMouseCheck;
             _collider.OnCollisionExit += ExitCollisionMouseCheck;
+            _pressCooldownTimer.OnTimeElapsed += AllowPress;
+            _pressCooldownTimer.StartTimer();
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime pGameTime, Transform2D pTransform)
         {
             base.Update(pGameTime, pTransform);
             CheckClick();
+            _pressCooldownTimer.Update(pGameTime);
         }
 
         public void GetCollider()
@@ -73,11 +79,25 @@ namespace Yayen.Framework.Components
         private void CheckClick()
         {
             _mouseState = Mouse.GetState();
-            if (_mouseOverlap && _mouseState.LeftButton == ButtonState.Pressed)
+            if (_canPress && _mouseOverlap && _mouseState.LeftButton == ButtonState.Pressed)
             {
                 Console.WriteLine("Pressing Button");
                 OnButtonPressed.Invoke();
             }
         }
+
+        #region PressCoolDownTimer
+        private void AllowPress()
+        {
+            _canPress = true;
+            _pressCooldownTimer.ResetTimer();
+        }
+
+        private void PressCooldown()
+        {
+            _canPress = false;
+            _pressCooldownTimer.StartTimer();
+        }
+        #endregion
     }
 }

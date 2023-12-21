@@ -12,11 +12,14 @@ using Yayen.Framework.Scenes.Base;
 
 namespace Yayen.Framework.GameObjects
 {
+
+
+
+
     public class GameObject
     {
         private Scene _scene;
         private string _name = "GameObject";
-
 
         #region Component Fields
         private Transform2D _transform;

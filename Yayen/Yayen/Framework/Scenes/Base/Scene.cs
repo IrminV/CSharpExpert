@@ -28,6 +28,8 @@ namespace Yayen.Framework.Scenes.Base
         protected ContentManager _content;
         protected RectangleCollisionSystem _RectangleCollisionSystem = new();
 
+        protected GraphicsDevice _graphicsDevice;
+
         public string SceneName { get { return _sceneName; } }
 
         public Scene(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene")
@@ -36,6 +38,8 @@ namespace Yayen.Framework.Scenes.Base
             _content = content;
             _game1 = game1;
             _sceneName = name;
+
+            _graphicsDevice = _game1.GraphicsDevice;
         }
 
         public virtual void Update(GameTime gameTime, Game1 game1)

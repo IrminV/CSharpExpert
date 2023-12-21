@@ -33,12 +33,14 @@ namespace Yayen.Framework.Components
         public float GlobalRotation { get { return _rotation; } }
         public Vector2 GlobalScale { get { return _scale; } }
 
-        public Transform2D(GameObject pGameObject, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY = 1) : base(pGameObject)
+        public Transform2D(GameObject pGameObject, float pX, float pY, float pRotation = 0, float pScaleX = 1, float pScaleY = 1) : base(pGameObject)
         {
             Position = new(pX, pY);
             Rotation = pRotation;
             Scale = new Vector2(pScaleX, pScaleY);
         }
+
+        //public Transform2D(GameObject pGameObject) : this(pGameObject, new Vector2(0, 0), 0f, 0.5f, 0.5f) { }
 
         #region Update Global Values
         private void UpdateGlobalPosition()
