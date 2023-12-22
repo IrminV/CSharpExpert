@@ -31,6 +31,15 @@ namespace Yayen.Gameplay.Scenes
             newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "OriginTest"));
             _GameObjects.Add(newGameObject);
 
+            // Previous Test Button
+            base.LoadContent(pContent, pGame1);
+            GameObject newGameObject2 = new(this, "Block", 96, _graphicsDevice.Viewport.Height - 96, 0, 2, 1);
+            newGameObject2.AddComponent(new SpriteRenderer(newGameObject2, pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
+            newGameObject2.AddComponent(new RectangleCollider(newGameObject2, _RectangleCollisionSystem));
+            newGameObject2.AddComponent(new Text(newGameObject2, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Position Test"));
+            newGameObject2.AddComponent(new Button(newGameObject2));
+            newGameObject2.AddComponent(new ButtonSceneSwitchScript(newGameObject2, _sceneSystem, "PositionTest"));
+            _GameObjects.Add(newGameObject2);
 
             // Mouse Object
             GameObject mouse = new(this, "Mouse", 96 + 128, 96 + 128, 0);

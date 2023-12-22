@@ -22,6 +22,11 @@ namespace Yayen.Framework.Components
         Vector2 _textSize;
         Color _color = Color.White;
         Vector2 _position;
+        float _rotation = 0;
+        Vector2 _origin = Vector2.Zero;
+        float _scale = 1;
+        SpriteEffects _spriteEffects = SpriteEffects.None;
+        float _layerDepth = 0;
 
         public Color Color { get { return _color; } set { _color = value; } }
         /// <summary>
@@ -30,13 +35,15 @@ namespace Yayen.Framework.Components
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pFont">Font to use when drawing text.</param>
         /// <param name="text">String of text to display.</param>
-        /// <param name="posX">Position on the X axis.</param>
-        /// <param name="posY">Position on the Y axis</param>
-        public Text(GameObject pGameObject, SpriteFont pFont, string text, float posX = 0, float posY = 0) : base(pGameObject)
+        /// <param name="pPosX">Position on the X axis.</param>
+        /// <param name="pPosY">Position on the Y axis</param>
+        public Text(GameObject pGameObject, SpriteFont pFont, string text, float pPosX = 0, float pPosY = 0, float pLayerDepth = -1) : base(pGameObject)
         {
             _font = pFont;
             _text = text;
-            _position = new Vector2(posX, posY);
+            _position = new Vector2(pPosX, pPosY);
+            if (pLayerDepth == -1) UpdateLayerDepthAboveSprite();
+            else _layerDepth = pLayerDepth;
             ConstructInitializer();
         }
 
@@ -49,13 +56,21 @@ namespace Yayen.Framework.Components
         {
             
             base.Draw(pSpriteBatch, pTransform);
-            pSpriteBatch.DrawString(_font, _text, new Vector2(pTransform.GlobalPosition.X - (_textSize.X / 2) + _position.X, pTransform.GlobalPosition.Y - (_textSize.Y / 2) + _position.Y), _color);
+            pSpriteBatch.DrawString(_font, _text, new Vector2(pTransform.GlobalPosition.X - (_textSize.X / 2) + _position.X, pTransform.GlobalPosition.Y - (_textSize.Y / 2) + _position.Y), _color, _rotation, _origin, _scale, _spriteEffects, _layerDepth);
 
         }
 
         public void UpdateTextSize()
         {
             _textSize = _font.MeasureString( _text );
+        }
+
+        public void UpdateLayerDepthAboveSprite()
+        {
+            SpriteRenderer spriteRenderer = (SpriteRenderer)GameObject.GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer == null) { /*Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"Warning no spriterender found for text layerdepth on object {GameObject.Name}"); Console.ResetColor();*/ return; }
+            _layerDepth = Math.Clamp((spriteRenderer.LayerDepth + 0.1f), 0, 1);
         }
     }
 }
