@@ -28,7 +28,7 @@ namespace Yayen.Gameplay.Scenes
             newGameObject.AddComponent(new RectangleCollider(newGameObject, _RectangleCollisionSystem));
             newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Scale Test"));
             newGameObject.AddComponent(new Button(newGameObject));
-            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "Test3"));
+            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "ScaleTest"));
             _GameObjects.Add(newGameObject);
 
 
@@ -93,9 +93,9 @@ namespace Yayen.Gameplay.Scenes
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch pSpriteBatch)
         {
-            base.Draw(spriteBatch);
+            base.Draw(pSpriteBatch);
         }
     }
 }

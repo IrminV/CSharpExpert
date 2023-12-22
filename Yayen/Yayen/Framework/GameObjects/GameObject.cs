@@ -30,6 +30,15 @@ namespace Yayen.Framework.GameObjects
         public string Name { get { return _name; } }
 
         #region Constructors
+        /// <summary>
+        /// Create a new standard GameObject
+        /// </summary>
+        /// <param name="pScene">Reference to Scene this GameObject is part of.</param>
+        /// <param name="pX">Position on the X axis.</param>
+        /// <param name="pY">Position on the Y axis.</param>
+        /// <param name="pRotation">Rotation.</param>
+        /// <param name="pScaleX">Scale on the X axis.</param>
+        /// <param name="pScaleY">Scale on the Y axis.</param>
         public GameObject(Scene pScene, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY =1)
         {
             _scene = pScene;
@@ -42,6 +51,17 @@ namespace Yayen.Framework.GameObjects
             AddComponent(_newTransform);
             
         }
+
+        /// <summary>
+        /// Create a new standard GameObject with name.
+        /// </summary>
+        /// <param name="pScene">Reference to Scene this GameObject is part of.</param>
+        /// <param name="pName">The name of this GameObject.</param>
+        /// <param name="pX">Position on the X axis.</param>
+        /// <param name="pY">Position on the Y axis.</param>
+        /// <param name="pRotation">Rotation.</param>
+        /// <param name="pScaleX">Scale on the X axis.</param>
+        /// <param name="pScaleY">Scale on the Y axis.</param>
         public GameObject(Scene pScene, string pName, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY = 1) : this (pScene, pX, pY, pRotation, pScaleX, pScaleY) { _name = pName; }
         #endregion
 
@@ -56,6 +76,12 @@ namespace Yayen.Framework.GameObjects
         }
 
         #region ComponentMethods
+
+        /// <summary>
+        /// Update all components this GameObject has.
+        /// </summary>
+        /// <param name="pGameTime">GameTime to use for calculations.</param>
+        /// <param name="pTransform">Reference to the Transform of the GameObject.</param>
         private void UpdateComponents(GameTime pGameTime, Transform2D pTransform)
         {
             for (int i = 0; i < _components.Count; i++)
@@ -64,6 +90,11 @@ namespace Yayen.Framework.GameObjects
             }
         }
 
+        /// <summary>
+        /// Draw all components this GameObject has.
+        /// </summary>
+        /// <param name="pSpriteBatch">SpriteBatch to use for drawing.</param>
+        /// <param name="pTransform">Reference to the Transform of the GameObject.</param>
         private void DrawComponents(SpriteBatch pSpriteBatch, Transform2D pTransform)
         {
             for (int i = 0; i < _components.Count; i++)

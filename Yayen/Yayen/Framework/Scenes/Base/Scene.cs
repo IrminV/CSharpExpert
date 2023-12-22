@@ -47,9 +47,9 @@ namespace Yayen.Framework.Scenes.Base
             UpdateGameObjects(gameTime);
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch pSpriteBatch)
         {
-            DrawGameObjects(spriteBatch);
+            DrawGameObjects(pSpriteBatch);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Yayen.Framework.Scenes.Base
         /// </summary>
         public virtual void EnterScene()
         {
-            Console.WriteLine("Entering Scene");
+            //Console.WriteLine("Entering Scene");
             //_collisionSystem.UpdateGameObjects(_GameObjects);
             if (_sceneSystem.previousScene != null && _sceneSystem.previousScene.SceneName == SceneName)
             {
@@ -65,7 +65,7 @@ namespace Yayen.Framework.Scenes.Base
             }
             else
             {
-                Console.WriteLine("Resetting Scene on enter:");
+                //Console.WriteLine("Resetting Scene on enter:");
                 ResetScene(_content, _game1);
             }
         }
@@ -85,7 +85,7 @@ namespace Yayen.Framework.Scenes.Base
         /// <param name="game1"></param>
         public virtual void ResetScene(ContentManager content, Game1 game1)
         {
-            Console.WriteLine("Resetting Scene");
+            //Console.WriteLine("Resetting Scene");
             for (int i = 0; i < _GameObjects.Count; i++)
             {
                 _GameObjects[i].Destroy();
@@ -128,8 +128,8 @@ namespace Yayen.Framework.Scenes.Base
         /// <summary>
         /// Call to draw all gameobjects in the scene
         /// </summary>
-        /// <param name="spriteBatch"></param>
-        private void DrawGameObjects(SpriteBatch spriteBatch)
+        /// <param name="pSpriteBatch">SpriteBatch to use when drawing.</param>
+        private void DrawGameObjects(SpriteBatch pSpriteBatch)
         {
             for (int i = 0; i < _GameObjects.Count; i++)
             {
@@ -138,7 +138,7 @@ namespace Yayen.Framework.Scenes.Base
                     Console.WriteLine($"Warning: {_GameObjects[i]} of index {i} was null");
                     continue;
                 }
-                _GameObjects[i].Draw(spriteBatch);
+                _GameObjects[i].Draw(pSpriteBatch);
             }
         }
 

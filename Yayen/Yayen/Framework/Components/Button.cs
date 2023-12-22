@@ -18,7 +18,7 @@ namespace Yayen.Framework.Components
         Color _disabledColor = Color.Gray;
         Collider _collider;
 
-        private Timer _pressCooldownTimer = new(0.5f, "PressCooldownTimer");
+        private Timer _pressCooldownTimer = new(0.25f, "PressCooldownTimer");
         private bool _canPress = false;
 
         private bool _mouseOverlap = false;
@@ -76,7 +76,7 @@ namespace Yayen.Framework.Components
         {
             if (pCollider.GameObject.HasComponentOfType(typeof(MouseSelector)))
             {
-                Console.WriteLine($"Button {GameObject.Name} detected mouse entering overlap");
+                //Console.WriteLine($"Button {GameObject.Name} detected mouse entering overlap");
                 _mouseOverlap = true;
             }
         }
@@ -89,7 +89,7 @@ namespace Yayen.Framework.Components
         {
             if (_mouseOverlap && pCollider.GameObject.HasComponentOfType(typeof(MouseSelector)))
             {
-                Console.WriteLine($"Button {GameObject.Name} detected mouse exiting overlap");
+                //Console.WriteLine($"Button {GameObject.Name} detected mouse exiting overlap");
                 _mouseOverlap = false;
             }
         }

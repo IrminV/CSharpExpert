@@ -28,7 +28,7 @@ namespace Yayen.Gameplay.Scenes
             newGameObject.AddComponent(new RectangleCollider(newGameObject, _RectangleCollisionSystem));
             newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Position Test"));
             newGameObject.AddComponent(new Button(newGameObject));
-            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "Test2"));
+            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "PositionTest"));
             _GameObjects.Add(newGameObject);
 
             // Mouse Object
@@ -92,9 +92,9 @@ namespace Yayen.Gameplay.Scenes
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch pSpriteBatch)
         {
-            base.Draw(spriteBatch);
+            base.Draw(pSpriteBatch);
         }
     }
 }

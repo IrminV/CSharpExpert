@@ -34,6 +34,7 @@ namespace Yayen.Framework.Components
         private Timer _testTimer = new(10f);
 
         //public Texture2D Sprite { get { return _sprite; } }
+        public float LayerDepth { get { return _layerDepth; } }
 
         /// <summary>
         /// Base constructor, which can already work with just a sprite.

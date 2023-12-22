@@ -50,12 +50,12 @@ namespace Yayen.Framework.Scenes
         /// <summary>
         /// Call to draw all active scenes. As of now only one scene.
         /// </summary>
-        /// <param name="spriteBatch"></param>
-        public void Draw(SpriteBatch spriteBatch)
+        /// <param name="pSpriteBatch">SpriteBatch to use when drawing.</param>
+        public void Draw(SpriteBatch pSpriteBatch)
         {
             for (int i = 0; i < _loadedScenes.Count; i++)
             {
-                _loadedScenes[i].Draw(spriteBatch);
+                _loadedScenes[i].Draw(pSpriteBatch);
             }
         }
 

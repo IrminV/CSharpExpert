@@ -26,9 +26,9 @@ namespace Yayen.Gameplay.Scenes
             GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 2, 1);
             newGameObject.AddComponent(new SpriteRenderer(newGameObject, pContent ,pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject.AddComponent(new RectangleCollider(newGameObject, _RectangleCollisionSystem));
-            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Rotation Test"));
+            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Layerdepth Test"));
             newGameObject.AddComponent(new Button(newGameObject));
-            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "Test1"));
+            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "LayerdepthTest"));
             _GameObjects.Add(newGameObject);
 
 
@@ -55,7 +55,7 @@ namespace Yayen.Gameplay.Scenes
             _GameObjects.Add(obj2);
 
             GameObject obj3 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 128, 0, 0.5f, 0.5f);
-            obj3.AddComponent(new SpriteRenderer(obj3, pContent, pContent.Load<Texture2D>("StarIndicators"), 0f, 1, 1));
+            obj3.AddComponent(new SpriteRenderer(obj3, pContent, pContent.Load<Texture2D>("StarIndicators"), 1f, 1, 1));
             obj3.AddComponent(new RectangleCollider(obj3, _RectangleCollisionSystem));
             obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 Origin (1,1)", -32, -74));
             _GameObjects.Add(obj3);
@@ -105,9 +105,9 @@ namespace Yayen.Gameplay.Scenes
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch pSpriteBatch)
         {
-            base.Draw(spriteBatch);
+            base.Draw(pSpriteBatch);
         }
     }
 }
