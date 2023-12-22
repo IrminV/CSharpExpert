@@ -42,7 +42,7 @@ namespace Yayen.Framework.Components
             _font = pFont;
             _text = text;
             _position = new Vector2(pPosX, pPosY);
-            if (pLayerDepth == -1) UpdateLayerDepthAboveSprite();
+            if (pLayerDepth == -1) UpdateLayerDepthToAboveSprite();
             else _layerDepth = pLayerDepth;
             ConstructInitializer();
         }
@@ -52,6 +52,11 @@ namespace Yayen.Framework.Components
             UpdateTextSize();
         }
 
+        /// <summary>
+        /// Draw text on screen.
+        /// </summary>
+        /// <param name="pSpriteBatch">SpriteBatch used to draw.</param>
+        /// <param name="pTransform">Reference to the transform of the gameobject this is part of.</param>
         public override void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
         {
             
@@ -60,12 +65,18 @@ namespace Yayen.Framework.Components
 
         }
 
+        /// <summary>
+        /// Updates _textSize variable to contain the size of the currently established string.
+        /// </summary>
         public void UpdateTextSize()
         {
             _textSize = _font.MeasureString( _text );
         }
 
-        public void UpdateLayerDepthAboveSprite()
+        /// <summary>
+        /// Generate a layerdepth 0.1f higher than the SpriteRenderer this is part of. Does nothing if no SpriteRenderer is detected.
+        /// </summary>
+        public void UpdateLayerDepthToAboveSprite()
         {
             SpriteRenderer spriteRenderer = (SpriteRenderer)GameObject.GetComponent<SpriteRenderer>();
 

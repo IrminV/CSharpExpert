@@ -11,7 +11,7 @@ namespace Yayen.Framework.Components
 {
     public class Transform2D : Component
     {
-        // When changing any of these 3 values (position, rotation and scale) it should first affect their local counterparts. Then we will run a conversion method which sets the global values as the local values change. This way they are connected and stable.
+        // When changing any of these 3 values (position, rotation and scale) it should first affect their local counterparts. Then we will run a conversion method which sets the global values as the local values change. This way they are connected and stable and really handy to use when implementing parent and child relationships.
 
         Vector2 _position;
         Vector2 _localPosition;
@@ -33,6 +33,15 @@ namespace Yayen.Framework.Components
         public float GlobalRotation { get { return _rotation; } }
         public Vector2 GlobalScale { get { return _scale; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
+        /// <param name="pX">Position on the X axis.</param>
+        /// <param name="pY">Position on the Y axis.</param>
+        /// <param name="pRotation">Rotation in degrees.</param>
+        /// <param name="pScaleX">Scale on the X axis.</param>
+        /// <param name="pScaleY">Scale on the Y axis.</param>
         public Transform2D(GameObject pGameObject, float pX, float pY, float pRotation = 0, float pScaleX = 1, float pScaleY = 1) : base(pGameObject)
         {
             Position = new(pX, pY);

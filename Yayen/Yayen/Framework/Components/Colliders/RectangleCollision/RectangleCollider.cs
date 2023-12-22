@@ -17,8 +17,7 @@ namespace Yayen.Framework.Components.Colliders.RectangleCollision
         //private List<CollisionRectangle> _collidingRectangles = new();
         //private bool _hasBeenDestroyed = false;
 
-        // REMINDER: In Monogame the 0, 0 point is in the top left, the starting point of this script
-        // should also be in the top left of the sprite you want to add collision to
+        // REMINDER: In Monogame the 0, 0 point is in the top left, the starting point of this script should also be in the top left of the sprite you want to add collision to
         private Vector2 _origin;
         private Vector2 _startingPoint;
         private Vector2 _endPoint;
@@ -41,6 +40,13 @@ namespace Yayen.Framework.Components.Colliders.RectangleCollision
         public float Width { get { return _width; } set { _width = value; } }
         public float Height { get { return _height; } set { _height = value; } }
 
+        /// <summary>
+        /// Create a RectangleCollider..
+        /// </summary>
+        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
+        /// <param name="pRectangleCollisionSystem">Reference to the RectangleCollisionSystem this collider is going to be part of.</param>
+        /// <param name="pOriginX">Origin on the X axis.</param>
+        /// <param name="pOriginY">Origin on the Y axis.</param>
         public RectangleCollider(GameObject pGameObject, RectangleCollisionSystem pRectangleCollisionSystem, float pOriginX = 0.5f, float pOriginY = 0.5f) : base(pGameObject)
         {
             pRectangleCollisionSystem.AddCollider(this);
@@ -56,6 +62,10 @@ namespace Yayen.Framework.Components.Colliders.RectangleCollision
             _midPoint = GetMidPoint();
         }
 
+        /// <summary>
+        /// Code to fire when this Component is added.
+        /// </summary>
+        /// <param name="pGameObject">GameObject this component is being added to.</param>
         public override void OnComponentAdded(GameObject pGameObject)
         {
             base.OnComponentAdded(pGameObject);
@@ -108,6 +118,9 @@ namespace Yayen.Framework.Components.Colliders.RectangleCollision
             return _endPoint.Y;
         }
 
+        /// <summary>
+        /// Sets the size of the collider to the render bound of the GameObject.
+        /// </summary>
         public void SetSizeToRenderBounds()
         {
             Vector2 renderBounds = GameObject.GetRenderBounds();

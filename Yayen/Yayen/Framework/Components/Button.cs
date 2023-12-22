@@ -102,7 +102,7 @@ namespace Yayen.Framework.Components
             _mouseState = Mouse.GetState();
             if (_canPress && _mouseOverlap && _mouseState.LeftButton == ButtonState.Pressed)
             {
-                Console.WriteLine("Pressing Button");
+                //Console.WriteLine("Pressing Button");
                 OnButtonPressed.Invoke();
             }
         }

@@ -48,27 +48,43 @@ namespace Yayen.Framework.Components.Base
         }
 
         // Some methods which need to be called on multiple components
+        /// <summary>
+        /// Code to fire when this Component is added.
+        /// </summary>
+        /// <param name="pGameObject">GameObject this component is being added to.</param>
         public virtual void OnComponentAdded(GameObject pGameObject)
         {
 
         }
 
+        // Some methods which need to be called on multiple components
+        /// <summary>
+        /// Code to fire when this Component is removed.
+        /// </summary>
+        /// <param name="pGameObject">GameObject this component is being removed from.</param>
         public virtual void OnComponentRemoved(GameObject pGameObject)
         {
 
         }
 
+        /// <summary>
+        /// Update this components functionality.
+        /// </summary>
+        /// <param name="pGameTime">GameTime to use for calculations.</param>
+        /// <param name="pTransform">Reference to the tranform of the GameObject this component is part of.</param>
         public virtual void Update(GameTime pGameTime, Transform2D pTransform)
         {
 
         }
 
+        /// <summary>
+        /// Draw this components graphics.
+        /// </summary>
+        /// <param name="pSpriteBatch">Spritebatch to use for drawing.</param>
+        /// <param name="pTransform">Reference to the tranform of the GameObject this component is part of.</param>
         public virtual void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
         {
 
         }
-        
-
-
     }
 }

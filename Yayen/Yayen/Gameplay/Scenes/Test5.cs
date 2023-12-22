@@ -19,6 +19,11 @@ namespace Yayen.Gameplay.Scenes
     {
         public Test5(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
+        /// <summary>
+        /// Method where we load all objects for this scene.
+        /// </summary>
+        /// <param name="pContent">ContentManager to load content with.</param>
+        /// <param name="pGame1">Reference to MonoGame Game1.</param>
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
             // Next Test Button
@@ -57,18 +62,6 @@ namespace Yayen.Gameplay.Scenes
             _GameObjects.Add(SceneDescription);
 
             // Test Objects
-            //GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 128, 0, 0.5f, 0.5f);
-            //obj2.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("StarIndicators"), 0f, 0, 0));
-            //obj2.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            //obj2.AddComponent(new Text(obj2, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 2 Origin (0,0)", 32, 96));
-            //_GameObjects.Add(obj2);
-
-            //GameObject obj3 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 128, 0, 0.5f, 0.5f);
-            //obj3.AddComponent(new SpriteRenderer(obj3, pContent, pContent.Load<Texture2D>("StarIndicators"), 0f, 1, 1));
-            //obj3.AddComponent(new RectangleCollider(obj3, _RectangleCollisionSystem));
-            //obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 Origin (1,1)", -32, -74));
-            //_GameObjects.Add(obj3);
-
             GameObject obj1 = new(this, "Obj1", _graphicsDevice.Viewport.Width / 2, _graphicsDevice.Viewport.Height / 2, 0, 2f, 2f);
             obj1.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0.5f));
             obj1.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
@@ -101,20 +94,6 @@ namespace Yayen.Gameplay.Scenes
             obj5.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
             obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "layerDepth - 0.1 (invisible)", 0, 50));
             _GameObjects.Add(obj5);
-
-            //GameObject obj6 = new(this, "Obj6", _graphicsDevice.Viewport.Width / 2 + 96, 352, 360, 0.5f, 0.5f);
-            //obj6.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            //obj6.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            //obj6.AddComponent(new Text(obj6, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 6 Position:\nMidpoint + 96 by 352", 0, 50));
-            //_GameObjects.Add(obj6);
-
-            //GameObject obj7 = new(this, "Obj7", _graphicsDevice.Viewport.Width / 2 + 288, 224, 450, 0.5f, 0.5f);
-            //obj7.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            //obj7.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            //obj7.AddComponent(new Text(obj7, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 7 Position:\nMidpoint + 288 by 224", 0, 50));
-            //_GameObjects.Add(obj7);
-
-
         }
 
         public override void Draw(SpriteBatch pSpriteBatch)

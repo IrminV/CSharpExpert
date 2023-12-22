@@ -10,6 +10,9 @@ using Yayen.Framework.GameObjects;
 
 namespace Yayen.Framework.CollisionSystem
 {
+    /// <summary>
+    /// Collision system used to calculate rectangle collisions
+    /// </summary>
     public class RectangleCollisionSystem
     {
         private List<RectangleCollider> _collidersToCheck = new();
@@ -23,6 +26,9 @@ namespace Yayen.Framework.CollisionSystem
             UpdateOverlapCheck();
         }
 
+        /// <summary>
+        /// Update to check if Colliders in the _collidersToCheck list are overlapping.
+        /// </summary>
         private void UpdateOverlapCheck()
         {
             for (int i = 0; i < _collidersToCheck.Count; i++)
@@ -32,7 +38,7 @@ namespace Yayen.Framework.CollisionSystem
                 {
                     bool collisionShouldExists = false;
                     RectangleCollider colTwo = _collidersToCheck[j + 1];
-                    if (colOne.GetCopyCurrentCollisions().Contains(colTwo) && colTwo.GetCopyCurrentCollisions().Contains(colOne))
+                    if (colOne.GetCopyCurrentOverlaps().Contains(colTwo) && colTwo.GetCopyCurrentOverlaps().Contains(colOne))
                     {
                         collisionShouldExists = true;
                     }
@@ -44,8 +50,8 @@ namespace Yayen.Framework.CollisionSystem
                     {
                         // They started to collide
                         //_collisionPairs.Add(new CollisionPair(_collisionPairs, colOne.ConnectedGameObject, colTwo.ConnectedGameObject));
-                        colOne.AddObjectToCollidingList(colTwo);
-                        colTwo.AddObjectToCollidingList(colOne);
+                        colOne.AddObjectToOverlappingList(colTwo);
+                        colTwo.AddObjectToOverlappingList(colOne);
                     }
                     else if (collidingOnX && collidingOnY && collisionShouldExists)
                     {
@@ -54,13 +60,17 @@ namespace Yayen.Framework.CollisionSystem
                     else if (collisionShouldExists)
                     {
                         // They stopped colliding
-                        colOne.RemoveObjectFromCollidingList(colTwo);
-                        colTwo.RemoveObjectFromCollidingList(colOne);
+                        colOne.RemoveObjectFromOverlappingList(colTwo);
+                        colTwo.RemoveObjectFromOverlappingList(colOne);
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Add collider to _collidersToCheck list.
+        /// </summary>
+        /// <param name="pRectangleCollider">Collider to check for collision.</param>
         public void AddCollider(RectangleCollider pRectangleCollider)
         {
             if (_collidersToCheck.Contains(pRectangleCollider))
@@ -74,7 +84,7 @@ namespace Yayen.Framework.CollisionSystem
         }
 
 
-        // The method below here are optimized for Rectangle coliders. We want ot make these more dynamic
+        
         private bool CheckIfCollidingOnX(RectangleCollider colOne, RectangleCollider colTwo)
         {
             bool collidingOnX = false;

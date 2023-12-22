@@ -11,41 +11,47 @@ namespace Yayen.Framework.Components.Colliders.Base
 {
     public class Collider : Component
     {
-        // List of all colliding object for which this object is colliding
-        private List<Collider> _collidingColliders = new();
+        // List of all overlapping objects for which this object is overlapping
+        private List<Collider> _overlappingColliders = new();
 
+        // Events for other script to make use of overlapping or collision
         public delegate void CollisionDelegate(Collider pCollider);
         public event CollisionDelegate OnCollisionEnter;
         public event CollisionDelegate OnCollisionExit;
+
         /// <summary>
         /// Create a Base Collider.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         public Collider(GameObject pGameObject) : base(pGameObject) { }
 
-        public void AddObjectToCollidingList(Collider pcollidingWithThis)
+        public void AddObjectToOverlappingList(Collider pcollidingWithThis)
         {
-            if (!_collidingColliders.Contains(pcollidingWithThis))
+            if (!_overlappingColliders.Contains(pcollidingWithThis))
             {
-                _collidingColliders.Add(pcollidingWithThis);
+                _overlappingColliders.Add(pcollidingWithThis);
                 OnCollisionEnter?.Invoke(pcollidingWithThis);
                 //_connectedGameObject.CollidedWithCollider(pcollidingWithThis);
             }
         }
 
-        public void RemoveObjectFromCollidingList(Collider pNotCollidingWithThis)
+        public void RemoveObjectFromOverlappingList(Collider pNotCollidingWithThis)
         {
-            _collidingColliders.Remove(pNotCollidingWithThis);
+            _overlappingColliders.Remove(pNotCollidingWithThis);
             OnCollisionExit?.Invoke(pNotCollidingWithThis);
             //_connectedGameObject.StoppedOverlappingWithThis(pNotCollidingWithThis.ConnectedGameObject);
         }
 
-        public List<Collider> GetCopyCurrentCollisions()
+        /// <summary>
+        /// Get a copy of the list of this colliders detected overlaps.
+        /// </summary>
+        /// <returns>A copy of the list of this colliders detected overlaps.</returns>
+        public List<Collider> GetCopyCurrentOverlaps()
         {
             List<Collider> colliders = new List<Collider>();
-            for (int i = 0; i < _collidingColliders.Count; i++)
+            for (int i = 0; i < _overlappingColliders.Count; i++)
             {
-                colliders.Add(_collidingColliders[i]);
+                colliders.Add(_overlappingColliders[i]);
             }
             return colliders;
         }

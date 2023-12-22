@@ -9,12 +9,20 @@ using Yayen.Framework.Scenes;
 
 namespace Yayen.Framework.Components
 {
+    /// <summary>
+    /// Script to make a button switch scenes.
+    /// </summary>
     public class ButtonSceneSwitchScript : Component
     {
         Button _button;
         SceneSystem _sceneSystem;
         string _sceneName;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
+        /// <param name="pSceneSystem">Reference to the SceneSystem used to switch scenes.</param>
+        /// <param name="pSceneName">The name of the scene we want to switch to.</param>
         public ButtonSceneSwitchScript(GameObject pGameObject, SceneSystem pSceneSystem, string pSceneName) : base(pGameObject)
         {
             _sceneSystem = pSceneSystem;
@@ -24,7 +32,9 @@ namespace Yayen.Framework.Components
 
         private void ConstructInitializer()
         {
+            // Get the button component on this components GameObject
             _button = (Button)GameObject.GetComponent<Button>();
+            // Add SwitchScene() to the OnButtonPressed event
             _button.OnButtonPressed += SwitchScene;
         }
 
@@ -32,7 +42,5 @@ namespace Yayen.Framework.Components
         {
             _sceneSystem.SwitchScene(_sceneName);
         }
-
-
     }
 }

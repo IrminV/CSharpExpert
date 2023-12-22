@@ -103,8 +103,10 @@ namespace Yayen.Framework.GameObjects
             }
         }
 
-
-        // We might want to make this private later
+        /// <summary>
+        /// Add a component to this GameObject.
+        /// </summary>
+        /// <param name="pComponent">Component to add.</param>
         public void AddComponent(Component pComponent)
         {
             if (!HasComponentOfType(pComponent))
@@ -128,6 +130,11 @@ namespace Yayen.Framework.GameObjects
             }
         }
 
+        /// <summary>
+        /// Check if this GameObject has a component of a type.
+        /// </summary>
+        /// <param name="pComponent">Component of type to check.</param>
+        /// <returns></returns>
         public bool HasComponentOfType(Component pComponent)
         {
             //if (_components == null || _components.Count == 0) return false;
@@ -140,7 +147,11 @@ namespace Yayen.Framework.GameObjects
             }
             return false;
         }
-
+        /// <summary>
+        /// Check if this GameObject has a component of a type.
+        /// </summary>
+        /// <param name="pType">Type to check.</param>
+        /// <returns></returns>
         public bool HasComponentOfType(Type pType)
         {
             //if (_components == null || _components.Count == 0) return false;
@@ -154,13 +165,22 @@ namespace Yayen.Framework.GameObjects
             return false;
         }
 
+        /// <summary>
+        /// Returns the bounds of spriterenderer sprite.
+        /// </summary>
+        /// <returns>Bounds of spriterenderer sprite.</returns>
         public Vector2 GetRenderBounds()
         {
             if (_spriteRenderer == null) return Vector2.Zero;
             return _spriteRenderer.GetSpriteBounds();
         }
 
-        public Component GetComponent<tValue>()
+        /// <summary>
+        /// Gets a component of <type> from this GameObject.
+        /// </summary>
+        /// <typeparam name="tValue">Type of component.</typeparam>
+        /// <returns>Component of <type> found on this GameObject.</returns>
+        public Component GetComponent<tValue>() where tValue : Component
         {
             for (int i = 0; i < _components.Count; i++)
             {
@@ -174,6 +194,9 @@ namespace Yayen.Framework.GameObjects
 
         #endregion
 
+        /// <summary>
+        /// Method to call when destroying this GameObject.
+        /// </summary>
         public void Destroy()
         {
             // First we need to stop the object from updating.

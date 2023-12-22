@@ -19,6 +19,11 @@ namespace Yayen.Gameplay.Scenes
     {
         public Test1(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
+        /// <summary>
+        /// Method where we load all objects for this scene.
+        /// </summary>
+        /// <param name="pContent">ContentManager to load content with.</param>
+        /// <param name="pGame1">Reference to MonoGame Game1.</param>
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
             // Next Test Button

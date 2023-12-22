@@ -18,7 +18,7 @@ namespace Yayen.Framework.Components
         private MouseState _mouseState = new MouseState();
 
         /// <summary>
-        /// Create a MouseSelector component which designates the GameObject it is part of as a mouse.
+        /// Create a MouseSelector component which designates the GameObject it is part of, as a mouse.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         public MouseSelector(GameObject pGameObject) : base(pGameObject) 
@@ -26,19 +26,11 @@ namespace Yayen.Framework.Components
         
         }
 
-
-
         public override void Update(GameTime pGameTime, Transform2D pTransform)
         {
             base.Update(pGameTime, pTransform);
             _mouseState = Mouse.GetState();
             pTransform.Position = new Vector2(_mouseState.Position.X, _mouseState.Position.Y);
-            //pTransform.Position =
         }
-
-
-
-
-
     }
 }

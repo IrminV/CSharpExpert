@@ -19,6 +19,11 @@ namespace Yayen.Gameplay.Scenes
     {
         public Test3(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
+        /// <summary>
+        /// Method where we load all objects for this scene.
+        /// </summary>
+        /// <param name="pContent">ContentManager to load content with.</param>
+        /// <param name="pGame1">Reference to MonoGame Game1.</param>
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
             // Next Test Button
@@ -80,26 +85,6 @@ namespace Yayen.Gameplay.Scenes
             obj4.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
             obj4.AddComponent(new Text(obj4, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 4 Scale -0.5 by -0.5", 0, 64));
             _GameObjects.Add(obj4);
-
-            //GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2 + 96, 224, -90, 0.5f, 0.5f);
-            //obj5.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            //obj5.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            //obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 5 Position:\nMidpoint + 96 by 224", 0, 50));
-            //_GameObjects.Add(obj5);
-
-            //GameObject obj6 = new(this, "Obj6", _graphicsDevice.Viewport.Width / 2 + 96, 352, 360, 0.5f, 0.5f);
-            //obj6.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            //obj6.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            //obj6.AddComponent(new Text(obj6, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 6 Position:\nMidpoint + 96 by 352", 0, 50));
-            //_GameObjects.Add(obj6);
-
-            //GameObject obj7 = new(this, "Obj7", _graphicsDevice.Viewport.Width / 2 + 288, 224, 450, 0.5f, 0.5f);
-            //obj7.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            //obj7.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            //obj7.AddComponent(new Text(obj7, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 7 Position:\nMidpoint + 288 by 224", 0, 50));
-            //_GameObjects.Add(obj7);
-
-
         }
 
         public override void Draw(SpriteBatch pSpriteBatch)
