@@ -22,22 +22,25 @@ namespace Yayen.Assignment2.Framework.Components
 
         private float _sineScale;
         private float _increment;
+        private float _periodsPerSecond;
         // Time till full rotation is completed
         private float _periodTimeFloat;
 
         private float _currentSineValue = 0;
+
+        public float SineValue { get { return _currentSineValue; } }
 
         /// <summary>
         /// Create a Text component which rotates GameObject this component is part of based on rotations per second.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pSineScale">Rotations this object rotates in a single second.</param>
-        public SineWave(float pSineScale = 0.5f, float pIncrement = 0.5f)
+        public SineWave(float pSineScale = 0.5f, float pIncrement = 0.5f, float pPeriodsPerSecond = 1)
         {
             _sineScale = pSineScale;
             _increment = pIncrement;
+            _periodsPerSecond = pPeriodsPerSecond;
             _periodTimeFloat = 1 / pSineScale;
-
 
             _sineSecondTimer = new(_sineTimerValue, "SineSecondTimer");
             _sineSecondTimer.OnTimeElapsed += RestartSineSecondTimer;
@@ -70,7 +73,7 @@ namespace Yayen.Assignment2.Framework.Components
                 Console.WriteLine($"Anomaly occured timer time = {_sineSecondTimer.TimerTime}");
             }
             //Console.WriteLine($"Current sine value is {_sineTimerValue - _sineSecondTimer.TimerCurrentTime}");
-            _currentSineValue = GetSineValue(_sineTimerValue - _sineSecondTimer.TimerCurrentTime);
+            _currentSineValue = GetSineValue((_sineTimerValue - _sineSecondTimer.TimerCurrentTime) * _periodsPerSecond);
         }
 
         private float GetSineValue(float pXInput)

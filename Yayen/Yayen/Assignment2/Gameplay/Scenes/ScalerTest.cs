@@ -18,8 +18,6 @@ namespace Yayen.Assignment2.Gameplay.Scenes
 {
     public class ScalerTest : Scene
     {
-        SineWave _sineWaveTest;
-
         public ScalerTest(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
         /// <summary>
@@ -29,8 +27,6 @@ namespace Yayen.Assignment2.Gameplay.Scenes
         /// <param name="pGame1">Reference to MonoGame Game1.</param>
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
-            _sineWaveTest = new();
-
             // Next Test Button
             base.LoadContent(pContent, pGame1);
             GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 3, 1);
@@ -121,7 +117,6 @@ namespace Yayen.Assignment2.Gameplay.Scenes
         public override void Update(GameTime gameTime, Game1 game1)
         {
             base.Update(gameTime, game1);
-            _sineWaveTest.Update(gameTime);
         }
     }
 }

@@ -18,8 +18,6 @@ namespace Yayen.Assignment2.Gameplay.Scenes
 {
     public class BouncerTest : Scene
     {
-        SineWave _sineWaveTest;
-
         public BouncerTest(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
         /// <summary>
@@ -29,8 +27,6 @@ namespace Yayen.Assignment2.Gameplay.Scenes
         /// <param name="pGame1">Reference to MonoGame Game1.</param>
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
-            _sineWaveTest = new();
-
             // Next Test Button
             base.LoadContent(pContent, pGame1);
             GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 3, 1);
@@ -71,8 +67,8 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             GameObject obj1 = new(this, "Obj1", _graphicsDevice.Viewport.Width / 2 - 96, 96, 0, 0.5f, 0.5f);
             obj1.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj1.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
-            obj1.AddComponent(new Text(obj1, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 1 Rotator:\nClockwise:True\nResolutionPerSec: 1", 0, 64));
-            //obj1.AddComponent(new SpriteRotator(obj1, true, 1));
+            obj1.AddComponent(new Text(obj1, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 1 Bouncer", 0, 64));
+            obj1.AddComponent(new Bouncer(obj1, 1, 1));
             _GameObjects.Add(obj1);
 
             GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 224, 0, 0.5f, 0.5f);
@@ -121,7 +117,6 @@ namespace Yayen.Assignment2.Gameplay.Scenes
         public override void Update(GameTime gameTime, Game1 game1)
         {
             base.Update(gameTime, game1);
-            _sineWaveTest.Update(gameTime);
         }
     }
 }
