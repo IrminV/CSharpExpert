@@ -13,6 +13,7 @@ namespace Yayen.Assignment2.Framework.Components
     public class Timer
     {
         protected string _timerName;
+        protected float _timeMultiplier;
         protected bool _timerActive = false;
 
         // How much time does the timer have?
@@ -42,7 +43,7 @@ namespace Yayen.Assignment2.Framework.Components
 
 
         #region Constructors
-        public Timer(float pTimerTime, string timerName = "Timer")
+        public Timer(float pTimerTime, string timerName = "Timer", float pTimeMultiplier = 1)
         {
             _timerTime = pTimerTime;
             ResetTimer();
@@ -65,7 +66,7 @@ namespace Yayen.Assignment2.Framework.Components
                 }
                 else
                 {
-                    _timerCurrentTime -= (float)pGameTime.ElapsedGameTime.TotalSeconds;
+                    _timerCurrentTime -= (float)pGameTime.ElapsedGameTime.TotalSeconds * _timeMultiplier;
                 }
             }
         }

@@ -28,6 +28,8 @@ namespace Yayen.Assignment2.Framework.Components
 
         private float _currentSineValue = 0;
 
+        private bool DebugMode = false;
+
         public float SineValue { get { return _currentSineValue; } }
 
         /// <summary>
@@ -39,10 +41,10 @@ namespace Yayen.Assignment2.Framework.Components
         {
             _sineScale = pSineScale;
             _increment = pIncrement;
-            _periodsPerSecond = pPeriodsPerSecond;
             _periodTimeFloat = 1 / pSineScale;
 
             _sineSecondTimer = new(_sineTimerValue, "SineSecondTimer");
+            SetPeriodsPerSecond(pPeriodsPerSecond);
             _sineSecondTimer.OnTimeElapsed += RestartSineSecondTimer;
             _sineSecondTimer.StartTimer();
         }
@@ -61,14 +63,18 @@ namespace Yayen.Assignment2.Framework.Components
         private void RestartSineSecondTimer()
         {
             _sineSecondTimer.ResetTimer(true, true);
-            Console.WriteLine("");
-            Console.WriteLine("New Sine period");
-            Console.WriteLine("");
+            if (DebugMode)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("New Sine period");
+                Console.WriteLine("");
+            }
+            
         }
 
         private void UpdateCurrentSineValue()
         {
-            if (_sineTimerValue - _sineSecondTimer.TimerCurrentTime < 0)
+            if (DebugMode && _sineTimerValue - _sineSecondTimer.TimerCurrentTime < 0)
             {
                 Console.WriteLine($"Anomaly occured timer time = {_sineSecondTimer.TimerTime}");
             }
@@ -78,11 +84,17 @@ namespace Yayen.Assignment2.Framework.Components
 
         private float GetSineValue(float pXInput)
         {
-            float sineValue = MathF.Sin(pXInput * (MathF.PI * 2)) * _sineScale;
-            Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");
+            float sineValue = MathF.Sin(pXInput * ((MathF.PI * 2) * _periodsPerSecond)) * _sineScale;
+            if (DebugMode) Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");
             sineValue += _increment;
-            Console.WriteLine($"Sine Value incremented by {_increment} to {sineValue}");
+            if (DebugMode) Console.WriteLine($"Sine Value incremented by {_increment} to {sineValue}");
             return sineValue;
+        }
+
+        public void SetPeriodsPerSecond(float pPeriodsPerSecond)
+        {
+            _periodsPerSecond = pPeriodsPerSecond;
+            _sineSecondTimer.TimerTime = 1 / pPeriodsPerSecond;
         }
     }
 }
