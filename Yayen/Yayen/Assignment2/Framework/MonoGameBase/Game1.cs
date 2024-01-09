@@ -38,6 +38,8 @@ namespace Yayen.Assignment2.Framework.MonoGameBase
             OriginTest originTest = new(_sceneSystem, Content, this, "OriginTest");
             LayerDepthTest layerdepthTest = new(_sceneSystem, Content, this, "LayerdepthTest");
             SineRotationTest sineRotationTest = new(_sceneSystem, Content, this, "SineRotationTest");
+            BouncerTest bounceTest = new(_sceneSystem, Content, this, "BouncerTest");
+            ScalerTest scalerTest = new(_sceneSystem, Content, this, "ScalerTest");
 
             _sceneSystem.AddScene(rotationTest);
             _sceneSystem.AddScene(positionTest);
@@ -45,6 +47,8 @@ namespace Yayen.Assignment2.Framework.MonoGameBase
             _sceneSystem.AddScene(originTest);
             _sceneSystem.AddScene(layerdepthTest);
             _sceneSystem.AddScene(sineRotationTest);
+            _sceneSystem.AddScene(bounceTest);
+            _sceneSystem.AddScene(scalerTest);
             _sceneSystem.SwitchScene(rotationTest);
         }
 

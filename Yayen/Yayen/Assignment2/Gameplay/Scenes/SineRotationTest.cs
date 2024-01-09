@@ -36,9 +36,9 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 3, 1);
             newGameObject.AddComponent(new SpriteRenderer(newGameObject, pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject.AddComponent(new RectangleCollider(newGameObject, _RectangleCollisionSystem));
-            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Rotation Test"));
+            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Bouncer Test"));
             newGameObject.AddComponent(new Button(newGameObject));
-            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "RotationTest"));
+            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "BouncerTest"));
             _GameObjects.Add(newGameObject);
 
             // Previous Test Button
