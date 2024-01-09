@@ -21,15 +21,28 @@ namespace Yayen.Assignment2.Framework.Components
         Timer _sineSecondTimer;
 
         private float _sineScale;
-        private float _increment;
         private float _periodsPerSecond;
+        private float _increment;
         // Time till full rotation is completed
-        private float _periodTimeFloat;
+        //private float _periodTimeFloat;
 
         private float _currentSineValue = 0;
 
         private bool DebugMode = false;
+        private bool _setBetweenZeroAndOne;
 
+        public float SineScale { get { return _sineScale; } set { _sineScale = value; } }
+        public float PeriodsPerSecond 
+        { 
+            get { return _periodsPerSecond; } 
+            set 
+            { 
+                _periodsPerSecond = value;
+                // Calculate how many seconds are within one period. The default is one period per second, this is why we divide by 1.
+                _sineTimerValue = 1 / value;
+                _sineSecondTimer.TimerTime = _sineTimerValue;
+            } 
+        }
         public float SineValue { get { return _currentSineValue; } }
 
         /// <summary>
@@ -37,14 +50,15 @@ namespace Yayen.Assignment2.Framework.Components
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pSineScale">Rotations this object rotates in a single second.</param>
-        public SineWave(float pSineScale = 0.5f, float pIncrement = 0.5f, float pPeriodsPerSecond = 1)
+        public SineWave(float pSineScale = 0.5f, float pPeriodsPerSecond = 1, bool pSetBetweenOneAndZero = false, float pIncrement = 0f)
         {
             _sineScale = pSineScale;
             _increment = pIncrement;
-            _periodTimeFloat = 1 / pSineScale;
+            //_periodTimeFloat = 1 / pSineScale;
 
             _sineSecondTimer = new(_sineTimerValue, "SineSecondTimer");
-            SetPeriodsPerSecond(pPeriodsPerSecond);
+            PeriodsPerSecond = pPeriodsPerSecond;
+            _setBetweenZeroAndOne = pSetBetweenOneAndZero;
             _sineSecondTimer.OnTimeElapsed += RestartSineSecondTimer;
             _sineSecondTimer.StartTimer();
         }
@@ -69,7 +83,6 @@ namespace Yayen.Assignment2.Framework.Components
                 Console.WriteLine("New Sine period");
                 Console.WriteLine("");
             }
-            
         }
 
         private void UpdateCurrentSineValue()
@@ -84,18 +97,32 @@ namespace Yayen.Assignment2.Framework.Components
 
         private float GetSineValue(float pXInput)
         {
-            Console.WriteLine($"Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) * {_sineScale} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale} ");
-            float sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale;
+            
+            float sineValue;
+            if (_setBetweenZeroAndOne)
+            {
+                Console.WriteLine($"((Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) + 1) / 2) * {_sineScale} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale} ");
+                sineValue = ((MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) + 1) / 2) * _sineScale;
+            }
+            else
+            {
+                Console.WriteLine($"Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) * {_sineScale} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale} ");
+                sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale;
+            }
+            
             if (DebugMode) Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");
             sineValue += _increment;
             if (DebugMode && _increment != 1) Console.WriteLine($"Sine Value incremented by {_increment} to {sineValue}");
             return sineValue;
         }
 
-        public void SetPeriodsPerSecond(float pPeriodsPerSecond)
-        {
-            _periodsPerSecond = pPeriodsPerSecond;
-            _sineSecondTimer.TimerTime = 1 / pPeriodsPerSecond;
-        }
+        // This method was replaced by the PeriodsPerSecond property
+        //public void SetPeriodsPerSecond(float pPeriodsPerSecond)
+        //{
+        //    _periodsPerSecond = pPeriodsPerSecond;
+        //    // Calculate how many seconds are within one period. The default is one period per second, this is why we divide by 1.
+        //    _sineTimerValue = 1 / pPeriodsPerSecond;
+        //    _sineSecondTimer.TimerTime = _sineTimerValue;
+        //}
     }
 }

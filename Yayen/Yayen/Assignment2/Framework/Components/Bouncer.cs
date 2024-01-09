@@ -19,7 +19,7 @@ namespace Yayen.Assignment2.Framework.Components
         public Bouncer(GameObject pGameObject, float pPeriodsPerSecond, float pAmplitude = 1) : base(pGameObject)
         {
             _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
-            _sineWave = new(pAmplitude, 0, pPeriodsPerSecond);
+            _sineWave = new(pAmplitude, pPeriodsPerSecond);
             _bounceAnchor = _transform.Position;
         }
 
