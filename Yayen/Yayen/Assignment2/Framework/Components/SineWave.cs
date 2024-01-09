@@ -79,15 +79,16 @@ namespace Yayen.Assignment2.Framework.Components
                 Console.WriteLine($"Anomaly occured timer time = {_sineSecondTimer.TimerTime}");
             }
             //Console.WriteLine($"Current sine value is {_sineTimerValue - _sineSecondTimer.TimerCurrentTime}");
-            _currentSineValue = GetSineValue((_sineTimerValue - _sineSecondTimer.TimerCurrentTime) * _periodsPerSecond);
+            _currentSineValue = GetSineValue((_sineTimerValue - _sineSecondTimer.TimerCurrentTime));
         }
 
         private float GetSineValue(float pXInput)
         {
-            float sineValue = MathF.Sin(pXInput * ((MathF.PI * 2) * _periodsPerSecond)) * _sineScale;
+            Console.WriteLine($"Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) * {_sineScale} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale} ");
+            float sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale;
             if (DebugMode) Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");
             sineValue += _increment;
-            if (DebugMode) Console.WriteLine($"Sine Value incremented by {_increment} to {sineValue}");
+            if (DebugMode && _increment != 1) Console.WriteLine($"Sine Value incremented by {_increment} to {sineValue}");
             return sineValue;
         }
 

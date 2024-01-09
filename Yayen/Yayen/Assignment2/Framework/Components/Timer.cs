@@ -48,6 +48,7 @@ namespace Yayen.Assignment2.Framework.Components
             _timerTime = pTimerTime;
             ResetTimer();
             _timerName = timerName;
+            _timeMultiplier = pTimeMultiplier;
         }
         #endregion
 
