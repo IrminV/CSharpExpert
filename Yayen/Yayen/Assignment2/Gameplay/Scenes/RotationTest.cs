@@ -16,12 +16,9 @@ using Microsoft.Xna.Framework;
 
 namespace Yayen.Assignment2.Gameplay.Scenes
 {
-    public class Test1 : Scene
+    public class RotationTest : Scene
     {
-        SineWave _sineWaveTest;
-
-
-        public Test1(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
+        public RotationTest(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
         /// <summary>
         /// Method where we load all objects for this scene.
@@ -30,11 +27,9 @@ namespace Yayen.Assignment2.Gameplay.Scenes
         /// <param name="pGame1">Reference to MonoGame Game1.</param>
         public override void LoadContent(ContentManager pContent, Game1 pGame1)
         {
-            _sineWaveTest = new SineWave(23);
-
             // Next Test Button
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 2, 1);
+            GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 3, 1);
             newGameObject.AddComponent(new SpriteRenderer(newGameObject, pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject.AddComponent(new RectangleCollider(newGameObject, _RectangleCollisionSystem));
             newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Position Test"));
@@ -44,12 +39,12 @@ namespace Yayen.Assignment2.Gameplay.Scenes
 
             // Previous Test Button
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject2 = new(this, "Block", 96, _graphicsDevice.Viewport.Height - 96, 0, 2, 1);
+            GameObject newGameObject2 = new(this, "Block", 96, _graphicsDevice.Viewport.Height - 96, 0, 3, 1);
             newGameObject2.AddComponent(new SpriteRenderer(newGameObject2, pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject2.AddComponent(new RectangleCollider(newGameObject2, _RectangleCollisionSystem));
-            newGameObject2.AddComponent(new Text(newGameObject2, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Layerdepth Test"));
+            newGameObject2.AddComponent(new Text(newGameObject2, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Sine Rotation Test"));
             newGameObject2.AddComponent(new Button(newGameObject2));
-            newGameObject2.AddComponent(new ButtonSceneSwitchScript(newGameObject2, _sceneSystem, "LayerdepthTest"));
+            newGameObject2.AddComponent(new ButtonSceneSwitchScript(newGameObject2, _sceneSystem, "SineRotationTest"));
             _GameObjects.Add(newGameObject2);
 
             // Mouse Object
@@ -121,7 +116,6 @@ namespace Yayen.Assignment2.Gameplay.Scenes
         public override void Update(GameTime gameTime, Game1 game1)
         {
             base.Update(gameTime, game1);
-            _sineWaveTest.Update(gameTime);
         }
     }
 }

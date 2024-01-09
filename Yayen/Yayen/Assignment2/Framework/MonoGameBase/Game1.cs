@@ -32,18 +32,20 @@ namespace Yayen.Assignment2.Framework.MonoGameBase
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Test1 _test1 = new(_sceneSystem, Content, this, "RotationTest");
-            Test2 _test2 = new(_sceneSystem, Content, this, "PositionTest");
-            Test3 _test3 = new(_sceneSystem, Content, this, "ScaleTest");
-            Test4 _test4 = new(_sceneSystem, Content, this, "OriginTest");
-            Test5 _test5 = new(_sceneSystem, Content, this, "LayerdepthTest");
+            RotationTest rotationTest = new(_sceneSystem, Content, this, "RotationTest");
+            PositionTest positionTest = new(_sceneSystem, Content, this, "PositionTest");
+            ScaleTest scaleTest = new(_sceneSystem, Content, this, "ScaleTest");
+            OriginTest originTest = new(_sceneSystem, Content, this, "OriginTest");
+            LayerDepthTest layerdepthTest = new(_sceneSystem, Content, this, "LayerdepthTest");
+            SineRotationTest sineRotationTest = new(_sceneSystem, Content, this, "SineRotationTest");
 
-            _sceneSystem.AddScene(_test1);
-            _sceneSystem.AddScene(_test2);
-            _sceneSystem.AddScene(_test3);
-            _sceneSystem.AddScene(_test4);
-            _sceneSystem.AddScene(_test5);
-            _sceneSystem.SwitchScene(_test1);
+            _sceneSystem.AddScene(rotationTest);
+            _sceneSystem.AddScene(positionTest);
+            _sceneSystem.AddScene(scaleTest);
+            _sceneSystem.AddScene(originTest);
+            _sceneSystem.AddScene(layerdepthTest);
+            _sceneSystem.AddScene(sineRotationTest);
+            _sceneSystem.SwitchScene(rotationTest);
         }
 
         protected override void Update(GameTime gameTime)

@@ -27,7 +27,17 @@ namespace Yayen.Assignment2.Framework.Components
         public event TimerDelegate OnTimeElapsed;
 
         public float TimerTime { get { return _timerTime; } set { _timerTime = value; } }
-        public float TimerCurrentTime { get { return _timerCurrentTime; } }
+        public float TimerCurrentTime
+        {
+            get
+            {
+                if (_timerCurrentTime < 0)
+                {
+                    return 0;
+                }
+                else return _timerCurrentTime; 
+            } 
+        }
         public bool TimerActive { get { return _timerActive; } }
 
 
@@ -90,9 +100,18 @@ namespace Yayen.Assignment2.Framework.Components
             _timerActive = true;
         }
 
-        public void ResetTimer(bool pSetActive = false)
+        public void ResetTimer(bool pSetActive = false, bool pKeepLeftOverTime = false)
         {
-            _timerCurrentTime = _timerTime;
+            // If we want to keep left over time and we have left over time (below zero) add this to new timer time, else just reset.
+            if (pKeepLeftOverTime && _timerCurrentTime < 0)
+            {
+                //Console.ForegroundColor = ConsoleColor.Green;
+                //Console.WriteLine($"Timer calculating time. _timertime + {_timerCurrentTime} = {_timerTime + _timerCurrentTime}");
+                //Console.ResetColor();
+                _timerCurrentTime = _timerTime + _timerCurrentTime;
+            }
+            else _timerCurrentTime = _timerTime;
+
             _timerActive = pSetActive;
         }
         public void Destroy()

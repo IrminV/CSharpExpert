@@ -15,9 +15,9 @@ using Yayen.Assignment2.Framework.Scenes.Base;
 
 namespace Yayen.Assignment2.Gameplay.Scenes
 {
-    public class Test5 : Scene
+    public class PositionTest : Scene
     {
-        public Test5(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
+        public PositionTest(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
         /// <summary>
         /// Method where we load all objects for this scene.
@@ -28,22 +28,22 @@ namespace Yayen.Assignment2.Gameplay.Scenes
         {
             // Next Test Button
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 2, 1);
+            GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height / 2, 0, 3, 1);
             newGameObject.AddComponent(new SpriteRenderer(newGameObject, pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject.AddComponent(new RectangleCollider(newGameObject, _RectangleCollisionSystem));
-            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Rotation Test"));
+            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Scale Test"));
             newGameObject.AddComponent(new Button(newGameObject));
-            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "RotationTest"));
+            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "ScaleTest"));
             _GameObjects.Add(newGameObject);
 
             // Previous Test Button
             base.LoadContent(pContent, pGame1);
-            GameObject newGameObject2 = new(this, "Block", 96, _graphicsDevice.Viewport.Height - 96, 0, 2, 1);
+            GameObject newGameObject2 = new(this, "Block", 96, _graphicsDevice.Viewport.Height / 2, 0, 3, 1);
             newGameObject2.AddComponent(new SpriteRenderer(newGameObject2, pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject2.AddComponent(new RectangleCollider(newGameObject2, _RectangleCollisionSystem));
-            newGameObject2.AddComponent(new Text(newGameObject2, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Origin Test"));
+            newGameObject2.AddComponent(new Text(newGameObject2, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Rotation Test"));
             newGameObject2.AddComponent(new Button(newGameObject2));
-            newGameObject2.AddComponent(new ButtonSceneSwitchScript(newGameObject2, _sceneSystem, "OriginTest"));
+            newGameObject2.AddComponent(new ButtonSceneSwitchScript(newGameObject2, _sceneSystem, "RotationTest"));
             _GameObjects.Add(newGameObject2);
 
             // Mouse Object
@@ -58,41 +58,38 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             GameObject SceneDescription = new(this, "SceneDescription", _graphicsDevice.Viewport.Width / 2, 32, 0, 0.5f, 0.5f);
             //SceneDescription.AddComponent(new SpriteRenderer(SceneDescription, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             //SceneDescription.AddComponent(new RectangleCollider(SceneDescription, _RectangleCollisionSystem));
-            SceneDescription.AddComponent(new Text(SceneDescription, pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth Test", 0, 0));
+            SceneDescription.AddComponent(new Text(SceneDescription, pContent.Load<SpriteFont>("DefaultSpritefont"), "Position Test", 0, 0));
             _GameObjects.Add(SceneDescription);
 
             // Test Objects
-            GameObject obj1 = new(this, "Obj1", _graphicsDevice.Viewport.Width / 2, _graphicsDevice.Viewport.Height / 2, 0, 2f, 2f);
-            obj1.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0.5f));
+            GameObject obj1 = new(this, "Obj1", 0, 0, 0, 0.5f, 0.5f);
+            obj1.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj1.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
-            obj1.AddComponent(new Text(obj1, pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth 0.5", 0, 74 + 128));
+            obj1.AddComponent(new Text(obj1, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 1 Position: Top Left", 128, 64));
             _GameObjects.Add(obj1);
-            //Console.WriteLine($"LayerDepth of Obj1 is {((SpriteRenderer)obj1.GetComponent<SpriteRenderer>()).LayerDepth}");
 
-            GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 352, 0, 0.5f, 0.5f);
+            GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width, 0, 0, 0.5f, 0.5f);
             obj2.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj2.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            obj2.AddComponent(new Text(obj2, pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth 0", 0, 50));
+            obj2.AddComponent(new Text(obj2, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 2 Position Top Right", -128, 64));
             _GameObjects.Add(obj2);
-            //Console.WriteLine($"LayerDepth of Obj2 is {((SpriteRenderer)obj2.GetComponent<SpriteRenderer>()).LayerDepth}");
 
-            GameObject obj3 = new(this, "Obj3", _graphicsDevice.Viewport.Width / 2 + 96, 352, 0, 0.5f, 0.5f);
-            obj3.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 1f));
+            GameObject obj3 = new(this, "Obj3", 0, _graphicsDevice.Viewport.Height, 0, 0.5f, 0.5f);
+            obj3.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj3.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth 1", 0, 50));
+            obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 Position: Bottom Left", 128, -64));
             _GameObjects.Add(obj3);
-            //Console.WriteLine($"LayerDepth of Obj3 is {((SpriteRenderer)obj3.GetComponent<SpriteRenderer>()).LayerDepth}");
 
-            GameObject obj4 = new(this, "Obj4", _graphicsDevice.Viewport.Width / 2 + 158, 96, 0, 0.5f, 0.5f);
-            obj4.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 2f));
+            GameObject obj4 = new(this, "Obj4", _graphicsDevice.Viewport.Width, _graphicsDevice.Viewport.Height, 0, 0.5f, 0.5f);
+            obj4.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj4.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
-            obj4.AddComponent(new Text(obj4, pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth 2 (invisable)", 0, 50));
+            obj4.AddComponent(new Text(obj4, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 4 Position: Bottom Right", -128, -64));
             _GameObjects.Add(obj4);
 
-            GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2 - 158, 96, 0, 0.5f, 0.5f);
-            obj5.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), -0.1f));
+            GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2, _graphicsDevice.Viewport.Height / 2, 0, 0.5f, 0.5f);
+            obj5.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj5.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "layerDepth - 0.1 (invisible)", 0, 50));
+            obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 5 Position: Center", 0, 64));
             _GameObjects.Add(obj5);
         }
 

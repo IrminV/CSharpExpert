@@ -16,9 +16,12 @@ namespace Yayen.Assignment2.Framework.Components
         // Output is Y
         // Cosine starts at 0.5
 
-        Timer _sineSecondTimer = new(1, "SineSecondTimer");
+        float _sineTimerValue = 1;
 
-        private float _periodsPerSecond;
+        Timer _sineSecondTimer;
+
+        private float _sineScale;
+        private float _increment;
         // Time till full rotation is completed
         private float _periodTimeFloat;
 
@@ -28,20 +31,23 @@ namespace Yayen.Assignment2.Framework.Components
         /// Create a Text component which rotates GameObject this component is part of based on rotations per second.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
-        /// <param name="pPeriodsPerSecond">Rotations this object rotates in a single second.</param>
-        public SineWave(float pPeriodsPerSecond = 1)
+        /// <param name="pSineScale">Rotations this object rotates in a single second.</param>
+        public SineWave(float pSineScale = 0.5f, float pIncrement = 0.5f)
         {
-            _periodsPerSecond = pPeriodsPerSecond;
-            _periodTimeFloat = 1 / pPeriodsPerSecond;
+            _sineScale = pSineScale;
+            _increment = pIncrement;
+            _periodTimeFloat = 1 / pSineScale;
 
+
+            _sineSecondTimer = new(_sineTimerValue, "SineSecondTimer");
             _sineSecondTimer.OnTimeElapsed += RestartSineSecondTimer;
+            _sineSecondTimer.StartTimer();
         }
 
         public void Update(GameTime pGameTime)
         {
             UpdateCurrentSineValue();
             UpdateSineSecondTimer(pGameTime);
-            Console.WriteLine($"Current sine value is {_currentSineValue}");
         }
 
         private void UpdateSineSecondTimer(GameTime pGameTime)
@@ -51,17 +57,29 @@ namespace Yayen.Assignment2.Framework.Components
 
         private void RestartSineSecondTimer()
         {
-            _sineSecondTimer.ResetTimer(true);
+            _sineSecondTimer.ResetTimer(true, true);
+            Console.WriteLine("");
+            Console.WriteLine("New Sine period");
+            Console.WriteLine("");
         }
 
         private void UpdateCurrentSineValue()
         {
-            _currentSineValue = GetSineValue(_sineSecondTimer.TimerCurrentTime);
+            if (_sineTimerValue - _sineSecondTimer.TimerCurrentTime < 0)
+            {
+                Console.WriteLine($"Anomaly occured timer time = {_sineSecondTimer.TimerTime}");
+            }
+            //Console.WriteLine($"Current sine value is {_sineTimerValue - _sineSecondTimer.TimerCurrentTime}");
+            _currentSineValue = GetSineValue(_sineTimerValue - _sineSecondTimer.TimerCurrentTime);
         }
 
         private float GetSineValue(float pXInput)
         {
-            return MathF.Sin(pXInput) * _periodsPerSecond;
+            float sineValue = MathF.Sin(pXInput * (MathF.PI * 2)) * _sineScale;
+            Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");
+            sineValue += _increment;
+            Console.WriteLine($"Sine Value incremented by {_increment} to {sineValue}");
+            return sineValue;
         }
     }
 }
