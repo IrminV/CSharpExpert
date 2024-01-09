@@ -68,7 +68,7 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             obj1.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj1.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
             obj1.AddComponent(new Text(obj1, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 1 Bouncer", 0, 64));
-            obj1.AddComponent(new Bouncer(obj1, 1, 1));
+            obj1.AddComponent(new Bouncer(obj1, 0.1f, 32));
             _GameObjects.Add(obj1);
 
             GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 224, 0, 0.5f, 0.5f);

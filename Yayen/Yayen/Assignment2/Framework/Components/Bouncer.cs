@@ -16,10 +16,10 @@ namespace Yayen.Assignment2.Framework.Components
         private bool _bounceActive = true;
         private Vector2 _bounceAnchor;
 
-        public Bouncer(GameObject pGameObject, float PeriodsPerSecond, float pAmplitude = 1) : base(pGameObject)
+        public Bouncer(GameObject pGameObject, float pPeriodsPerSecond, float pAmplitude = 1) : base(pGameObject)
         {
             _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
-            _sineWave = new(pAmplitude, 0);
+            _sineWave = new(pAmplitude, 0, pPeriodsPerSecond);
             _bounceAnchor = _transform.Position;
         }
 
