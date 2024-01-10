@@ -122,10 +122,10 @@ namespace Yayen.Assignment2.Framework.GameObjects
                     _transform = (Transform2D)pComponent;
                 }
 
-                if (pComponent is SineSpriteRotator)
-                {
-                    Console.WriteLine($"Addcomponent of SineSpriteRotator detected on {_name}");
-                }
+                //if (pComponent is SineSpriteRotator)
+                //{
+                //    Console.WriteLine($"Addcomponent of SineSpriteRotator detected on {_name}");
+                //}
 
                 pComponent.OnComponentAdded(this);
             }

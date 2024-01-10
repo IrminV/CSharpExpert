@@ -31,7 +31,7 @@ namespace Yayen.Assignment2.Framework.Components
         private bool DebugMode = false;
         private bool _setBetweenZeroAndOne;
 
-        public float SineScale { get { return _amplitude; } set { _amplitude = value; } }
+        public float SineAmplitude { get { return _amplitude; } set { _amplitude = value; } }
         public float PeriodsPerSecond 
         { 
             get { return _periodsPerSecond; } 
@@ -100,13 +100,12 @@ namespace Yayen.Assignment2.Framework.Components
             float sineValue;
             if (_setBetweenZeroAndOne)
             {
-                Console.WriteLine($"((Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) + 1) / 2) * {_amplitude} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude} ");
                 sineValue = ((MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) + 1) / 2) * _amplitude;
             }
             else
             {
-                Console.WriteLine($"Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) * {_amplitude} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude} ");
-                sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude;
+                // Amplitude is divided by 2 to account for the negative values the sine function returns as well (-1 to 1) Because the bounce already goes over the amplitude value once
+                sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude / 2;
             }
             
             if (DebugMode) Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");

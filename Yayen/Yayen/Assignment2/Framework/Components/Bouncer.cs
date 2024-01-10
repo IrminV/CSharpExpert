@@ -11,14 +11,22 @@ namespace Yayen.Assignment2.Framework.Components
 {
     public class Bouncer : Component
     {
-        Transform2D _transform;
-        SineWave _sineWave;
+        private Transform2D _transform;
+        private SineWave _sineWave;
         private bool _bounceActive = true;
         private Vector2 _bounceAnchor;
 
-        public Bouncer(GameObject pGameObject, float pPeriodsPerSecond, float pAmplitude = 1) : base(pGameObject)
+        private Vector2 _bounceDirection;
+
+        public Bouncer(GameObject pGameObject, float pPeriodsPerSecond, float pAmplitude = 1, Vector2 pBounceDirection = new Vector2()) : base(pGameObject)
         {
+            // If no input, use default Vector2 value for direction, else normalize Vector2 input value for direction
+            if (pBounceDirection == Vector2.Zero) pBounceDirection = new Vector2(0, 1f);
+            else pBounceDirection.Normalize();
+            _bounceDirection = pBounceDirection;
+
             _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+            
             _sineWave = new(pAmplitude, pPeriodsPerSecond);
             _bounceAnchor = _transform.Position;
         }
@@ -32,7 +40,7 @@ namespace Yayen.Assignment2.Framework.Components
 
         private void UpdateBouncePosition()
         {
-            if (_bounceActive) _transform.Position = new Vector2(_transform.Position.X, _bounceAnchor.Y + _sineWave.SineValue);
+            if (_bounceActive) _transform.Position = new Vector2(_bounceAnchor.X + _sineWave.SineValue * _bounceDirection.X, _bounceAnchor.Y + _sineWave.SineValue * _bounceDirection.Y);
         }
 
 
