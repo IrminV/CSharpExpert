@@ -122,6 +122,11 @@ namespace Yayen.Assignment2.Framework.GameObjects
                     _transform = (Transform2D)pComponent;
                 }
 
+                if (pComponent is SineSpriteRotator)
+                {
+                    Console.WriteLine($"Addcomponent of SineSpriteRotator detected on {_name}");
+                }
+
                 pComponent.OnComponentAdded(this);
             }
         }
@@ -176,13 +181,13 @@ namespace Yayen.Assignment2.Framework.GameObjects
         /// </summary>
         /// <typeparam name="tValue">Type of component.</typeparam>
         /// <returns>Component of <type> found on this GameObject.</returns>
-        public Component GetComponent<tValue>() where tValue : Component
+        public tValue GetComponent<tValue>() where tValue : Component
         {
             for (int i = 0; i < _components.Count; i++)
             {
                 if (typeof(tValue) == _components[i].GetType())
                 {
-                    return _components[i];
+                    return (tValue)_components[i];
                 }
             }
             return null;

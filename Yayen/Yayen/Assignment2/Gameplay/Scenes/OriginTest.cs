@@ -69,7 +69,7 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             obj2.AddComponent(new Text(obj2, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 2 Origin (0,0)", 32, 96));
             _GameObjects.Add(obj2);
 
-            GameObject obj3 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 128, 0, 0.5f, 0.5f);
+            GameObject obj3 = new(this, "Obj3", _graphicsDevice.Viewport.Width / 2 - 96, 128, 0, 0.5f, 0.5f);
             obj3.AddComponent(new SpriteRenderer(obj3, pContent, pContent.Load<Texture2D>("StarIndicators"), 1f, 1, 1));
             obj3.AddComponent(new RectangleCollider(obj3, _RectangleCollisionSystem));
             obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 Origin (1,1)", -32, -74));

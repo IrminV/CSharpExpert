@@ -77,21 +77,21 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             //Console.WriteLine($"LayerDepth of Obj2 is {((SpriteRenderer)obj2.GetComponent<SpriteRenderer>()).LayerDepth}");
 
             GameObject obj3 = new(this, "Obj3", _graphicsDevice.Viewport.Width / 2 + 96, 352, 0, 0.5f, 0.5f);
-            obj3.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 1f));
-            obj3.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
+            obj3.AddComponent(new SpriteRenderer(obj3, pContent, pContent.Load<Texture2D>("LittleStar"), 1f));
+            obj3.AddComponent(new RectangleCollider(obj3, _RectangleCollisionSystem));
             obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth 1", 0, 50));
             _GameObjects.Add(obj3);
             //Console.WriteLine($"LayerDepth of Obj3 is {((SpriteRenderer)obj3.GetComponent<SpriteRenderer>()).LayerDepth}");
 
             GameObject obj4 = new(this, "Obj4", _graphicsDevice.Viewport.Width / 2 + 158, 96, 0, 0.5f, 0.5f);
-            obj4.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 2f));
-            obj4.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
+            obj4.AddComponent(new SpriteRenderer(obj4, pContent, pContent.Load<Texture2D>("LittleStar"), 2f));
+            obj4.AddComponent(new RectangleCollider(obj4, _RectangleCollisionSystem));
             obj4.AddComponent(new Text(obj4, pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth 2 (invisable)", 0, 50));
             _GameObjects.Add(obj4);
 
             GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2 - 158, 96, 0, 0.5f, 0.5f);
-            obj5.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), -0.1f));
-            obj5.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
+            obj5.AddComponent(new SpriteRenderer(obj5, pContent, pContent.Load<Texture2D>("LittleStar"), -0.1f));
+            obj5.AddComponent(new RectangleCollider(obj5, _RectangleCollisionSystem));
             obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "layerDepth - 0.1 (invisible)", 0, 50));
             _GameObjects.Add(obj5);
         }

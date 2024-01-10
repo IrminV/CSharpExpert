@@ -64,48 +64,61 @@ namespace Yayen.Assignment2.Gameplay.Scenes
 
 
             // Test Objects
-            GameObject obj1 = new(this, "Obj1", _graphicsDevice.Viewport.Width / 2 - 96, 96, 0, 0.5f, 0.5f);
+            GameObject obj1 = new(this, "Obj1", _graphicsDevice.Viewport.Width / 2 - 284, 96, 0, 0.5f, 0.5f);
             obj1.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj1.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
             obj1.AddComponent(new Text(obj1, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 1 Rotator:\nClockwise:True\nResolutionPerSec: 1", 0, 64));
             obj1.AddComponent(new SpriteRotator(obj1, true, 1));
             _GameObjects.Add(obj1);
 
-            GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 224, 0, 0.5f, 0.5f);
+            GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 160, 0, 0.5f, 0.5f);
             obj2.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj2.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            obj2.AddComponent(new Text(obj2, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 2 Rotation: 90", 0, 64));
+            obj2.AddComponent(new Text(obj2, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 2 SineRotator:\nClockwise:True\nResolutionPerSec: 0.1\nDegrees: 90 to 270", 0, 64));
+            obj2.AddComponent(new SineSpriteRotator(obj2, 90, 270, true, 0.1f));
             _GameObjects.Add(obj2);
 
             GameObject obj3 = new(this, "Obj3", _graphicsDevice.Viewport.Width / 2 - 96, 352, 0, 0.5f, 0.5f);
-            obj3.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj3.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 Rotation: 180", 0, 64));
+            obj3.AddComponent(new SpriteRenderer(obj3, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj3.AddComponent(new RectangleCollider(obj3, _RectangleCollisionSystem));
+            obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 SineRotator:\nClockwise:True\nResolutionPerSec: 1\nDegrees: 90 to 270", 0, 64));
+            obj3.AddComponent(new SineSpriteRotator(obj3, 90, 270, true, 1));
             _GameObjects.Add(obj3);
 
-            GameObject obj4 = new(this, "Obj4", _graphicsDevice.Viewport.Width / 2 + 96, 96, 0, 0.5f, 0.5f);
-            obj4.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj4.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
-            obj4.AddComponent(new Text(obj4, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 4 Rotation: 270", 0, 64));
+            GameObject obj4 = new(this, "Obj4", _graphicsDevice.Viewport.Width / 2 + 284, 96, 0, 0.5f, 0.5f);
+            obj4.AddComponent(new SpriteRenderer(obj4, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj4.AddComponent(new RectangleCollider(obj4, _RectangleCollisionSystem));
+            obj4.AddComponent(new Text(obj4, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 4 Rotator:\nClockwise:false\nResolutionPerSec: 1", 0, 64));
+            obj4.AddComponent(new SpriteRotator(obj4, false, 1));
             _GameObjects.Add(obj4);
 
-            GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2 + 96, 224, 0, 0.5f, 0.5f);
-            obj5.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj5.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 5 Rotation: -90", 0, 64));
+            GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2 + 96, 160, 0, 0.5f, 0.5f);
+            obj5.AddComponent(new SpriteRenderer(obj5, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj5.AddComponent(new RectangleCollider(obj5, _RectangleCollisionSystem));
+            obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 5 SineRotator:\nClockwise:false\nResolutionPerSec: 0.1\nDegrees: 90 to 270", 0, 64));
+            obj5.AddComponent(new SineSpriteRotator(obj5, 90, 270, false, 0.1f));
             _GameObjects.Add(obj5);
 
             GameObject obj6 = new(this, "Obj6", _graphicsDevice.Viewport.Width / 2 + 96, 352, 0, 0.5f, 0.5f);
-            obj6.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj6.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            obj6.AddComponent(new Text(obj6, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 6 Rotation: 360", 0, 64));
+            obj6.AddComponent(new SpriteRenderer(obj6, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj6.AddComponent(new RectangleCollider(obj6, _RectangleCollisionSystem));
+            obj6.AddComponent(new Text(obj6, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 6 SineRotator:\nClockwise:true\nResolutionPerSec: 1.2\nDegrees: 270 to 450", 0, 64));
+            obj6.AddComponent(new SineSpriteRotator(obj6, 270, 450, true, 1.2f));
             _GameObjects.Add(obj6);
 
-            GameObject obj7 = new(this, "Obj7", _graphicsDevice.Viewport.Width / 2 + 288, 224, 0, 0.5f, 0.5f);
-            obj7.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj7.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
-            obj7.AddComponent(new Text(obj7, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 7 Rotation: 450", 0, 64));
+            GameObject obj7 = new(this, "Obj7", _graphicsDevice.Viewport.Width / 2 - 288, 224, 0, 0.5f, 0.5f);
+            obj7.AddComponent(new SpriteRenderer(obj7, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj7.AddComponent(new RectangleCollider(obj7, _RectangleCollisionSystem));
+            obj7.AddComponent(new Text(obj7, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 7 Rotator:\nClockwise:True\nResolutionPerSec: 1.2", 0, 64));
+            obj7.AddComponent(new SpriteRotator(obj7, true, 1.2f));
             _GameObjects.Add(obj7);
+
+            GameObject obj8 = new(this, "Obj8", _graphicsDevice.Viewport.Width / 2 + 288, 224, 0, 0.5f, 0.5f);
+            obj8.AddComponent(new SpriteRenderer(obj8, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj8.AddComponent(new RectangleCollider(obj8, _RectangleCollisionSystem));
+            obj8.AddComponent(new Text(obj8, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 8 Rotator:\nClockwise:false\nResolutionPerSec: 0.88842375", 0, 64));
+            obj8.AddComponent(new SpriteRotator(obj8, false, 0.8842375f));
+            _GameObjects.Add(obj8);
 
         }
 

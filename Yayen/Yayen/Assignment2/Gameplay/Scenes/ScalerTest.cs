@@ -78,32 +78,32 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             _GameObjects.Add(obj2);
 
             GameObject obj3 = new(this, "Obj3", _graphicsDevice.Viewport.Width / 2 - 96, 352, 0, 0.5f, 0.5f);
-            obj3.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj3.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
+            obj3.AddComponent(new SpriteRenderer(obj3, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj3.AddComponent(new RectangleCollider(obj3, _RectangleCollisionSystem));
             obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 Rotation: 180", 0, 64));
             _GameObjects.Add(obj3);
 
             GameObject obj4 = new(this, "Obj4", _graphicsDevice.Viewport.Width / 2 + 96, 96, 0, 0.5f, 0.5f);
-            obj4.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj4.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
+            obj4.AddComponent(new SpriteRenderer(obj4, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj4.AddComponent(new RectangleCollider(obj4, _RectangleCollisionSystem));
             obj4.AddComponent(new Text(obj4, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 4 Rotation: 270", 0, 64));
             _GameObjects.Add(obj4);
 
             GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2 + 96, 224, 0, 0.5f, 0.5f);
-            obj5.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj5.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
+            obj5.AddComponent(new SpriteRenderer(obj5, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj5.AddComponent(new RectangleCollider(obj5, _RectangleCollisionSystem));
             obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 5 Rotation: -90", 0, 64));
             _GameObjects.Add(obj5);
 
             GameObject obj6 = new(this, "Obj6", _graphicsDevice.Viewport.Width / 2 + 96, 352, 0, 0.5f, 0.5f);
-            obj6.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj6.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
+            obj6.AddComponent(new SpriteRenderer(obj6, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj6.AddComponent(new RectangleCollider(obj6, _RectangleCollisionSystem));
             obj6.AddComponent(new Text(obj6, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 6 Rotation: 360", 0, 64));
             _GameObjects.Add(obj6);
 
             GameObject obj7 = new(this, "Obj7", _graphicsDevice.Viewport.Width / 2 + 288, 224, 0, 0.5f, 0.5f);
-            obj7.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj7.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
+            obj7.AddComponent(new SpriteRenderer(obj7, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj7.AddComponent(new RectangleCollider(obj7, _RectangleCollisionSystem));
             obj7.AddComponent(new Text(obj7, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 7 Rotation: 450", 0, 64));
             _GameObjects.Add(obj7);
 

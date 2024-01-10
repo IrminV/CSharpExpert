@@ -20,7 +20,7 @@ namespace Yayen.Assignment2.Framework.Components
 
         Timer _sineSecondTimer;
 
-        private float _sineScale;
+        private float _amplitude;
         private float _periodsPerSecond;
         private float _increment;
         // Time till full rotation is completed
@@ -31,7 +31,7 @@ namespace Yayen.Assignment2.Framework.Components
         private bool DebugMode = false;
         private bool _setBetweenZeroAndOne;
 
-        public float SineScale { get { return _sineScale; } set { _sineScale = value; } }
+        public float SineScale { get { return _amplitude; } set { _amplitude = value; } }
         public float PeriodsPerSecond 
         { 
             get { return _periodsPerSecond; } 
@@ -46,13 +46,12 @@ namespace Yayen.Assignment2.Framework.Components
         public float SineValue { get { return _currentSineValue; } }
 
         /// <summary>
-        /// Create a Text component which rotates GameObject this component is part of based on rotations per second.
+        /// Create a SineWave
         /// </summary>
-        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
-        /// <param name="pSineScale">Rotations this object rotates in a single second.</param>
-        public SineWave(float pSineScale = 0.5f, float pPeriodsPerSecond = 1, bool pSetBetweenOneAndZero = false, float pIncrement = 0f)
+        /// <param name="pAmplitude">Rotations this object rotates in a single second.</param>
+        public SineWave(float pAmplitude = 1, float pPeriodsPerSecond = 1, bool pSetBetweenOneAndZero = false, float pIncrement = 0f)
         {
-            _sineScale = pSineScale;
+            _amplitude = pAmplitude;
             _increment = pIncrement;
             //_periodTimeFloat = 1 / pSineScale;
 
@@ -95,19 +94,19 @@ namespace Yayen.Assignment2.Framework.Components
             _currentSineValue = GetSineValue((_sineTimerValue - _sineSecondTimer.TimerCurrentTime));
         }
 
+        // TODO: Make this function more readable
         private float GetSineValue(float pXInput)
         {
-            
             float sineValue;
             if (_setBetweenZeroAndOne)
             {
-                Console.WriteLine($"((Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) + 1) / 2) * {_sineScale} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale} ");
-                sineValue = ((MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) + 1) / 2) * _sineScale;
+                Console.WriteLine($"((Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) + 1) / 2) * {_amplitude} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude} ");
+                sineValue = ((MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) + 1) / 2) * _amplitude;
             }
             else
             {
-                Console.WriteLine($"Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) * {_sineScale} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale} ");
-                sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _sineScale;
+                Console.WriteLine($"Mathf.Sine(({pXInput} * ({MathF.PI} * 2)) * {_periodsPerSecond}) * {_amplitude} = {MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude} ");
+                sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude;
             }
             
             if (DebugMode) Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");

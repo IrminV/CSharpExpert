@@ -9,28 +9,35 @@ using Yayen.Assignment2.Framework.GameObjects;
 
 namespace Yayen.Assignment2.Framework.Components
 {
-    public class SpriteRotator : Component
+    public class SineSpriteRotator : Component
     {
+        float _minRot;
+        float _maxRot;
         bool _clockwise;
-        float _revolutionsPerSecond;
-        Timer _secondTimer;
+        //Timer _secondTimer;
         float _lerpValue;
         Transform2D _transform;
+        
+        SineWave _sineWave;
 
-        public SpriteRotator(GameObject pGameObject, bool pClockwise = true, float pRevolutionsPerSecond = 1) : base(pGameObject)
+        public SineSpriteRotator(GameObject pGameObject, float pMinRot, float pMaxRot, bool pClockwise = true, float pRevolutionsPerSecond = 1) : base(pGameObject)
         {
+            _minRot = pMinRot;
+            _maxRot = pMaxRot;
             _clockwise = pClockwise;
-            _revolutionsPerSecond = pRevolutionsPerSecond;
             _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
-            _secondTimer = new(1 / pRevolutionsPerSecond, "Second Timer");
-            _secondTimer.OnTimeElapsed += ResetSecondTimer;
-            _secondTimer.StartTimer();
+            Console.WriteLine($"SineSpriteRotator: Getting transform component of GameObjct {GameObject.Name}");
+            _sineWave = new(1, pRevolutionsPerSecond, true);
+            //_secondTimer = new(1, "Second Timer");
+            //_secondTimer.OnTimeElapsed += ResetSecondTimer;
+            //_secondTimer.StartTimer();
         }
 
         public override void Update(GameTime pGameTime, Transform2D pTransform)
         {
             base.Update(pGameTime, pTransform);
-            _secondTimer.Update(pGameTime);
+            //_secondTimer.Update(pGameTime);
+            _sineWave.Update(pGameTime);
             UpdateLerpValue();
             UpdateSpriteRotation();
         }
@@ -39,11 +46,11 @@ namespace Yayen.Assignment2.Framework.Components
         {
             if (_clockwise)
             {
-                _lerpValue = MathHelper.Lerp(0, 360 * _revolutionsPerSecond, _secondTimer.TimerTime - _secondTimer.TimerCurrentTime);
+                _lerpValue = MathHelper.Lerp(_minRot, _maxRot, _sineWave.SineValue);
             }
             else
             {
-                _lerpValue = MathHelper.Lerp(0, 360 * _revolutionsPerSecond, _secondTimer.TimerCurrentTime);
+                _lerpValue = MathHelper.Lerp(_minRot, _maxRot, -_sineWave.SineValue);
             }
             
         }
@@ -51,11 +58,6 @@ namespace Yayen.Assignment2.Framework.Components
         public void UpdateSpriteRotation()
         {
             _transform.Rotation = _transform.Rotation = _lerpValue;
-        }
-
-        private void ResetSecondTimer()
-        {
-            _secondTimer.ResetTimer(true, true);
         }
     }
 }

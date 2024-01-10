@@ -75,20 +75,20 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             _GameObjects.Add(obj2);
 
             GameObject obj3 = new(this, "Obj3", 0, _graphicsDevice.Viewport.Height, 0, 0.5f, 0.5f);
-            obj3.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj3.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
+            obj3.AddComponent(new SpriteRenderer(obj3, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj3.AddComponent(new RectangleCollider(obj3, _RectangleCollisionSystem));
             obj3.AddComponent(new Text(obj3, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 Position: Bottom Left", 128, -64));
             _GameObjects.Add(obj3);
 
             GameObject obj4 = new(this, "Obj4", _graphicsDevice.Viewport.Width, _graphicsDevice.Viewport.Height, 0, 0.5f, 0.5f);
-            obj4.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj4.AddComponent(new RectangleCollider(obj1, _RectangleCollisionSystem));
+            obj4.AddComponent(new SpriteRenderer(obj4, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj4.AddComponent(new RectangleCollider(obj4, _RectangleCollisionSystem));
             obj4.AddComponent(new Text(obj4, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 4 Position: Bottom Right", -128, -64));
             _GameObjects.Add(obj4);
 
             GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2, _graphicsDevice.Viewport.Height / 2, 0, 0.5f, 0.5f);
-            obj5.AddComponent(new SpriteRenderer(obj2, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
-            obj5.AddComponent(new RectangleCollider(obj2, _RectangleCollisionSystem));
+            obj5.AddComponent(new SpriteRenderer(obj5, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj5.AddComponent(new RectangleCollider(obj5, _RectangleCollisionSystem));
             obj5.AddComponent(new Text(obj5, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 5 Position: Center", 0, 64));
             _GameObjects.Add(obj5);
         }

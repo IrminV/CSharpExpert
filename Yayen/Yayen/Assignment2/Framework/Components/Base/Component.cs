@@ -29,6 +29,7 @@ namespace Yayen.Assignment2.Framework.Components.Base
             {
                 if (_gameObject == null)
                 {
+                    if (this is SineSpriteRotator) Console.WriteLine($"Setting GameObject of SineSpriteRotator to {_gameObject.Name}");
                     _gameObject = value;
                 }
                 else
