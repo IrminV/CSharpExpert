@@ -8,20 +8,31 @@ using Yayen.Assignment2.Gameplay.Scenes;
 
 namespace Yayen.Assignment2.Framework.MonoGameBase
 {
+    /// <summary>
+    /// MonoGame Game1.
+    /// </summary>
     public class Game1 : Game
     {
+        #region Fields
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SceneSystem _sceneSystem;
+        #endregion
 
+        #region Constructors
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
+        #endregion
 
+        #region Initialization
         // NOTE: LoadContent() is called in base.Initialize
+        /// <summary>
+        /// Initialize.
+        /// </summary>
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
@@ -29,6 +40,9 @@ namespace Yayen.Assignment2.Framework.MonoGameBase
             base.Initialize();
         }
 
+        /// <summary>
+        /// load sprites and scene classes. NOTE: Loadcontent is called in base.Initialize().
+        /// </summary>
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -51,6 +65,7 @@ namespace Yayen.Assignment2.Framework.MonoGameBase
             _sceneSystem.AddScene(scalerTest);
             _sceneSystem.SwitchScene(rotationTest);
         }
+        #endregion
 
         protected override void Update(GameTime gameTime)
         {

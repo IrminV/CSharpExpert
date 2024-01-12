@@ -30,7 +30,7 @@ namespace Yayen.Assignment2.Framework.Components
         private Vector2 _origin;
         private Transform2D _transform;
 
-        ContentManager _content;
+        private ContentManager _content;
         private Timer _testTimer = new(10f);
 
         //public Texture2D Sprite { get { return _sprite; } }
@@ -54,24 +54,26 @@ namespace Yayen.Assignment2.Framework.Components
             _origin = new Vector2(pOriginX, pOriginY);
             _spriteEffects = pSpriteEffects;
 
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+            _transform = GameObject.GetComponent<Transform2D>();
         }
 
-        public override void Update(GameTime pGameTime, Transform2D pTransform)
+
+
+        public override void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime, pTransform);
+            base.Update(pGameTime);
             _testTimer.Update(pGameTime);
         }
 
-        public override void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
+        public override void Draw(SpriteBatch pSpriteBatch)
         {
             pSpriteBatch.Draw(_sprite,
-                new Vector2(pTransform.GlobalPosition.X, pTransform.GlobalPosition.Y),
+                new Vector2(_transform.GlobalPosition.X, _transform.GlobalPosition.Y),
                 null,
                 _colorMask,
-                MathHelper.ToRadians(pTransform.GlobalRotation),
+                MathHelper.ToRadians(_transform.GlobalRotation),
                 new Vector2(_sprite.Width * _origin.X, _sprite.Height * _origin.Y),
-                pTransform.Scale,
+                _transform.Scale,
                 _spriteEffects,
                 _layerDepth);
         }

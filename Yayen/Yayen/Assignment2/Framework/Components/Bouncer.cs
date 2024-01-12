@@ -18,6 +18,13 @@ namespace Yayen.Assignment2.Framework.Components
 
         private Vector2 _bounceDirection;
 
+        /// <summary>
+        /// Create a Bouncer component which bounces the attached GameObject around it's original point. NOTE: Mixing this with other movement scripts could result in unexpected behaviour.
+        /// </summary>
+        /// <param name="pGameObject">Reference to the GameObject this Component is part of.</param>
+        /// <param name="pPeriodsPerSecond">The amount of periods/bounces per second.</param>
+        /// <param name="pAmplitude">The amount of displacement per bounce.</param>
+        /// <param name="pBounceDirection">The direction of the bounce.</param>
         public Bouncer(GameObject pGameObject, float pPeriodsPerSecond, float pAmplitude = 1, Vector2 pBounceDirection = new Vector2()) : base(pGameObject)
         {
             // If no input, use default Vector2 value for direction, else normalize Vector2 input value for direction
@@ -31,13 +38,20 @@ namespace Yayen.Assignment2.Framework.Components
             _bounceAnchor = _transform.Position;
         }
 
-        public override void Update(GameTime pGameTime, Transform2D pTransform)
+        /// <summary>
+        /// Update Bouncer Component.
+        /// </summary>
+        /// <param name="pGameTime">MonoGame GameTime.</param>
+        public override void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime, pTransform);
+            base.Update(pGameTime);
             _sineWave.Update(pGameTime);
             UpdateBouncePosition();
         }
 
+        /// <summary>
+        /// Update the position of the bouncing object.
+        /// </summary>
         private void UpdateBouncePosition()
         {
             if (_bounceActive) _transform.Position = new Vector2(_bounceAnchor.X + _sineWave.SineValue * _bounceDirection.X, _bounceAnchor.Y + _sineWave.SineValue * _bounceDirection.Y);

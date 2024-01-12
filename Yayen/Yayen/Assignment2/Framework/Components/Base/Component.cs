@@ -75,7 +75,7 @@ namespace Yayen.Assignment2.Framework.Components.Base
         /// </summary>
         /// <param name="pGameTime">GameTime to use for calculations.</param>
         /// <param name="pTransform">Reference to the tranform of the GameObject this component is part of.</param>
-        public virtual void Update(GameTime pGameTime, Transform2D pTransform)
+        public virtual void Update(GameTime pGameTime)
         {
 
         }
@@ -85,7 +85,7 @@ namespace Yayen.Assignment2.Framework.Components.Base
         /// </summary>
         /// <param name="pSpriteBatch">Spritebatch to use for drawing.</param>
         /// <param name="pTransform">Reference to the tranform of the GameObject this component is part of.</param>
-        public virtual void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
+        public virtual void Draw(SpriteBatch pSpriteBatch)
         {
 
         }

@@ -9,6 +9,9 @@ using Yayen.Assignment2.Framework.GameObjects;
 
 namespace Yayen.Assignment2.Framework.Components
 {
+    /// <summary>
+    /// transform Component of a GameObject.
+    /// </summary>
     public class Transform2D : Component
     {
         // When changing any of these 3 values (position, rotation and scale) it should first affect their local counterparts. Then we will run a conversion method which sets the global values as the local values change. This way they are connected and stable and really handy to use when implementing parent and child relationships.
@@ -34,7 +37,7 @@ namespace Yayen.Assignment2.Framework.Components
         public Vector2 GlobalScale { get { return _scale; } }
 
         /// <summary>
-        /// 
+        /// Crreate the Transform Component of a GameObject.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pX">Position on the X axis.</param>
@@ -52,16 +55,23 @@ namespace Yayen.Assignment2.Framework.Components
         //public Transform2D(GameObject pGameObject) : this(pGameObject, new Vector2(0, 0), 0f, 0.5f, 0.5f) { }
 
         #region Update Global Values
+        /// <summary>
+        /// Update the global position values used as input for MonoGames render system.
+        /// </summary>
         private void UpdateGlobalPosition()
         {
             _position = _parent == null ? _localPosition : _localPosition * _parent.Scale + _parent.Position;
         }
-
+        /// <summary>
+        /// Update the global rotation values used as input for MonoGames render system.
+        /// </summary>
         private void UpdateGlobalRotation()
         {
             _rotation = _parent == null ? _localRotation : _localRotation + _parent.Rotation;
         }
-
+        /// <summary>
+        /// Update the global scale values used as input for MonoGames render system.
+        /// </summary>
         private void UpdateGlobalScale()
         {
             _scale = _parent == null ? _localScale : _localScale + _parent.Scale;

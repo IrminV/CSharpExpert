@@ -12,8 +12,12 @@ using Yayen.Assignment2.Framework.Scenes.Base;
 
 namespace Yayen.Assignment2.Framework.GameObjects
 {
+    /// <summary>
+    /// GameObject class.
+    /// </summary>
     public class GameObject
     {
+        #region Fields
         private Scene _scene;
         private string _name = "GameObject";
 
@@ -22,8 +26,11 @@ namespace Yayen.Assignment2.Framework.GameObjects
         private SpriteRenderer _spriteRenderer;
         private List<Component> _components = new();
         #endregion
+        #endregion
 
+        #region Properties
         public string Name { get { return _name; } }
+        #endregion
 
         #region Constructors
         /// <summary>
@@ -61,44 +68,43 @@ namespace Yayen.Assignment2.Framework.GameObjects
         public GameObject(Scene pScene, string pName, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY = 1) : this(pScene, pX, pY, pRotation, pScaleX, pScaleY) { _name = pName; }
         #endregion
 
+        #region Public Methods
+        /// <summary>
+        /// Update the GameObject and all Components belonging to it.
+        /// </summary>
+        /// <param name="pGameTime">MonoGame GameTime.</param>
         public void Update(GameTime pGameTime)
         {
             UpdateComponents(pGameTime, _transform);
         }
 
+        /// <summary>
+        /// Draw all things related to this GameObject.
+        /// </summary>
+        /// <param name="pSpriteBatch">Monogame SpriteBatch.</param>
         public void Draw(SpriteBatch pSpriteBatch)
         {
             DrawComponents(pSpriteBatch, _transform);
         }
 
+        /// <summary>
+        /// Method to call when destroying this GameObject.
+        /// </summary>
+        public void Destroy()
+        {
+            // First we need to stop the object from updating.
+            _scene.DestroyGameObject(this);
+
+            // Then we can nullify everything else
+            _spriteRenderer = null;
+            _transform = null;
+            _components.Clear();
+        }
+        #endregion
+
         #region ComponentMethods
 
-        /// <summary>
-        /// Update all components this GameObject has.
-        /// </summary>
-        /// <param name="pGameTime">GameTime to use for calculations.</param>
-        /// <param name="pTransform">Reference to the Transform of the GameObject.</param>
-        private void UpdateComponents(GameTime pGameTime, Transform2D pTransform)
-        {
-            for (int i = 0; i < _components.Count; i++)
-            {
-                _components[i].Update(pGameTime, _transform);
-            }
-        }
-
-        /// <summary>
-        /// Draw all components this GameObject has.
-        /// </summary>
-        /// <param name="pSpriteBatch">SpriteBatch to use for drawing.</param>
-        /// <param name="pTransform">Reference to the Transform of the GameObject.</param>
-        private void DrawComponents(SpriteBatch pSpriteBatch, Transform2D pTransform)
-        {
-            for (int i = 0; i < _components.Count; i++)
-            {
-                _components[i].Draw(pSpriteBatch, _transform);
-            }
-        }
-
+        #region Public Component Methods
         /// <summary>
         /// Add a component to this GameObject.
         /// </summary>
@@ -166,6 +172,8 @@ namespace Yayen.Assignment2.Framework.GameObjects
             return false;
         }
 
+
+        // TODO: Remove and replace this
         /// <summary>
         /// Returns the bounds of spriterenderer sprite.
         /// </summary>
@@ -192,21 +200,36 @@ namespace Yayen.Assignment2.Framework.GameObjects
             }
             return null;
         }
-
         #endregion
 
+        #region Utility Component Functions
         /// <summary>
-        /// Method to call when destroying this GameObject.
+        /// Update all components this GameObject has.
         /// </summary>
-        public void Destroy()
+        /// <param name="pGameTime">GameTime to use for calculations.</param>
+        /// <param name="pTransform">Reference to the Transform of the GameObject.</param>
+        private void UpdateComponents(GameTime pGameTime, Transform2D pTransform)
         {
-            // First we need to stop the object from updating.
-            _scene.DestroyGameObject(this);
-
-            // Then we can nullify everything else
-            _spriteRenderer = null;
-            _transform = null;
-            _components.Clear();
+            for (int i = 0; i < _components.Count; i++)
+            {
+                _components[i].Update(pGameTime);
+            }
         }
+
+        /// <summary>
+        /// Draw all components this GameObject has.
+        /// </summary>
+        /// <param name="pSpriteBatch">SpriteBatch to use for drawing.</param>
+        /// <param name="pTransform">Reference to the Transform of the GameObject.</param>
+        private void DrawComponents(SpriteBatch pSpriteBatch, Transform2D pTransform)
+        {
+            for (int i = 0; i < _components.Count; i++)
+            {
+                _components[i].Draw(pSpriteBatch);
+            }
+        }
+        #endregion
+
+        #endregion
     }
 }

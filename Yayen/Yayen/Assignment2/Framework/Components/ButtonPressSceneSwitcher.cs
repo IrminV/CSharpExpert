@@ -36,9 +36,9 @@ namespace Yayen.Assignment2.Framework.Components
             _key = pKey;
         }
 
-        public override void Update(GameTime pGameTime, Transform2D pTransform)
+        public override void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime, pTransform);
+            base.Update(pGameTime);
         }
 
         private void CheckButtonPress()

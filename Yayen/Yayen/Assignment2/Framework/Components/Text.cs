@@ -28,6 +28,8 @@ namespace Yayen.Assignment2.Framework.Components
         SpriteEffects _spriteEffects = SpriteEffects.None;
         float _layerDepth = 0;
 
+        Transform2D _transform;
+
         public Color Color { get { return _color; } set { _color = value; } }
         /// <summary>
         /// Create a Text component which displays text at a position local to the GameObject it is part of.
@@ -45,6 +47,8 @@ namespace Yayen.Assignment2.Framework.Components
             if (pLayerDepth == -1) UpdateLayerDepthToAboveSprite();
             else _layerDepth = pLayerDepth;
             ConstructInitializer();
+
+            _transform = GameObject.GetComponent<Transform2D>();
         }
 
         private void ConstructInitializer()
@@ -57,11 +61,11 @@ namespace Yayen.Assignment2.Framework.Components
         /// </summary>
         /// <param name="pSpriteBatch">SpriteBatch used to draw.</param>
         /// <param name="pTransform">Reference to the transform of the gameobject this is part of.</param>
-        public override void Draw(SpriteBatch pSpriteBatch, Transform2D pTransform)
+        public override void Draw(SpriteBatch pSpriteBatch)
         {
 
-            base.Draw(pSpriteBatch, pTransform);
-            pSpriteBatch.DrawString(_font, _text, new Vector2(pTransform.GlobalPosition.X - _textSize.X / 2 + _position.X, pTransform.GlobalPosition.Y - _textSize.Y / 2 + _position.Y), _color, _rotation, _origin, _scale, _spriteEffects, _layerDepth);
+            base.Draw(pSpriteBatch);
+            pSpriteBatch.DrawString(_font, _text, new Vector2(_transform.GlobalPosition.X - _textSize.X / 2 + _position.X, _transform.GlobalPosition.Y - _textSize.Y / 2 + _position.Y), _color, _rotation, _origin, _scale, _spriteEffects, _layerDepth);
 
         }
 

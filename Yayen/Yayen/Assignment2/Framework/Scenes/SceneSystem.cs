@@ -18,14 +18,17 @@ namespace Yayen.Assignment2.Framework.Scenes
     /// </summary>
     public class SceneSystem
     {
-        public Scene previousScene;
-        List<Scene> _scenes = new();
+        #region Fields
+        private List<Scene> _scenes = new();
         /// <summary>
         /// I made _loadedScenes a list to be able to expand it to use multiple scenes at the same time in the future. for now the only interesting index is 0 for the currently active scene.
         /// </summary>
-        List<Scene> _loadedScenes = new();
-        ContentManager _content;
-        Game1 _game1;
+        private List<Scene> _loadedScenes = new();
+        private ContentManager _content;
+        private Game1 _game1;
+        // TODO: Maybe check if we can do the _previousScene functionality different without a property
+        private Scene _previousScene;
+        #endregion
 
         #region Constructors
         public SceneSystem(ContentManager content, Game1 game1)
@@ -35,6 +38,11 @@ namespace Yayen.Assignment2.Framework.Scenes
         }
         #endregion
 
+        #region Properties
+        public Scene PreviousScene { get { return _previousScene; } set { _previousScene = value; } }
+        #endregion
+
+        #region Public Methods
         /// <summary>
         /// Call to update all active scenes int SceneSystem. As of now only one scene.
         /// </summary>
@@ -80,6 +88,7 @@ namespace Yayen.Assignment2.Framework.Scenes
             _loadedScenes.Add(_scenes[index]);
             for (int i = 0; i < _loadedScenes.Count; i++) _loadedScenes[i].EnterScene();
         }
+
         /// <summary>
         /// Switch the current active scene with scene by name.
         /// </summary>
@@ -118,6 +127,7 @@ namespace Yayen.Assignment2.Framework.Scenes
             Scene currentScene = _loadedScenes[0];
             SwitchScene(_scenes.IndexOf(currentScene) + 1);
         }
+
         /// <summary>
         /// Get scene by name.
         /// </summary>
@@ -136,6 +146,7 @@ namespace Yayen.Assignment2.Framework.Scenes
             // If not found, return null
             return null;
         }
+
         /// <summary>
         /// Get next scene in scenes list.
         /// </summary>
@@ -189,7 +200,6 @@ namespace Yayen.Assignment2.Framework.Scenes
         {
             return _loadedScenes[0];
         }
-
-
+        #endregion
     }
 }

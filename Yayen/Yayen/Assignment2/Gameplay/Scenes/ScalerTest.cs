@@ -106,12 +106,19 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             obj6.AddComponent(new SpriteScaler(obj6, new Vector2(0.5f, 0.2f), new Vector2(1f, 0.5f), new Vector2(1f, 0.5f)));
             _GameObjects.Add(obj6);
 
-            GameObject obj7 = new(this, "Obj7", _graphicsDevice.Viewport.Width / 2 + 288, 224, 0, 0.5f, 0.5f);
+            GameObject obj7 = new(this, "Obj7", _graphicsDevice.Viewport.Width / 2 + 288, 96, 0, 0.5f, 0.5f);
             obj7.AddComponent(new SpriteRenderer(obj7, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj7.AddComponent(new RectangleCollider(obj7, _RectangleCollisionSystem));
             obj7.AddComponent(new Text(obj7, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 7 Scaler:\nMinsCale:-0.5\nMaxScale:0.5\nScalingPerSec: 0.25", 0, 64));
             obj7.AddComponent(new SpriteScaler(obj7, -0.5f, 0.5f, 0.25f));
             _GameObjects.Add(obj7);
+
+            GameObject obj8 = new(this, "Obj8", _graphicsDevice.Viewport.Width / 2 + 288, 224, 0, 0.5f, 0.5f);
+            obj8.AddComponent(new SpriteRenderer(obj8, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+            obj8.AddComponent(new RectangleCollider(obj8, _RectangleCollisionSystem));
+            obj8.AddComponent(new Text(obj8, pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 8 Scaler:\nMinScale: 0.5\nMaxScale:2\nScalingPerSec: 1\nOnly scale on X", 0, 64));
+            obj8.AddComponent(new SpriteScaler(obj8, 0.5f, 2, 1, true, false));
+            _GameObjects.Add(obj8);
         }
 
         public override void Draw(SpriteBatch pSpriteBatch)

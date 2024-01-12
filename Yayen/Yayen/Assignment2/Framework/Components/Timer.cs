@@ -43,6 +43,12 @@ namespace Yayen.Assignment2.Framework.Components
 
 
         #region Constructors
+        /// <summary>
+        /// Create a Timer.
+        /// </summary>
+        /// <param name="pTimerTime">This is the value from which we will be counting down.</param>
+        /// <param name="timerName">This is the name reference of this timer. This can be handy during debugging.</param>
+        /// <param name="pTimeMultiplier">This is the time multiplier value. You can use this if for some reason, you want the timer to go down twice as fast, faster or slower. Do not touch this or keep this at one if you want the usual DeltaTime accurate timer.</param>
         public Timer(float pTimerTime, string timerName = "Timer", float pTimeMultiplier = 1)
         {
             _timerTime = pTimerTime;
@@ -52,10 +58,19 @@ namespace Yayen.Assignment2.Framework.Components
         }
         #endregion
 
+        /// <summary>
+        /// Update Timer.
+        /// </summary>
+        /// <param name="pGameTime">MonoGame GameTime.</param>
         public void Update(GameTime pGameTime)
         {
             UpdateTimer(pGameTime);
         }
+
+        /// <summary>
+        /// Update Timer checks.
+        /// </summary>
+        /// <param name="pGameTime">MonoGame GameTime</param>
         private void UpdateTimer(GameTime pGameTime)
         {
             if (_timerActive)
@@ -73,7 +88,7 @@ namespace Yayen.Assignment2.Framework.Components
         }
 
         /// <summary>
-        /// Resets and activates timer
+        /// Resets and activates Timer
         /// </summary>
         public void SetTimer()
         {
@@ -83,25 +98,36 @@ namespace Yayen.Assignment2.Framework.Components
         }
 
         /// <summary>
-        /// Set timer to value, 
+        /// Set Timer to value, 
         /// </summary>
-        /// <param name="pTime"></param>
+        /// <param name="pTime">Value to count down from.</param>
         public void SetTimer(float pTime)
         {
             _timerTime = pTime;
             ResetTimer(true);
             _timerActive = true;
         }
+        /// <summary>
+        /// Pause the Timer, leaving _timerCurrentTime intact.
+        /// </summary>
         public void PauseTimer()
         {
             _timerActive = false;
         }
 
+        /// <summary>
+        /// Start the Timer, also used to resume after pausing.
+        /// </summary>
         public void StartTimer()
         {
             _timerActive = true;
         }
 
+        /// <summary>
+        /// Reset Timer.
+        /// </summary>
+        /// <param name="pSetActive">Do want to start Timer immediatly after?</param>
+        /// <param name="pKeepLeftOverTime">Do want to subtract the leftover time (time we went below zero) from the new _currentTimerTime? Possibly making timer more accurate in the long run when chain timing.</param>
         public void ResetTimer(bool pSetActive = false, bool pKeepLeftOverTime = false)
         {
             // If we want to keep left over time and we have left over time (below zero) add this to new timer time, else just reset.
@@ -116,6 +142,9 @@ namespace Yayen.Assignment2.Framework.Components
 
             _timerActive = pSetActive;
         }
+        /// <summary>
+        /// To be called upon destruction of the timer. ATM it only sets the OnTimeElapsed event to null.
+        /// </summary>
         public void Destroy()
         {
             OnTimeElapsed = null;

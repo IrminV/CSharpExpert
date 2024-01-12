@@ -63,6 +63,17 @@ namespace Yayen.Assignment2.Gameplay.Scenes
             _GameObjects.Add(SceneDescription);
 
 
+
+            /*
+             
+             GameObject g = new GameObject();
+            Transform t = g.AddComponent<Transform>();
+            t.position = ...;
+            t.rotation = ...;
+            t.scale = ...;
+             
+             */
+
             // Test Objects
             GameObject obj1 = new(this, "Obj1", _graphicsDevice.Viewport.Width / 2 - 96, 96, 0, 0.5f, 0.5f);
             obj1.AddComponent(new SpriteRenderer(obj1, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));

@@ -25,6 +25,8 @@ namespace Yayen.Assignment2.Framework.Components.Colliders.RectangleCollision
         private float _width = 2;
         private float _height = 2;
 
+        private Transform2D _transform;
+
         //public List<CollisionRectangle> CollidingRectangles { get { return _collidingRectangles; } }
         //public bool HasBeenDestroyed { get { return _hasBeenDestroyed; } }
         //public GameObject ConnectedGameObject
@@ -52,12 +54,14 @@ namespace Yayen.Assignment2.Framework.Components.Colliders.RectangleCollision
             pRectangleCollisionSystem.AddCollider(this);
             _origin.X = pOriginX;
             _origin.Y = pOriginY;
+
+            _transform = GameObject.GetComponent<Transform2D>();
         }
 
-        public override void Update(GameTime pGameTime, Transform2D pTransform)
+        public override void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime, pTransform);
-            _startingPoint = new Vector2(pTransform.GlobalPosition.X - _origin.X * _width, pTransform.GlobalPosition.Y - _origin.Y * _height);
+            base.Update(pGameTime);
+            _startingPoint = new Vector2(_transform.GlobalPosition.X - _origin.X * _width, _transform.GlobalPosition.Y - _origin.Y * _height);
             _endPoint = new Vector2(_startingPoint.X + _width, _startingPoint.Y + _height);
             _midPoint = GetMidPoint();
         }

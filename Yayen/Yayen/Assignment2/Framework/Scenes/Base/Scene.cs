@@ -21,6 +21,7 @@ namespace Yayen.Assignment2.Framework.Scenes.Base
     /// </summary>
     public class Scene
     {
+        #region Fields
         protected string _sceneName = "Scene";
         protected List<GameObject> _GameObjects = new();
         protected SceneSystem _sceneSystem;
@@ -29,9 +30,13 @@ namespace Yayen.Assignment2.Framework.Scenes.Base
         protected RectangleCollisionSystem _RectangleCollisionSystem = new();
 
         protected GraphicsDevice _graphicsDevice;
+        #endregion
 
+        #region Properties
         public string SceneName { get { return _sceneName; } }
+        #endregion
 
+        #region Constructors
         public Scene(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene")
         {
             _sceneSystem = sceneSystem;
@@ -41,7 +46,9 @@ namespace Yayen.Assignment2.Framework.Scenes.Base
 
             _graphicsDevice = _game1.GraphicsDevice;
         }
+        #endregion
 
+        #region Public Methods
         public virtual void Update(GameTime gameTime, Game1 game1)
         {
             UpdateGameObjects(gameTime);
@@ -59,9 +66,9 @@ namespace Yayen.Assignment2.Framework.Scenes.Base
         {
             //Console.WriteLine("Entering Scene");
             //_collisionSystem.UpdateGameObjects(_GameObjects);
-            if (_sceneSystem.previousScene != null && _sceneSystem.previousScene.SceneName == SceneName)
+            if (_sceneSystem.PreviousScene != null && _sceneSystem.PreviousScene.SceneName == SceneName)
             {
-                _sceneSystem.previousScene = null;
+                _sceneSystem.PreviousScene = null;
             }
             else
             {
@@ -111,6 +118,17 @@ namespace Yayen.Assignment2.Framework.Scenes.Base
         }
 
         /// <summary>
+        ///  Call to destroy a GameObject in this scene. GameObjects can call this for themeselves.
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void DestroyGameObject(GameObject gameObject)
+        {
+            _GameObjects.Remove(gameObject);
+        }
+        #endregion
+
+        #region Utility Functions
+        /// <summary>
         /// Call to update all gameobjects in the scene
         /// </summary>
         /// <param name="gameTime"></param>
@@ -141,14 +159,6 @@ namespace Yayen.Assignment2.Framework.Scenes.Base
                 _GameObjects[i].Draw(pSpriteBatch);
             }
         }
-
-        /// <summary>
-        ///  Call to destroy a GameObject in this scene. GameObjects can call this for themeselves.
-        /// </summary>
-        /// <param name="gameObject"></param>
-        public void DestroyGameObject(GameObject gameObject)
-        {
-            _GameObjects.Remove(gameObject);
-        }
+        #endregion
     }
 }

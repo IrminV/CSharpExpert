@@ -14,11 +14,12 @@ namespace Yayen.Assignment2.Framework.Components
     /// </summary>
     public class ButtonSceneSwitchScript : Component
     {
-        Button _button;
-        SceneSystem _sceneSystem;
-        string _sceneName;
+        private Button _button;
+        private SceneSystem _sceneSystem;
+        private string _sceneName;
+
         /// <summary>
-        /// 
+        /// Create a ButtonSceneSwitchScript Component.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pSceneSystem">Reference to the SceneSystem used to switch scenes.</param>

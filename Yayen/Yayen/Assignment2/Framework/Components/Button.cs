@@ -10,13 +10,13 @@ namespace Yayen.Assignment2.Framework.Components
 {
     public class Button : Component
     {
-        MouseState _mouseState;
+        private MouseState _mouseState;
 
-        Color _neutralColor = Color.White;
-        Color _hoverColor = Color.LightBlue;
-        Color _pressedColor = Color.Azure;
-        Color _disabledColor = Color.Gray;
-        Collider _collider;
+        private Color _neutralColor = Color.White;
+        private Color _hoverColor = Color.LightBlue;
+        private Color _pressedColor = Color.Azure;
+        private Color _disabledColor = Color.Gray;
+        private Collider _collider;
 
         private Timer _pressCooldownTimer = new(0.25f, "PressCooldownTimer");
         private bool _canPress = false;
@@ -56,9 +56,9 @@ namespace Yayen.Assignment2.Framework.Components
             _pressCooldownTimer.StartTimer();
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime pGameTime, Transform2D pTransform)
+        public override void Update(Microsoft.Xna.Framework.GameTime pGameTime)
         {
-            base.Update(pGameTime, pTransform);
+            base.Update(pGameTime);
             CheckClick();
             _pressCooldownTimer.Update(pGameTime);
         }
