@@ -129,8 +129,7 @@ namespace Yayen.Assignment2.Framework.Components
             }
             else
             {
-                // Amplitude is divided by 2 to account for the negative values the sine function returns as well (-1 to 1) Because the bounce already goes over the amplitude value once
-                sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude / 2;
+                sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude;
             }
             
             if (DebugMode) Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");
