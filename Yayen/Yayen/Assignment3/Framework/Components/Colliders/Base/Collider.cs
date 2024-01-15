@@ -23,7 +23,7 @@ namespace Yayen.Assignment3.Framework.Components.Colliders.Base
         /// Create a Base Collider.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
-        public Collider(GameObject pGameObject) : base(pGameObject) { }
+        public Collider() { }
 
         public void AddObjectToOverlappingList(Collider pcollidingWithThis)
         {
@@ -54,6 +54,13 @@ namespace Yayen.Assignment3.Framework.Components.Colliders.Base
                 colliders.Add(_overlappingColliders[i]);
             }
             return colliders;
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            OnCollisionEnter = null;
+            OnCollisionExit = null;
         }
     }
 }

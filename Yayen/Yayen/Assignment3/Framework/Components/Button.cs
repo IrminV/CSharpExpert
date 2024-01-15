@@ -12,6 +12,7 @@ namespace Yayen.Assignment3.Framework.Components
     {
         private MouseState _mouseState;
 
+        // TODO: implement these colors
         private Color _neutralColor = Color.White;
         private Color _hoverColor = Color.LightBlue;
         private Color _pressedColor = Color.Azure;
@@ -26,34 +27,30 @@ namespace Yayen.Assignment3.Framework.Components
         public delegate void ButtonDelegate();
         public event ButtonDelegate OnButtonPressed;
 
+        private bool _debugMode = false;
+
         /// <summary>
         /// Create a Button Component, designating the GameObject this is part of as the Button.
         /// </summary>
-        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pHoverColor">Colormask the button has when it's being hovered by a selector.</param>
         /// <param name="pPressedColor">Colormask the button has when being pressed.</param>
         /// <param name="pDisabledColor">Colormask the button has when disabled.</param>
-        public Button(GameObject pGameObject, Color pHoverColor, Color pPressedColor, Color pDisabledColor) : base(pGameObject)
+        public Button(Color pHoverColor, Color pPressedColor, Color pDisabledColor)
         {
             _hoverColor = pHoverColor;
             _pressedColor = pPressedColor;
             _disabledColor = pDisabledColor;
-            ConstructInitialize();
         }
 
         /// <summary>
         /// Create a Button Component, designating the GameObject this is part of as the Button. 
         /// </summary>
-        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
-        public Button(GameObject pGameObject) : base(pGameObject) { ConstructInitialize(); }
+        public Button() { SetColliderEvents(); }
 
-        public void ConstructInitialize()
+        public override void Start()
         {
-            GetCollider();
-            _collider.OnCollisionEnter += CollisionMouseCheck;
-            _collider.OnCollisionExit += ExitCollisionMouseCheck;
-            _pressCooldownTimer.OnTimeElapsed += AllowPress;
-            _pressCooldownTimer.StartTimer();
+            SetColliderEvents();
+            if(_debugMode) OnButtonPressed += DebugOnButtonPressedMessage;
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime pGameTime)
@@ -105,6 +102,25 @@ namespace Yayen.Assignment3.Framework.Components
                 //Console.WriteLine("Pressing Button");
                 OnButtonPressed.Invoke();
             }
+        }
+
+        public void SetColliderEvents()
+        {
+            GetCollider();
+            _collider.OnCollisionEnter += CollisionMouseCheck;
+            _collider.OnCollisionExit += ExitCollisionMouseCheck;
+            _pressCooldownTimer.OnTimeElapsed += AllowPress;
+            _pressCooldownTimer.StartTimer();
+        }
+
+        private void DebugOnButtonPressedMessage()
+        {
+            Console.WriteLine("If this calls more than once per click, we are not destroying the OnButtonPressed event correctly.");
+        }
+        public override void Destroy()
+        {
+            base.Destroy();
+            OnButtonPressed = null;
         }
 
         #region PressCoolDownTimerMethods

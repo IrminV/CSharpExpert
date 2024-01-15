@@ -20,15 +20,21 @@ namespace Yayen.Assignment3.Framework.Components
         /// <summary>
         /// Create a SpriteRotator which rotates the sprite of the attached GameObject.
         /// </summary>
-        /// <param name="pGameObject">Reference to the GameObject this SpriteRotator is part of.</param>
         /// <param name="pClockwise">Do want a clockwis or counterclockwise rotation.</param>
         /// <param name="pRevolutionsPerSecond">How many rotation per second do we want?</param>
-        public SpriteRotator(GameObject pGameObject, bool pClockwise = true, float pRevolutionsPerSecond = 1) : base(pGameObject)
+        public SpriteRotator(bool pClockwise = true, float pRevolutionsPerSecond = 1)
         {
             _clockwise = pClockwise;
             _revolutionsPerSecond = pRevolutionsPerSecond;
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+            
             _secondTimer = new(1 / pRevolutionsPerSecond, "Second Timer");
+            
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
             _secondTimer.OnTimeElapsed += ResetSecondTimer;
             _secondTimer.StartTimer();
         }
@@ -75,6 +81,12 @@ namespace Yayen.Assignment3.Framework.Components
         private void ResetSecondTimer()
         {
             _secondTimer.ResetTimer(true, true);
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            _secondTimer.Destroy();
         }
     }
 }

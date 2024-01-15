@@ -39,13 +39,12 @@ namespace Yayen.Assignment3.Framework.Components
         /// <summary>
         /// Crreate the Transform Component of a GameObject.
         /// </summary>
-        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pX">Position on the X axis.</param>
         /// <param name="pY">Position on the Y axis.</param>
         /// <param name="pRotation">Rotation in degrees.</param>
         /// <param name="pScaleX">Scale on the X axis.</param>
         /// <param name="pScaleY">Scale on the Y axis.</param>
-        public Transform2D(GameObject pGameObject, float pX, float pY, float pRotation = 0, float pScaleX = 1, float pScaleY = 1) : base(pGameObject)
+        public Transform2D(float pX, float pY, float pRotation = 0, float pScaleX = 1, float pScaleY = 1)
         {
             Position = new(pX, pY);
             Rotation = pRotation;

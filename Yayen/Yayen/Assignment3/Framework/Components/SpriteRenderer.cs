@@ -34,6 +34,7 @@ namespace Yayen.Assignment3.Framework.Components
         private Timer _testTimer = new(10f);
 
         //public Texture2D Sprite { get { return _sprite; } }
+        public Color ColorMask { get { return _colorMask; } set { _colorMask = value; } }
         public float LayerDepth { get { return _layerDepth; } }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Yayen.Assignment3.Framework.Components
         /// <param name="pOriginX">Draw origin X.</param>
         /// <param name="pOriginY">Draw origin Y.</param>
         /// <param name="pSpriteEffects">MonoGame SpriteEffects, used to mirror sprites.</param>
-        public SpriteRenderer(GameObject pGameObject, ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None) : base(pGameObject)
+        public SpriteRenderer(ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
         {
             _content = pContent;
             _sprite = pSprite;
@@ -53,7 +54,11 @@ namespace Yayen.Assignment3.Framework.Components
             _layerDepth = pLayerDepth;
             _origin = new Vector2(pOriginX, pOriginY);
             _spriteEffects = pSpriteEffects;
+        }
 
+        public override void Start()
+        {
+            base.Start();
             _transform = GameObject.GetComponent<Transform2D>();
         }
 

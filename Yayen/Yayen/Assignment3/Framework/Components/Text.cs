@@ -34,25 +34,24 @@ namespace Yayen.Assignment3.Framework.Components
         /// <summary>
         /// Create a Text component which displays text at a position local to the GameObject it is part of.
         /// </summary>
-        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pFont">Font to use when drawing text.</param>
         /// <param name="text">String of text to display.</param>
         /// <param name="pPosX">Position on the X axis.</param>
         /// <param name="pPosY">Position on the Y axis</param>
-        public Text(GameObject pGameObject, SpriteFont pFont, string text, float pPosX = 0, float pPosY = 0, float pLayerDepth = -1) : base(pGameObject)
+        public Text(SpriteFont pFont, string text, float pPosX = 0, float pPosY = 0, float pLayerDepth = -1)
         {
             _font = pFont;
             _text = text;
             _position = new Vector2(pPosX, pPosY);
             if (pLayerDepth == -1) UpdateLayerDepthToAboveSprite();
             else _layerDepth = pLayerDepth;
-            ConstructInitializer();
 
             _transform = GameObject.GetComponent<Transform2D>();
         }
 
-        private void ConstructInitializer()
+        public override void Start()
         {
+            base.Start();
             UpdateTextSize();
         }
 

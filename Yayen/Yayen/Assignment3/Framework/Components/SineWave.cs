@@ -138,6 +138,11 @@ namespace Yayen.Assignment3.Framework.Components
             return sineValue;
         }
 
+        public void Destroy()
+        {
+            _sineSecondTimer.Destroy();
+        }
+
         // This method was replaced by the PeriodsPerSecond property
         //public void SetPeriodsPerSecond(float pPeriodsPerSecond)
         //{

@@ -28,17 +28,23 @@ namespace Yayen.Assignment3.Framework.Components
         /// <param name="pMaxRot">The maximum rotation for the animation.</param>
         /// <param name="pClockwise">Do we want a clockwise or counterclockwise animation?</param>
         /// <param name="pRevolutionsPerSecond">How many sine revolutions or rotations back and forth from min to max per second do we want?</param>
-        public SineSpriteRotator(GameObject pGameObject, float pMinRot, float pMaxRot, bool pClockwise = true, float pRevolutionsPerSecond = 1) : base(pGameObject)
+        public SineSpriteRotator(float pMinRot, float pMaxRot, bool pClockwise = true, float pRevolutionsPerSecond = 1)
         {
             _minRot = pMinRot;
             _maxRot = pMaxRot;
             _clockwise = pClockwise;
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
             //Console.WriteLine($"SineSpriteRotator: Getting transform component of GameObjct {GameObject.Name}");
             _sineWave = new(1, pRevolutionsPerSecond, true);
             //_secondTimer = new(1, "Second Timer");
             //_secondTimer.OnTimeElapsed += ResetSecondTimer;
             //_secondTimer.StartTimer();
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+
         }
 
         /// <summary>
@@ -76,6 +82,12 @@ namespace Yayen.Assignment3.Framework.Components
         public void UpdateSpriteRotation()
         {
             _transform.Rotation = _transform.Rotation = _lerpValue;
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            _sineWave.Destroy();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace Yayen.Assignment3.Framework.Components.Colliders.RectangleCollision
 
         private Transform2D _transform;
 
+        private SpriteRenderer _spriteRenderer;
+
         //public List<CollisionRectangle> CollidingRectangles { get { return _collidingRectangles; } }
         //public bool HasBeenDestroyed { get { return _hasBeenDestroyed; } }
         //public GameObject ConnectedGameObject
@@ -45,17 +48,21 @@ namespace Yayen.Assignment3.Framework.Components.Colliders.RectangleCollision
         /// <summary>
         /// Create a RectangleCollider..
         /// </summary>
-        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pRectangleCollisionSystem">Reference to the RectangleCollisionSystem this collider is going to be part of.</param>
         /// <param name="pOriginX">Origin on the X axis.</param>
         /// <param name="pOriginY">Origin on the Y axis.</param>
-        public RectangleCollider(GameObject pGameObject, RectangleCollisionSystem pRectangleCollisionSystem, float pOriginX = 0.5f, float pOriginY = 0.5f) : base(pGameObject)
+        public RectangleCollider(RectangleCollisionSystem pRectangleCollisionSystem, float pOriginX = 0.5f, float pOriginY = 0.5f)
         {
             pRectangleCollisionSystem.AddCollider(this);
             _origin.X = pOriginX;
             _origin.Y = pOriginY;
+        }
 
+        public override void Start()
+        {
             _transform = GameObject.GetComponent<Transform2D>();
+            _spriteRenderer = GameObject.GetComponent<SpriteRenderer>();
+            if(_spriteRenderer != null) SetSizeToRenderBounds();
         }
 
         public override void Update(GameTime pGameTime)
@@ -65,17 +72,6 @@ namespace Yayen.Assignment3.Framework.Components.Colliders.RectangleCollision
             _endPoint = new Vector2(_startingPoint.X + _width, _startingPoint.Y + _height);
             _midPoint = GetMidPoint();
         }
-
-        /// <summary>
-        /// Code to fire when this Component is added.
-        /// </summary>
-        /// <param name="pGameObject">GameObject this component is being added to.</param>
-        public override void OnComponentAdded(GameObject pGameObject)
-        {
-            base.OnComponentAdded(pGameObject);
-            SetSizeToRenderBounds();
-        }
-
 
         // I created some extra methods to get the edges of the rectangle, these are unused as of now. But i thought it was a pretty neat idea.
         // If i ever were to need this, it can simply be calculated here, inside the rectangle
@@ -127,14 +123,9 @@ namespace Yayen.Assignment3.Framework.Components.Colliders.RectangleCollision
         /// </summary>
         public void SetSizeToRenderBounds()
         {
-            Vector2 renderBounds = GameObject.GetRenderBounds();
+            Vector2 renderBounds = _spriteRenderer.GetSpriteBounds();
             Width = renderBounds.X;
             Height = renderBounds.Y;
         }
-
-        //public void Destroy()
-        //{
-        //    _hasBeenDestroyed = true;
-        //}
     }
 }

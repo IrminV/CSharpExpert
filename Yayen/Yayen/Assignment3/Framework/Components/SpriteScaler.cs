@@ -41,15 +41,13 @@ namespace Yayen.Assignment3.Framework.Components
         /// <summary>
         /// Create a SpriteScaler Component. This creates a scaling animation for the connected GameObjects Sprite. This constructor gives the most indept configuration. This Constructor expects non uniform scaling with Vector 2s.
         /// </summary>
-        /// <param name="pGameObject">A reference to the GameObject this component is part of.</param>
         /// <param name="pMinScale">The minimum scale of the animation, seperated by axis.</param>
         /// <param name="pMaxScale">The maximum sclae of the animation, seperated by axis.</param>
         /// <param name="pScalesPerSecond">The amount sine scales per second.</param>
         /// <param name="pXScaling">Do we activate scaling on the x axis?</param>
         /// <param name="pYScaling">Do we activate scaling on the y axis?</param>
-        public SpriteScaler(GameObject pGameObject, Vector2 pMinScale, Vector2 pMaxScale, Vector2 pScalesPerSecond, bool pXScaling = true, bool pYScaling = true) : base(pGameObject)
+        public SpriteScaler(Vector2 pMinScale, Vector2 pMaxScale, Vector2 pScalesPerSecond, bool pXScaling = true, bool pYScaling = true)
         {
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
             _minScale = pMinScale;
             float rangeX = pMaxScale.X - pMinScale.X;
             float rangeY = pMaxScale.Y - pMinScale.Y;
@@ -70,7 +68,7 @@ namespace Yayen.Assignment3.Framework.Components
         /// <param name="pScalesPerSecond">The amount sine scales per second.</param>
         /// <param name="pXscaling">Do we activate scaling on the x axis?</param>
         /// <param name="pYScaling">Do we activate scaling on the y axis?</param>
-        public SpriteScaler(GameObject pGameObject, float pMinscale, float pMaxScale, float pScalesPerSecond, bool pXscaling = true, bool pYScaling = true) : this(pGameObject, new Vector2(pMinscale, pMinscale), new Vector2(pMaxScale, pMaxScale), new Vector2(pScalesPerSecond, pScalesPerSecond), pXscaling, pYScaling)
+        public SpriteScaler(float pMinscale, float pMaxScale, float pScalesPerSecond, bool pXscaling = true, bool pYScaling = true) : this(new Vector2(pMinscale, pMinscale), new Vector2(pMaxScale, pMaxScale), new Vector2(pScalesPerSecond, pScalesPerSecond), pXscaling, pYScaling)
         {
         }
 
@@ -82,8 +80,14 @@ namespace Yayen.Assignment3.Framework.Components
         /// <param name="pScalesPerSecond">The amount sine scales per second.</param>
         /// <param name="pXscaling">Do we activate scaling on the x axis?</param>
         /// <param name="pYScaling">Do we activate scaling on the y axis?</param>
-        public SpriteScaler(GameObject pGameObject, float pMaxScale, float pScalesPerSecond, bool pXscaling = true, bool pYScaling = true) : this(pGameObject, new Vector2(0, 0), new Vector2(pMaxScale, pMaxScale), new Vector2(pScalesPerSecond, pScalesPerSecond), pXscaling, pYScaling)
+        public SpriteScaler(float pMaxScale, float pScalesPerSecond, bool pXscaling = true, bool pYScaling = true) : this(new Vector2(0, 0), new Vector2(pMaxScale, pMaxScale), new Vector2(pScalesPerSecond, pScalesPerSecond), pXscaling, pYScaling)
         {
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
         }
 
         /// <summary>
@@ -105,6 +109,13 @@ namespace Yayen.Assignment3.Framework.Components
         {
             if (_scaleXActive) _transform.Scale = new Vector2(_minScale.X + _sineWaveXScale.SineValue, _transform.Scale.Y);
             if (_scaleYActive) _transform.Scale = new Vector2(_transform.Scale.X, _minScale.Y + _sineWaveYScale.SineValue);
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+            _sineWaveXScale.Destroy();
+            _sineWaveYScale.Destroy();
         }
     }
 }

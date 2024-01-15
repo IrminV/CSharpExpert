@@ -23,8 +23,14 @@ namespace Yayen.Assignment3.Framework.Components
         /// Create a MouseSelector component which designates the GameObject it is part of, as a mouse.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
-        public MouseSelector(GameObject pGameObject) : base(pGameObject)
+        public MouseSelector()
         {
+            
+        }
+
+        public override void Start()
+        {
+            base.Start();
             _transform2D = GameObject.GetComponent<Transform2D>();
         }
 

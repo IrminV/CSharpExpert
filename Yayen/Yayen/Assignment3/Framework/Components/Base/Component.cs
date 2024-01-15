@@ -45,9 +45,9 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// Base component constructor.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
-        public Component(GameObject pGameObject)
+        public Component()
         {
-            _gameObject = pGameObject;
+
         }
 
         // Some methods which need to be called on multiple components
@@ -60,6 +60,7 @@ namespace Yayen.Assignment3.Framework.Components.Base
 
         }
 
+        // TODO: Maybe make things like start into an interface instead of a virtual method.
         public virtual void Start()
         {
 
@@ -91,6 +92,12 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// <param name="pSpriteBatch">Spritebatch to use for drawing.</param>
         /// <param name="pTransform">Reference to the tranform of the GameObject this component is part of.</param>
         public virtual void Draw(SpriteBatch pSpriteBatch)
+        {
+
+        }
+
+        // This is to destroy the component and event references
+        public virtual void Destroy()
         {
 
         }

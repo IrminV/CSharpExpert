@@ -21,17 +21,22 @@ namespace Yayen.Assignment3.Framework.Components
         /// <summary>
         /// Create a ButtonSceneSwitchScript Component.
         /// </summary>
-        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pSceneSystem">Reference to the SceneSystem used to switch scenes.</param>
         /// <param name="pSceneName">The name of the scene we want to switch to.</param>
-        public ButtonSceneSwitchScript(GameObject pGameObject, SceneSystem pSceneSystem, string pSceneName) : base(pGameObject)
+        public ButtonSceneSwitchScript(SceneSystem pSceneSystem, string pSceneName)
         {
             _sceneSystem = pSceneSystem;
             _sceneName = pSceneName;
-            ConstructInitializer();
+            SetButtonEvent();
         }
 
-        private void ConstructInitializer()
+        public override void Start()
+        {
+            base.Start();
+            SetButtonEvent();
+        }
+
+        private void SetButtonEvent()
         {
             // Get the button component on this components GameObject
             _button = (Button)GameObject.GetComponent<Button>();

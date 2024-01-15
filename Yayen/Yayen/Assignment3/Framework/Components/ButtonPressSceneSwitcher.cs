@@ -27,10 +27,9 @@ namespace Yayen.Assignment3.Framework.Components
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         /// <param name="pSceneSystem">Reference to the SceneSystem used to switch scenes.</param>
         /// <param name="pKey">Key to press to switch scenes</param>
-        public ButtonPressSceneSwitcher(GameObject pGameObject, SceneSystem pSceneSystem, Keys pKey = Keys.Enter) : base(pGameObject)
+        public ButtonPressSceneSwitcher(SceneSystem pSceneSystem, Keys pKey = Keys.Enter)
         {
             _sceneSystem = pSceneSystem;
             _key = pKey;

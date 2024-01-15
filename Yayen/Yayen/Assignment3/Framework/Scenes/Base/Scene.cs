@@ -50,9 +50,15 @@ namespace Yayen.Assignment3.Framework.Scenes.Base
 
         #region Public Methods
 
+        /// <summary>
+        /// Start is called after a scene is loaded. (Not when the scene is created)
+        /// </summary>
         public virtual void Start()
         {
-
+            for (int gameObject = 0; gameObject < _GameObjects.Count; gameObject++)
+            {
+                _GameObjects[gameObject].Start();
+            }
         }
 
         public virtual void Update(GameTime gameTime, Game1 game1)

@@ -23,7 +23,6 @@ namespace Yayen.Assignment3.Framework.GameObjects
 
         #region Component Fields
         private Transform2D _transform;
-        private SpriteRenderer _spriteRenderer;
         private List<Component> _components = new();
         #endregion
         #endregion
@@ -69,6 +68,15 @@ namespace Yayen.Assignment3.Framework.GameObjects
         #endregion
 
         #region Public Methods
+
+        public void Start()
+        {
+            for (int component = 0; component < _components.Count; component++)
+            {
+                _components[component].Start();
+            }
+        }
+
         /// <summary>
         /// Update the GameObject and all Components belonging to it.
         /// </summary>
@@ -96,7 +104,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
             _scene.DestroyGameObject(this);
 
             // Then we can nullify everything else
-            _spriteRenderer = null;
+            for (int component = 0; component < _components.Count; component++) _components[component].Destroy();
             _transform = null;
             _components.Clear();
         }
@@ -116,23 +124,11 @@ namespace Yayen.Assignment3.Framework.GameObjects
                 //pComponent.GameObject = this;
                 _components.Add(pComponent);
                 // TODO: Make it so we don't have to check types here
-                if (pComponent is SpriteRenderer)
-                {
-                    //Console.WriteLine("Added SR");
-                    _spriteRenderer = (SpriteRenderer)pComponent;
-                }
-
                 if (pComponent is Transform2D)
                 {
                     //Console.WriteLine("Added Transform");
                     _transform = (Transform2D)pComponent;
                 }
-
-                //if (pComponent is SineSpriteRotator)
-                //{
-                //    Console.WriteLine($"Addcomponent of SineSpriteRotator detected on {_name}");
-                //}
-
                 pComponent.OnComponentAdded(this);
             }
         }
@@ -178,11 +174,11 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// Returns the bounds of spriterenderer sprite.
         /// </summary>
         /// <returns>Bounds of spriterenderer sprite.</returns>
-        public Vector2 GetRenderBounds()
-        {
-            if (_spriteRenderer == null) return Vector2.Zero;
-            return _spriteRenderer.GetSpriteBounds();
-        }
+        //public Vector2 GetRenderBounds()
+        //{
+        //    if (_spriteRenderer == null) return Vector2.Zero;
+        //    return _spriteRenderer.GetSpriteBounds();
+        //}
 
         /// <summary>
         /// Gets a component of <type> from this GameObject.

@@ -12,6 +12,7 @@ namespace Yayen.Assignment3.Framework.Components
 
         //Fields - internal
         private float _hue;
+        private SpriteRenderer _spriteRenderer;
 
         //Properties
         public float ShiftSpeed
@@ -21,9 +22,15 @@ namespace Yayen.Assignment3.Framework.Components
         }
 
         //Constructors
-        public ColorShifterObject(GameObject pGameObject, float pShiftSpeed) : base(pGameObject)
+        public ColorShifterObject(float pShiftSpeed)
         {
             _shiftSpeed = pShiftSpeed;
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            _spriteRenderer = GameObject.GetComponent<SpriteRenderer>();
         }
 
         //Methods - overridden
@@ -39,7 +46,7 @@ namespace Yayen.Assignment3.Framework.Components
             //Saturation is hardcoded to 1.0f and Lightness is hardcoded to 0.5f for the brightest color representation
 
             //TODO Change SpriteRenderer property to a cached reference to the attached SpriteRenderer component via GetComponent<T>
-            SpriteRenderer.Color = HSLToRGB(_hue, 1.0f, 0.5f);
+            _spriteRenderer.ColorMask = HSLToRGB(_hue, 1.0f, 0.5f);
         }
 
         //Methods - ColorShift
