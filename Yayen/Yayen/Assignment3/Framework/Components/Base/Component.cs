@@ -60,6 +60,11 @@ namespace Yayen.Assignment3.Framework.Components.Base
 
         }
 
+        public virtual void Start()
+        {
+
+        }
+
         // Some methods which need to be called on multiple components
         /// <summary>
         /// Code to fire when this Component is removed.

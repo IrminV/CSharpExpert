@@ -49,6 +49,12 @@ namespace Yayen.Assignment3.Framework.Scenes.Base
         #endregion
 
         #region Public Methods
+
+        public virtual void Start()
+        {
+
+        }
+
         public virtual void Update(GameTime gameTime, Game1 game1)
         {
             UpdateGameObjects(gameTime);
@@ -73,7 +79,7 @@ namespace Yayen.Assignment3.Framework.Scenes.Base
             else
             {
                 //Console.WriteLine("Resetting Scene on enter:");
-                ResetScene(_content, _game1);
+                StartScene(_content, _game1);
             }
         }
 
@@ -90,7 +96,7 @@ namespace Yayen.Assignment3.Framework.Scenes.Base
         /// </summary>
         /// <param name="content"></param>
         /// <param name="game1"></param>
-        public virtual void ResetScene(ContentManager content, Game1 game1)
+        public virtual void StartScene(ContentManager content, Game1 game1)
         {
             //Console.WriteLine("Resetting Scene");
             for (int i = 0; i < _GameObjects.Count; i++)
@@ -99,6 +105,7 @@ namespace Yayen.Assignment3.Framework.Scenes.Base
             }
             _GameObjects.Clear();
             LoadContent(content, game1);
+            Start();
             //_collisionSystem = new CollisionSystem();
             //_collisionSystem.UpdateGameObjects(_GameObjects);
             //if (_game1.Player.Lives <= 0)

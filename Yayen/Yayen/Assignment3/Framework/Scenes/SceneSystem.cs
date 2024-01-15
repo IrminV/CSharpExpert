@@ -74,7 +74,7 @@ namespace Yayen.Assignment3.Framework.Scenes
         public void AddScene(Scene scene)
         {
             _scenes.Add(scene);
-            scene.ResetScene(_content, _game1);
+            scene.StartScene(_content, _game1);
             SwitchScene(scene);
         }
 
@@ -163,7 +163,7 @@ namespace Yayen.Assignment3.Framework.Scenes
         /// <param name="index"></param>
         public void ResetScene(int index)
         {
-            _scenes[index].ResetScene(_content, _game1);
+            _scenes[index].StartScene(_content, _game1);
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Yayen.Assignment3.Framework.Scenes
                 Console.ResetColor();
                 return;
             }
-            sceneToReset.ResetScene(_content, _game1);
+            sceneToReset.StartScene(_content, _game1);
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Yayen.Assignment3.Framework.Scenes
         /// <param name="scene"></param>
         public void ResetScene(Scene scene)
         {
-            scene.ResetScene(_content, _game1);
+            scene.StartScene(_content, _game1);
         }
 
         /// <summary>
