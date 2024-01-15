@@ -29,7 +29,7 @@ namespace Yayen.Assignment3.Framework.Components.Base
             {
                 if (_gameObject == null)
                 {
-                    if (this is SineSpriteRotator) Console.WriteLine($"Setting GameObject of SineSpriteRotator to {_gameObject.Name}");
+                    //if (this is SineSpriteRotator) Console.WriteLine($"Setting GameObject of SineSpriteRotator to {value.Name}");
                     _gameObject = value;
                 }
                 else
@@ -57,7 +57,7 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// <param name="pGameObject">GameObject this component is being added to.</param>
         public virtual void OnComponentAdded(GameObject pGameObject)
         {
-
+            GameObject = pGameObject;
         }
 
         // TODO: Maybe make things like start into an interface instead of a virtual method.
@@ -93,7 +93,6 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// <param name="pTransform">Reference to the tranform of the GameObject this component is part of.</param>
         public virtual void Draw(SpriteBatch pSpriteBatch)
         {
-
         }
 
         // This is to destroy the component and event references

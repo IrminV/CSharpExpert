@@ -45,7 +45,7 @@ namespace Yayen.Assignment3.Framework.Components
         /// <summary>
         /// Create a Button Component, designating the GameObject this is part of as the Button. 
         /// </summary>
-        public Button() { SetColliderEvents(); }
+        public Button() { }
 
         public override void Start()
         {
@@ -62,7 +62,8 @@ namespace Yayen.Assignment3.Framework.Components
 
         public void GetCollider()
         {
-            _collider = (Collider)GameObject.GetComponent<RectangleCollider>();
+            if(GameObject.GetComponent<RectangleCollider>() == null) { Console.WriteLine($"Button could not find collider"); }
+            _collider = GameObject.GetComponent<RectangleCollider>();
         }
 
         /// <summary>

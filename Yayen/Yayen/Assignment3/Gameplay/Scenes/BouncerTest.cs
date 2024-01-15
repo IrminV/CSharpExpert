@@ -30,11 +30,11 @@ namespace Yayen.Assignment3.Gameplay.Scenes
             // Next Test Button
             base.LoadContent(pContent, pGame1);
             GameObject newGameObject = new(this, "Block", _graphicsDevice.Viewport.Width - 96, _graphicsDevice.Viewport.Height - 96, 0, 3, 1);
-            newGameObject.AddComponent(new SpriteRenderer(newGameObject, pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
-            newGameObject.AddComponent(new RectangleCollider(newGameObject, _RectangleCollisionSystem));
-            newGameObject.AddComponent(new Text(newGameObject, pContent.Load<SpriteFont>("DefaultSpritefont"), "To Scaler Test"));
-            newGameObject.AddComponent(new Button(newGameObject));
-            newGameObject.AddComponent(new ButtonSceneSwitchScript(newGameObject, _sceneSystem, "ScalerTest"));
+            newGameObject.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
+            newGameObject.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
+            newGameObject.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "To Scaler Test"));
+            newGameObject.AddComponent(new Button());
+            newGameObject.AddComponent(new ButtonSceneSwitchScript(_sceneSystem, "ScalerTest"));
             _GameObjects.Add(newGameObject);
 
             // Previous Test Button

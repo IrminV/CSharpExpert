@@ -27,7 +27,6 @@ namespace Yayen.Assignment3.Framework.Components
         {
             _sceneSystem = pSceneSystem;
             _sceneName = pSceneName;
-            SetButtonEvent();
         }
 
         public override void Start()

@@ -45,7 +45,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         {
             _scene = pScene;
 
-            Transform2D _newTransform = new(this, pX, pY, pRotation, pScaleX, pScaleY);
+            Transform2D _newTransform = new(pX, pY, pRotation, pScaleX, pScaleY);
             if (_newTransform == null)
             {
                 Console.WriteLine("_newTransform is null");
@@ -119,17 +119,12 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// <param name="pComponent">Component to add.</param>
         public void AddComponent(Component pComponent)
         {
-            if (!HasComponentOfType(pComponent))
+            _components.Add(pComponent);
+            pComponent.OnComponentAdded(this);
+            if (pComponent is Transform2D)
             {
-                //pComponent.GameObject = this;
-                _components.Add(pComponent);
-                // TODO: Make it so we don't have to check types here
-                if (pComponent is Transform2D)
-                {
-                    //Console.WriteLine("Added Transform");
-                    _transform = (Transform2D)pComponent;
-                }
-                pComponent.OnComponentAdded(this);
+                //Console.WriteLine("Added Transform");
+                _transform = (Transform2D)pComponent;
             }
         }
 
@@ -168,20 +163,8 @@ namespace Yayen.Assignment3.Framework.GameObjects
             return false;
         }
 
-
-        // TODO: Remove and replace this
         /// <summary>
-        /// Returns the bounds of spriterenderer sprite.
-        /// </summary>
-        /// <returns>Bounds of spriterenderer sprite.</returns>
-        //public Vector2 GetRenderBounds()
-        //{
-        //    if (_spriteRenderer == null) return Vector2.Zero;
-        //    return _spriteRenderer.GetSpriteBounds();
-        //}
-
-        /// <summary>
-        /// Gets a component of <type> from this GameObject.
+        /// Gets a component of <type> from this GameObject. This will return the first match.
         /// </summary>
         /// <typeparam name="tValue">Type of component.</typeparam>
         /// <returns>Component of <type> found on this GameObject.</returns>
@@ -195,6 +178,19 @@ namespace Yayen.Assignment3.Framework.GameObjects
                 }
             }
             return null;
+        }
+
+        public List<tValue> GetComponents<tValue>() where tValue : Component
+        {
+            List<tValue> foundComponents = new List<tValue>();
+            for (int i = 0; i < _components.Count; i++)
+            {
+                if (typeof(tValue) == _components[i].GetType())
+                {
+                    foundComponents.Add((tValue)_components[i]);
+                }
+            }
+            return foundComponents;
         }
         #endregion
 

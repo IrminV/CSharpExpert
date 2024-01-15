@@ -58,7 +58,7 @@ namespace Yayen.Assignment3.Gameplay.Scenes
             GameObject SceneDescription = new(this, "SceneDescription", _graphicsDevice.Viewport.Width / 2, 32, 0, 0.5f, 0.5f);
             //SceneDescription.AddComponent(new SpriteRenderer(SceneDescription, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             //SceneDescription.AddComponent(new RectangleCollider(SceneDescription, _RectangleCollisionSystem));
-            SceneDescription.AddComponent(new Text(SceneDescription, pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth Test", 0, 0));
+            SceneDescription.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "LayerDepth Test", 0, 0));
             _GameObjects.Add(SceneDescription);
 
             // Test Objects

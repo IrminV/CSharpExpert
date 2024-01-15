@@ -29,6 +29,7 @@ namespace Yayen.Assignment3.Framework.Components
         float _layerDepth = 0;
 
         Transform2D _transform;
+        SpriteRenderer _spriteRenderer;
 
         public Color Color { get { return _color; } set { _color = value; } }
         /// <summary>
@@ -43,16 +44,20 @@ namespace Yayen.Assignment3.Framework.Components
             _font = pFont;
             _text = text;
             _position = new Vector2(pPosX, pPosY);
-            if (pLayerDepth == -1) UpdateLayerDepthToAboveSprite();
-            else _layerDepth = pLayerDepth;
+            _layerDepth = pLayerDepth;
+            
 
-            _transform = GameObject.GetComponent<Transform2D>();
+            
         }
 
         public override void Start()
         {
             base.Start();
+            _transform = GameObject.GetComponent<Transform2D>();
+            _spriteRenderer = GameObject.GetComponent<SpriteRenderer>();
             UpdateTextSize();
+
+            if (_layerDepth == -1) UpdateLayerDepthToAboveSprite();
         }
 
         /// <summary>
@@ -81,10 +86,8 @@ namespace Yayen.Assignment3.Framework.Components
         /// </summary>
         public void UpdateLayerDepthToAboveSprite()
         {
-            SpriteRenderer spriteRenderer = (SpriteRenderer)GameObject.GetComponent<SpriteRenderer>();
-
-            if (spriteRenderer == null) { /*Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"Warning no spriterender found for text layerdepth on object {GameObject.Name}"); Console.ResetColor();*/ return; }
-            _layerDepth = Math.Clamp(spriteRenderer.LayerDepth + 0.1f, 0, 1);
+            if (_spriteRenderer == null) { /*Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"Warning no spriterender found for text layerdepth on object {GameObject.Name}"); Console.ResetColor();*/ return; }
+            _layerDepth = Math.Clamp(_spriteRenderer.LayerDepth + 0.1f, 0, 1);
         }
     }
 }
