@@ -70,6 +70,8 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
             _sceneSystem.SwitchScene(rotationTest);
 
             _graphics.ToggleFullScreen();
+            //_graphics.PreferredBackBufferWidth = GraphicsAdapter.
+            //_graphics.IsFullScreen = true;
         }
         #endregion
 
