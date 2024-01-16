@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Security.AccessControl;
 using Yayen.Assignment3.Framework.Scenes;
+using Yayen.Assignment3.Framework.Vizualization;
 using Yayen.Assignment3.Gameplay.Scenes;
 
 namespace Yayen.Assignment3.Framework.MonoGameBase
@@ -17,6 +18,8 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SceneSystem _sceneSystem;
+        Matrix _currentMatrix;
+        private MatrixUtility _matrixUtility;
         #endregion
 
         #region Constructors
@@ -37,6 +40,8 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
         {
             // TODO: Add your initialization logic here
             _sceneSystem = new(Content, this);
+            _matrixUtility = new MatrixUtility();
+            _currentMatrix = _matrixUtility.CalculateScale(new Vector2(1f, 1f));
             base.Initialize();
         }
 
@@ -69,7 +74,8 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
             _sceneSystem.AddScene(mixTest);
             _sceneSystem.SwitchScene(rotationTest);
 
-            _graphics.ToggleFullScreen();
+            // fullscreen testing
+
             //_graphics.PreferredBackBufferWidth = GraphicsAdapter.
             //_graphics.IsFullScreen = true;
         }
@@ -87,7 +93,7 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             // I learned from testing that you need to have a SpriteSortMode active to be able to use the LayerDepth property of the draw function.
-            _spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            _spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, Matrix.CreateTranslation(new Vector3(0, 0, 0)));
             _sceneSystem.Draw(_spriteBatch);
             base.Draw(gameTime);
             _spriteBatch.End();

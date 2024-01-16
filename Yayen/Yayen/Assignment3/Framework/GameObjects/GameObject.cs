@@ -51,7 +51,6 @@ namespace Yayen.Assignment3.Framework.GameObjects
                 Console.WriteLine("_newTransform is null");
             }
             AddComponent(_newTransform);
-
         }
 
         /// <summary>
@@ -120,7 +119,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         public void AddComponent(Component pComponent)
         {
             _components.Add(pComponent);
-            pComponent.OnComponentAdded(this);
+            pComponent.OnComponentAdded(this, _components.Count -1);
             if (pComponent is Transform2D)
             {
                 //Console.WriteLine("Added Transform");
@@ -179,6 +178,32 @@ namespace Yayen.Assignment3.Framework.GameObjects
             }
             return null;
         }
+
+        public tValue GetComponent<tValue>(int pBeginIndex) where tValue : Component
+        {
+            for (int i = pBeginIndex; i < _components.Count; i++)
+            {
+                if (typeof(tValue) == _components[i].GetType())
+                {
+                    return (tValue)_components[i];
+                }
+            }
+            return null;
+        }
+
+        public tValue GetComponent<tValue>(int pBeginIndex, int pEndIndex) where tValue : Component
+        {
+            for (int i = pBeginIndex; i < pEndIndex; i++)
+            {
+                if (typeof(tValue) == _components[i].GetType())
+                {
+                    return (tValue)_components[i];
+                }
+            }
+            return null;
+        }
+
+
 
         public List<tValue> GetComponents<tValue>() where tValue : Component
         {

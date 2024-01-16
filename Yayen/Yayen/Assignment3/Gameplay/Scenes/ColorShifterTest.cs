@@ -67,50 +67,57 @@ namespace Yayen.Assignment3.Gameplay.Scenes
             GameObject obj1 = new(this, "Obj1", _graphicsDevice.Viewport.Width / 2 - 96, 96, 0, 0.5f, 0.5f);
             obj1.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj1.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj1.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 1", 0, 64));
-            obj1.AddComponent(new ColorShifterObject(1));
+            obj1.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 1 ColorShifter\nShiftSpeed: 1", 0, 64));
+            obj1.AddComponent(new ColorShifter(1));
             _GameObjects.Add(obj1);
 
             GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 224, 0, 0.5f, 0.5f);
             obj2.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj2.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj2.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 2", 0, 64));
+            obj2.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 2 ColorShifter\nShiftSpeed: 1,5", 0, 64));
+            obj2.AddComponent(new ColorShifter(1.5f));
             _GameObjects.Add(obj2);
 
             GameObject obj3 = new(this, "Obj3", _graphicsDevice.Viewport.Width / 2 - 96, 352, 0, 0.5f, 0.5f);
             obj3.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj3.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj3.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3", 0, 64));
+            obj3.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 3 ColorShifter\nShiftSpeed: -0.1", 0, 64));
+            obj3.AddComponent(new ColorShifter(-0.1f));
             _GameObjects.Add(obj3);
 
             GameObject obj4 = new(this, "Obj4", _graphicsDevice.Viewport.Width / 2 + 96, 96, 0, 0.5f, 0.5f);
             obj4.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj4.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj4.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 4", 0, 64));
+            obj4.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 4 ColorShifter\nShiftSpeed: 0.5", 0, 64));
+            obj4.AddComponent(new ColorShifter(0.5f));
             _GameObjects.Add(obj4);
 
             GameObject obj5 = new(this, "Obj5", _graphicsDevice.Viewport.Width / 2 + 96, 224, 0, 0.5f, 0.5f);
             obj5.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj5.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj5.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 5", 0, 64));
+            obj5.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 5 ColorShifter\nShiftSpeed: 0.25", 0, 64));
+            obj5.AddComponent(new ColorShifter(0.25f));
             _GameObjects.Add(obj5);
 
             GameObject obj6 = new(this, "Obj6", _graphicsDevice.Viewport.Width / 2 + 96, 352, 0, 0.5f, 0.5f);
             obj6.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj6.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj6.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 6 Scaler", 0, 64));
+            obj6.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 6 ColorShifter\nShiftSpeed: 0.1", 0, 64));
+            obj6.AddComponent(new ColorShifter(0.1f));
             _GameObjects.Add(obj6);
 
             GameObject obj7 = new(this, "Obj7", _graphicsDevice.Viewport.Width / 2 + 288, 96, 0, 0.5f, 0.5f);
             obj7.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj7.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj7.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 7", 0, 64));
+            obj7.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 7 ColorShifter\nShiftSpeed: -1", 0, 64));
+            obj7.AddComponent(new ColorShifter(-1));
             _GameObjects.Add(obj7);
 
             GameObject obj8 = new(this, "Obj8", _graphicsDevice.Viewport.Width / 2 + 288, 224, 0, 0.5f, 0.5f);
             obj8.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj8.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj8.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 8", 0, 64));
+            obj8.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Obj 8 ColorShifter\nShiftSpeed: -1.5", 0, 64));
+            obj8.AddComponent(new ColorShifter(-1.5f));
             _GameObjects.Add(obj8);
         }
 

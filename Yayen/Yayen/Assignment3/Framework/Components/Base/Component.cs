@@ -16,7 +16,8 @@ namespace Yayen.Assignment3.Framework.Components.Base
     /// </summary>
     public class Component
     {
-        private GameObject _gameObject;
+        protected GameObject _gameObject;
+        protected int _index;
 
         /// <summary>
         /// A component should only be able to be bound to a GameObject once, upon creation.
@@ -55,9 +56,11 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// Code to fire when this Component is added.
         /// </summary>
         /// <param name="pGameObject">GameObject this component is being added to.</param>
-        public virtual void OnComponentAdded(GameObject pGameObject)
+        /// <param name="pIndex">Index of this component on the GameObject.</param>
+        public virtual void OnComponentAdded(GameObject pGameObject, int pIndex)
         {
             GameObject = pGameObject;
+            _index = pIndex;
         }
 
         // TODO: Maybe make things like start into an interface instead of a virtual method.
@@ -80,7 +83,6 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// Update this components functionality.
         /// </summary>
         /// <param name="pGameTime">GameTime to use for calculations.</param>
-        /// <param name="pTransform">Reference to the tranform of the GameObject this component is part of.</param>
         public virtual void Update(GameTime pGameTime)
         {
 
@@ -90,7 +92,6 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// Draw this components graphics.
         /// </summary>
         /// <param name="pSpriteBatch">Spritebatch to use for drawing.</param>
-        /// <param name="pTransform">Reference to the tranform of the GameObject this component is part of.</param>
         public virtual void Draw(SpriteBatch pSpriteBatch)
         {
         }

@@ -5,7 +5,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class ColorShifterObject : Component
+    public class ColorShifter : Component
     {
         //Fields - configurable
         private float _shiftSpeed;
@@ -22,7 +22,7 @@ namespace Yayen.Assignment3.Framework.Components
         }
 
         //Constructors
-        public ColorShifterObject(float pShiftSpeed)
+        public ColorShifter(float pShiftSpeed)
         {
             _shiftSpeed = pShiftSpeed;
         }
