@@ -14,7 +14,7 @@ namespace Yayen.Assignment3.Framework.Components.Base
     /// <summary>
     /// Base component class. All components should inherit from this.
     /// </summary>
-    public class Component
+    public class MonoBehaviour
     {
         protected GameObject _gameObject;
         protected int _index;
@@ -46,7 +46,7 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// Base component constructor.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
-        public Component()
+        public MonoBehaviour()
         {
 
         }
@@ -63,10 +63,15 @@ namespace Yayen.Assignment3.Framework.Components.Base
             _index = pIndex;
         }
 
-        // TODO: Maybe make things like start into an interface instead of a virtual method.
+        public virtual void Awake()
+        {
+            Console.WriteLine($"Awake is Called on object {GameObject.Name}");
+        }
+
+        // TODO: Maybe make things like Start() and Awake() into an interface instead of a virtual method.
         public virtual void Start()
         {
-
+            Console.WriteLine($"Start is Called on object {GameObject.Name}");
         }
 
         // Some methods which need to be called on multiple components

@@ -50,6 +50,14 @@ namespace Yayen.Assignment3.Framework.Scenes.Base
 
         #region Public Methods
 
+        public virtual void Awake()
+        {
+            for (int gameObject = 0; gameObject < _GameObjects.Count; gameObject++)
+            {
+                _GameObjects[gameObject].Awake();
+            }
+        }
+
         /// <summary>
         /// Start is called after a scene is loaded. (Not when the scene is created)
         /// </summary>
@@ -104,13 +112,14 @@ namespace Yayen.Assignment3.Framework.Scenes.Base
         /// <param name="game1"></param>
         public virtual void StartScene(ContentManager content, Game1 game1)
         {
-            //Console.WriteLine("Resetting Scene");
+            Console.WriteLine("Starting Scene");
             for (int i = 0; i < _GameObjects.Count; i++)
             {
                 _GameObjects[i].Destroy();
             }
             _GameObjects.Clear();
             LoadContent(content, game1);
+            Awake();
             Start();
             //_collisionSystem = new CollisionSystem();
             //_collisionSystem.UpdateGameObjects(_GameObjects);

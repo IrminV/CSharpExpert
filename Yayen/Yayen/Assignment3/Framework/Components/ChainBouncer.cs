@@ -9,7 +9,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class Bouncer : MonoBehaviour
+    public class ChainBouncer : MonoBehaviour
     {
         private Transform2D _transform;
         private SineWave _sineWave;
@@ -19,8 +19,8 @@ namespace Yayen.Assignment3.Framework.Components
 
         private Vector2 _bounceDirection;
 
-        //private Bouncer _nextBouncer;
-        //protected Vector2 _addedPosition = Vector2.Zero;
+        private ChainBouncer _nextBouncer;
+        protected Vector2 _addedPosition = Vector2.Zero;
 
         /// <summary>
         /// Create a Bouncer component which bounces the attached GameObject around it's original point. NOTE: Mixing this with other movement scripts could result in unexpected behaviour.
@@ -28,7 +28,7 @@ namespace Yayen.Assignment3.Framework.Components
         /// <param name="pPeriodsPerSecond">The amount of periods/bounces per second.</param>
         /// <param name="pAmplitude">The amount of displacement per bounce.</param>
         /// <param name="pBounceDirection">The direction of the bounce. NOTE: Vector2.Zero input will result in default settings.</param>
-        public Bouncer(float pPeriodsPerSecond, float pAmplitude = 1, Vector2 pBounceDirection = new Vector2())
+        public ChainBouncer(float pPeriodsPerSecond, float pAmplitude = 1, Vector2 pBounceDirection = new Vector2())
         {
             // If no input, use default Vector2 value for direction, else normalize Vector2 input value for direction
             if (pBounceDirection == Vector2.Zero) pBounceDirection = new Vector2(0, 1f);
@@ -41,7 +41,7 @@ namespace Yayen.Assignment3.Framework.Components
         {
             base.Start();
             _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
-            //_nextBouncer = GetNextBouncer();
+            _nextBouncer = GetNextBouncer();
             _bounceAnchor = _transform.Position;
         }
 
@@ -65,34 +65,34 @@ namespace Yayen.Assignment3.Framework.Components
             _currentBounceValue.Y = _sineWave.SineValue * _bounceDirection.Y;
             if (_bounceActive)
             {
-                _transform.Position = new Vector2(_bounceAnchor.X + _sineWave.SineValue * _bounceDirection.X, _bounceAnchor.Y + _sineWave.SineValue * _bounceDirection.Y);
+                //_transform.Position = new Vector2(_bounceAnchor.X + _sineWave.SineValue * _bounceDirection.X, _bounceAnchor.Y + _sineWave.SineValue * _bounceDirection.Y);
 
 
-                //if (_nextBouncer == null)
-                //{
-                //    _transform.Position = new Vector2(_bounceAnchor.X + (_addedPosition.X + _sineWave.SineValue * _bounceDirection.X), _bounceAnchor.Y + (_addedPosition.Y + _sineWave.SineValue * _bounceDirection.Y));
-                //    _addedPosition.X = 0;
-                //    _addedPosition.Y = 0;
-                //}
-                //else
-                //{
-                //    _nextBouncer._addedPosition = _addedPosition += new Vector2(_sineWave.SineValue * _bounceDirection.X, _sineWave.SineValue * _bounceDirection.Y);
-                //    _addedPosition.X = 0;
-                //    _addedPosition.Y = 0;
-                //}
+                if (_nextBouncer == null)
+                {
+                    _transform.Position = new Vector2(_bounceAnchor.X + (_addedPosition.X + _sineWave.SineValue * _bounceDirection.X), _bounceAnchor.Y + (_addedPosition.Y + _sineWave.SineValue * _bounceDirection.Y));
+                    _addedPosition.X = 0;
+                    _addedPosition.Y = 0;
+                }
+                else
+                {
+                    _nextBouncer._addedPosition = _addedPosition += new Vector2(_sineWave.SineValue * _bounceDirection.X, _sineWave.SineValue * _bounceDirection.Y);
+                    _addedPosition.X = 0;
+                    _addedPosition.Y = 0;
+                }
             }
-            
+
         }
 
         /// <summary>
         /// Gets the first bouncer component after this one.
         /// </summary>
         /// <returns></returns>
-        //private Bouncer GetNextBouncer()
-        //{
-        //    Bouncer nextBouncer = GameObject.GetComponent<Bouncer>(_index +1);
-        //    return nextBouncer;
-        //}
+        private ChainBouncer GetNextBouncer()
+        {
+            ChainBouncer nextChainBouncer = GameObject.GetComponent<ChainBouncer>(_index +1);
+            return nextChainBouncer;
+        }
 
         public override void Destroy()
         {

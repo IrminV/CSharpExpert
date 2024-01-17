@@ -13,7 +13,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Mouse GameObject
     /// </summary>
-    public class MouseSelector : Component
+    public class MouseSelector : MonoBehaviour
     {
         private MouseState _mouseState = new MouseState();
 

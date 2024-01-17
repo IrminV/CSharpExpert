@@ -9,7 +9,7 @@ using Yayen.Assignment3.Framework.Components.Colliders.RectangleCollision;
 
 namespace Yayen.Assignment3.Framework.Components.Colliders.Base
 {
-    public class Collider : Component
+    public class Collider : MonoBehaviour
     {
         // List of all overlapping objects for which this object is overlapping
         private List<Collider> _overlappingColliders = new();

@@ -11,7 +11,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class SpriteRenderer : Component
+    public class SpriteRenderer : MonoBehaviour
     {
         /* What does a sprite renderer do?
          * 

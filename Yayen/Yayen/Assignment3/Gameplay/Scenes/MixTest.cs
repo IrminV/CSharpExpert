@@ -114,11 +114,11 @@ namespace Yayen.Assignment3.Gameplay.Scenes
             GameObject obj6 = new(this, "Obj6", _graphicsDevice.Viewport.Width / 2 + 96, 352, 0, 0.5f, 0.5f);
             obj6.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj6.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            obj6.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "ColorShifter\nBouncer\nSpriteScaler", 0, 64));
+            obj6.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "ColorShifter\nChainBouncer\nChainBouncer\nSpriteScaler", 0, 64));
             obj6.AddComponent(new ColorShifter(0.25f));
-            obj6.AddComponent(new Bouncer(1.5f, 32, new Vector2(0, 1)));
-            obj6.AddComponent(new Bouncer(1.5f, 32, new Vector2(1, 0)));
-            obj6.AddComponent(new SpriteScaler(-0.5f, 0.5f, 1.5f));
+            obj6.AddComponent(new ChainBouncer(0.5f, 32, new Vector2(0, 1)));
+            obj6.AddComponent(new ChainBouncer(1.5f, 32, new Vector2(1, 0)));
+            obj6.AddComponent(new SpriteScaler(0.25f, 0.5f, 3f));
 
             _GameObjects.Add(obj6);
 

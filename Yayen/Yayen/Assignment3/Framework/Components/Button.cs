@@ -8,7 +8,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class Button : Component
+    public class Button : MonoBehaviour
     {
         private MouseState _mouseState;
 
@@ -49,6 +49,7 @@ namespace Yayen.Assignment3.Framework.Components
 
         public override void Start()
         {
+            base.Start();
             SetColliderEvents();
             if(_debugMode) OnButtonPressed += DebugOnButtonPressedMessage;
         }

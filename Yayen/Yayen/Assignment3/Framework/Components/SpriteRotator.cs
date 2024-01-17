@@ -9,7 +9,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class SpriteRotator : Component
+    public class SpriteRotator : MonoBehaviour
     {
         private bool _clockwise;
         private float _revolutionsPerSecond;

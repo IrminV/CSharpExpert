@@ -60,6 +60,7 @@ namespace Yayen.Assignment3.Framework.Components.Colliders.RectangleCollision
 
         public override void Start()
         {
+            base.Start();
             _transform = GameObject.GetComponent<Transform2D>();
             _spriteRenderer = GameObject.GetComponent<SpriteRenderer>();
             if(_spriteRenderer != null) SetSizeToRenderBounds();

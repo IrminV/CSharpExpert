@@ -12,7 +12,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Script to make a button switch scenes.
     /// </summary>
-    public class ButtonSceneSwitchScript : Component
+    public class ButtonSceneSwitchScript : MonoBehaviour
     {
         private Button _button;
         private SceneSystem _sceneSystem;
