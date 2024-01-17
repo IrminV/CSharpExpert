@@ -34,6 +34,9 @@ namespace Yayen.Assignment3.Framework.Components
         private bool DebugMode = false;
         private bool _setBetweenZeroAndOne;
 
+        // I added this to be able to change the calculation from sine to cosine. I haven't tested the resulting values extensively, but it should be working.
+        private bool _cos = false;
+
         public float SineAmplitude { get { return _amplitude; } set { _amplitude = value; } }
         public float PeriodsPerSecond 
         { 
@@ -123,14 +126,29 @@ namespace Yayen.Assignment3.Framework.Components
         private float GetSineValue(float pXInput)
         {
             float sineValue;
-            if (_setBetweenZeroAndOne)
+            if (_cos)
             {
-                sineValue = ((MathF.Sin((pXInput * (MathHelper.TwoPi)) * _periodsPerSecond) + 1) / 2) * _amplitude;
+                if (_setBetweenZeroAndOne)
+                {
+                    sineValue = ((MathF.Sin((pXInput * (MathHelper.TwoPi)) * _periodsPerSecond) + 1) / 2) * _amplitude;
+                }
+                else
+                {
+                    sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude;
+                }
             }
             else
             {
-                sineValue = MathF.Sin((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude;
+                if (_setBetweenZeroAndOne)
+                {
+                    sineValue = ((MathF.Cos((pXInput * (MathHelper.TwoPi)) * _periodsPerSecond) + 1) / 2) * _amplitude;
+                }
+                else
+                {
+                    sineValue = MathF.Cos((pXInput * (MathF.PI * 2)) * _periodsPerSecond) * _amplitude;
+                }
             }
+            
             
             if (DebugMode) Console.WriteLine($"Returning {sineValue} while at reverse time value: {pXInput}");
             sineValue += _increment;

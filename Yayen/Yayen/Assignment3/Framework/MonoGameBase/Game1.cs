@@ -19,7 +19,7 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
         private SpriteBatch _spriteBatch;
         private SceneSystem _sceneSystem;
         Matrix _currentMatrix;
-        private MatrixUtility _matrixUtility;
+        //private MatrixUtility _matrixUtility;
         #endregion
 
         #region Constructors
@@ -40,8 +40,8 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
         {
             // TODO: Add your initialization logic here
             _sceneSystem = new(Content, this);
-            _matrixUtility = new MatrixUtility();
-            _currentMatrix = _matrixUtility.CalculateScale(new Vector2(1f, 1f));
+            //_matrixUtility = new MatrixUtility();
+            //_currentMatrix = _matrixUtility.CalculateScale(new Vector2(1f, 1f));
             base.Initialize();
         }
 

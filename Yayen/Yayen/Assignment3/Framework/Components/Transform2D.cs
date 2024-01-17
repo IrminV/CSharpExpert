@@ -51,6 +51,17 @@ namespace Yayen.Assignment3.Framework.Components
             Scale = new Vector2(pScaleX, pScaleY);
         }
 
+        public void AddChild(Transform2D pTransform2D)
+        {
+            _children.Add(pTransform2D);
+            pTransform2D.SetParent(this);
+        }
+
+        public void SetParent(Transform2D pTransform2D)
+        {
+            _parent = pTransform2D;
+        }
+
         //public Transform2D(GameObject pGameObject) : this(pGameObject, new Vector2(0, 0), 0f, 0.5f, 0.5f) { }
 
         #region Update Global Values

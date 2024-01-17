@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Yayen.Assignment3.Framework.Vizualization
 {
+    /// <summary>
+    /// WIP, Unused at the moment. I wanted to try doing some things with MonoGame Matrix, would decided it would be better to focus on other things first.
+    /// </summary>
     public class MatrixUtility
     {
         //private Vector2 _targetResolution = new Vector2(1920, 1080);

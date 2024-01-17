@@ -29,6 +29,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
 
         #region Properties
         public string Name { get { return _name; } }
+        public Transform2D Transform { get { return _transform; } }
         #endregion
 
         #region Constructors
@@ -49,7 +50,9 @@ namespace Yayen.Assignment3.Framework.GameObjects
             Transform2D _newTransform = new(pX, pY, pRotation, pScaleX, pScaleY);
             if (_newTransform == null)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("_newTransform is null");
+                Console.ResetColor();
             }
             AddComponent(_newTransform);
 
