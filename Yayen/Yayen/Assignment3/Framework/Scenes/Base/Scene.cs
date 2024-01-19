@@ -112,7 +112,7 @@ namespace Yayen.Assignment3.Framework.Scenes.Base
         /// <param name="game1"></param>
         public virtual void StartScene(ContentManager content, Game1 game1)
         {
-            Console.WriteLine("Starting Scene");
+            //Console.WriteLine("Starting Scene");
             for (int i = 0; i < _GameObjects.Count; i++)
             {
                 _GameObjects[i].Destroy();

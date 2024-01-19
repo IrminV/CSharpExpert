@@ -24,7 +24,7 @@ namespace Yayen.Assignment3.Framework.Components
         Vector2 _localScale;
 
         Transform2D _parent;
-        List<Transform2D> _children;
+        List<Transform2D> _children = new();
 
         // In these properties we inplement local to global conversion
         public Vector2 Position { get { return _localPosition; } set { _localPosition = value; UpdateGlobalPosition(); } }
@@ -51,6 +51,11 @@ namespace Yayen.Assignment3.Framework.Components
             Scale = new Vector2(pScaleX, pScaleY);
         }
 
+        public override void Start()
+        {
+            base.Start();
+        }
+
         public void AddChild(Transform2D pTransform2D)
         {
             _children.Add(pTransform2D);
@@ -60,6 +65,32 @@ namespace Yayen.Assignment3.Framework.Components
         public void SetParent(Transform2D pTransform2D)
         {
             _parent = pTransform2D;
+            Position = ConvertToParentedPosition(pTransform2D);
+            Console.WriteLine($"My new position is {Position}");
+            Scale = ConvertToParentedScale(pTransform2D);
+
+        }
+
+        /// <summary>
+        /// Create a new parented position which will display this Transform the same as before the parenting. If we don't do this after parenting, the visual position of the Child transform will be altered compared to the parent.
+        /// </summary>
+        /// <param name="pParentTransform2D">parent Transform.</param>
+        /// <returns></returns>
+        private Vector2 ConvertToParentedPosition(Transform2D pParentTransform2D)
+        {
+            Vector2 newParantedPosition = (Position - pParentTransform2D.Position) * (Vector2.One / pParentTransform2D.Scale);
+            return newParantedPosition;
+        }
+
+        /// <summary>
+        /// Create a new parented scale which will display this Transform the same as before the parenting. If we don't do this after parenting, the visual scale of the Child transform will be altered compared to the parent.
+        /// </summary>
+        /// <param name="pParentTransform">parent Transform.</param>
+        /// <returns></returns>
+        private Vector2 ConvertToParentedScale(Transform2D pParentTransform)
+        {
+            Vector2 newParentedScale = Scale * (Vector2.One / pParentTransform.Scale);
+            return newParentedScale;
         }
 
         //public Transform2D(GameObject pGameObject) : this(pGameObject, new Vector2(0, 0), 0f, 0.5f, 0.5f) { }
@@ -71,6 +102,11 @@ namespace Yayen.Assignment3.Framework.Components
         private void UpdateGlobalPosition()
         {
             _position = _parent == null ? _localPosition : _localPosition * _parent.Scale + _parent.Position;
+            for (int i = 0; i < _children.Count; i++)
+            {
+                _children[i].UpdateGlobalPosition();
+            }
+
         }
         /// <summary>
         /// Update the global rotation values used as input for MonoGames render system.
@@ -78,13 +114,28 @@ namespace Yayen.Assignment3.Framework.Components
         private void UpdateGlobalRotation()
         {
             _rotation = _parent == null ? _localRotation : _localRotation + _parent.Rotation;
+            for (int i = 0; i < _children.Count; i++)
+            {
+                _children[i].UpdateGlobalRotation();
+            }
         }
         /// <summary>
         /// Update the global scale values used as input for MonoGames render system.
         /// </summary>
         private void UpdateGlobalScale()
         {
-            _scale = _parent == null ? _localScale : _localScale + _parent.Scale;
+            _scale = _parent == null ? _localScale : _localScale * _parent.Scale;
+            if (_parent != null)
+            {
+                Console.WriteLine($"New scale is {_localScale * _parent.Scale}");
+                Console.WriteLine($"Actual new scale = {_scale}");
+            }
+
+            
+            for (int i = 0; i < _children.Count; i++)
+            {
+                _children[i].UpdateGlobalScale();
+            }
         }
         #endregion
     }

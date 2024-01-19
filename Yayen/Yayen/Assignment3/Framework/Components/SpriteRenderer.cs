@@ -78,7 +78,7 @@ namespace Yayen.Assignment3.Framework.Components
                 _colorMask,
                 MathHelper.ToRadians(_transform.GlobalRotation),
                 new Vector2(_sprite.Width * _origin.X, _sprite.Height * _origin.Y),
-                _transform.Scale,
+                _transform.GlobalScale,
                 _spriteEffects,
                 _layerDepth);
         }

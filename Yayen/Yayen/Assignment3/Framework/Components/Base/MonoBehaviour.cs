@@ -65,13 +65,13 @@ namespace Yayen.Assignment3.Framework.Components.Base
 
         public virtual void Awake()
         {
-            Console.WriteLine($"Awake is Called on object {GameObject.Name}");
+            //Console.WriteLine($"Awake is Called on object {GameObject.Name}");
         }
 
         // TODO: Maybe make things like Start() and Awake() into an interface instead of a virtual method.
         public virtual void Start()
         {
-            Console.WriteLine($"Start is Called on object {GameObject.Name}");
+            //Console.WriteLine($"Start is Called on object {GameObject.Name}");
         }
 
         // Some methods which need to be called on multiple components
