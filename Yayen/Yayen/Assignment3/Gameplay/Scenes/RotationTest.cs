@@ -42,9 +42,9 @@ namespace Yayen.Assignment3.Gameplay.Scenes
             GameObject newGameObject2 = new(this, "Block", 96, _graphicsDevice.Viewport.Height - 96, 0, 3, 1);
             newGameObject2.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject2.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            newGameObject2.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "To MixTest"));
+            newGameObject2.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "To SpriteAnimationTest"));
             newGameObject2.AddComponent(new Button());
-            newGameObject2.AddComponent(new ButtonSceneSwitchScript(_sceneSystem, "MixTest"));
+            newGameObject2.AddComponent(new ButtonSceneSwitchScript(_sceneSystem, "SpriteAnimationTest"));
             _GameObjects.Add(newGameObject2);
 
             // Mouse Object

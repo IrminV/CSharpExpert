@@ -61,6 +61,7 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
             ScalerTest scalerTest = new(_sceneSystem, Content, this, "ScalerTest");
             ColorShifterTest colorShifterTest = new(_sceneSystem, Content, this, "ColorShifterTest");
             MixTest mixTest = new(_sceneSystem, Content, this, "MixTest");
+            SpriteAnimationTest spriteAnimationTest = new(_sceneSystem, Content, this, "SpriteAnimationTest");
 
             _sceneSystem.AddScene(rotationTest);
             _sceneSystem.AddScene(positionTest);
@@ -72,6 +73,7 @@ namespace Yayen.Assignment3.Framework.MonoGameBase
             _sceneSystem.AddScene(scalerTest);
             _sceneSystem.AddScene(colorShifterTest);
             _sceneSystem.AddScene(mixTest);
+            _sceneSystem.AddScene(spriteAnimationTest);
             _sceneSystem.SwitchScene(rotationTest);
 
             // fullscreen testing
