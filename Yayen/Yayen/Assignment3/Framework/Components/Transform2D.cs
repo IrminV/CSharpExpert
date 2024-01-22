@@ -13,7 +13,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// transform Component of a GameObject.
     /// </summary>
-    public class Transform2D : MonoBehaviour
+    public class Transform2D : Component
     {
         // When changing any of these 3 values (position, rotation and scale) it should first affect their local counterparts. Then we will run a conversion method which sets the global values as the local values change. This way they are connected and stable and really handy to use when implementing parent and child relationships.
 

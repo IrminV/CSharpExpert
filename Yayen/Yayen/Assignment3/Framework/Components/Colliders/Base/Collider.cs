@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
 using Yayen.Assignment3.Framework.GameObjects;
 using Yayen.Assignment3.Framework.Components.Colliders.RectangleCollision;
+using Microsoft.Xna.Framework;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 
 namespace Yayen.Assignment3.Framework.Components.Colliders.Base
 {
-    public class Collider : Component
+    public class Collider : Component, IUpdatableComponent
     {
         // List of all overlapping objects for which this object is overlapping
         private List<Collider> _overlappingColliders = new();
@@ -61,6 +63,13 @@ namespace Yayen.Assignment3.Framework.Components.Colliders.Base
             base.Destroy();
             OnCollisionEnter = null;
             OnCollisionExit = null;
+        }
+
+        // RectangleCollider implements this Update so i cannot remove it yet
+        // TODO: Disconnect RectangleCollider from Collider or do something else to remove this Update()
+        public virtual void Update(GameTime pGameTimer)
+        {
+
         }
     }
 }
