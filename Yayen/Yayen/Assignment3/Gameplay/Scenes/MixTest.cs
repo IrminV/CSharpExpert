@@ -68,20 +68,19 @@ namespace Yayen.Assignment3.Gameplay.Scenes
             obj1.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj1.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
             obj1.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "ColorShifter\nSpriteRotator", 0, 64));
-            //obj1.AddComponent(new ColorShifter(1));
-            //obj1.AddComponent(new SpriteRotator());
+            obj1.AddComponent(new ColorShifter(1));
+            obj1.AddComponent(new SpriteRotator());
             _GameObjects.Add(obj1);
 
             GameObject obj2 = new(this, "Obj2", _graphicsDevice.Viewport.Width / 2 - 96, 224, 0, 0.5f, 0.5f);
             obj2.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             obj2.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
             obj2.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "ColorShifter\nBouncer\nSpriteRotator", 0, 64));
-            //obj2.AddComponent(new ColorShifter(0.5f));
-            //obj2.AddComponent(new Bouncer(1, 32, new Vector2(0.5f, -0.5f)));
-            //obj2.AddComponent(new SpriteRotator());
-            //obj2.AddComponent(new );
+            obj2.AddComponent(new ColorShifter(0.5f));
+            obj2.AddComponent(new Bouncer(1, 32, new Vector2(0.5f, -0.5f)));
+            obj2.AddComponent(new SpriteRotator(true, 0.2f));
             _GameObjects.Add(obj2);
-            obj2.Transform.AddChild(obj1.Transform);
+            //obj2.Transform.AddChild(obj1.Transform);
 
             GameObject obj3 = new(this, "Obj3", _graphicsDevice.Viewport.Width / 2 - 96, 352, 0, 0.5f, 0.5f);
             obj3.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));

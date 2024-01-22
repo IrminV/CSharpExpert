@@ -72,7 +72,7 @@ namespace Yayen.Assignment3.Framework.Components
         /// </summary>
         public void UpdateSpriteRotation()
         {
-            _transform.Rotation = _transform.Rotation = _lerpValue;
+            _transform.Rotation = _lerpValue;
         }
 
         /// <summary>

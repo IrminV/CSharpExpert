@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
@@ -93,6 +94,30 @@ namespace Yayen.Assignment3.Framework.Components
             return newParentedScale;
         }
 
+        // Please be aware, this angle is calculated in MonoGame space where upwards is y negative. You can invert y for the true angle
+        // This needs to be redone in global space i think
+        //public Vector2 GetRotatedPositionAroundParent(float pDegrees, float pDegreeOffset = 0f, bool pInvertY = false)
+        //{
+        //    //pDegrees = pDegrees * 2;
+        //    float vectorLength = MathF.Sqrt((Position.X * Position.X) + (Position.Y * Position.Y));
+        //    Vector2 normalizedVector = Position;
+        //    normalizedVector.Normalize();
+        //    if (pInvertY) normalizedVector.Y = -normalizedVector.Y;
+        //    float angle = MathF.Atan2(normalizedVector.X, normalizedVector.Y);
+        //    // By default, zero degrees is ->
+        //    float degreeAngle = (MathHelper.ToDegrees(angle)) + pDegreeOffset + pDegrees;
+        //    degreeAngle = GetThreeSixtyDegrees(degreeAngle);
+        //    angle = MathHelper.ToRadians(degreeAngle);
+
+        //    Console.WriteLine($"Input was {pDegrees}");
+        //    Console.WriteLine($"Angle is {GetThreeSixtyDegrees(MathHelper.ToDegrees(angle) + pDegreeOffset)}");
+        //    //Console.WriteLine($"Vector length is {vectorLength}");
+        //    //Calculating angle back to vector
+        //   Vector2 newPosition = (new Vector2(MathF.Cos(angle), MathF.Sin(angle)) * vectorLength);
+        //    //Console.WriteLine($"New rotated position = {newPosition}");
+        //    return (newPosition);
+        //}
+
         //public Transform2D(GameObject pGameObject) : this(pGameObject, new Vector2(0, 0), 0f, 0.5f, 0.5f) { }
 
         #region Update Global Values
@@ -113,10 +138,12 @@ namespace Yayen.Assignment3.Framework.Components
         /// </summary>
         private void UpdateGlobalRotation()
         {
-            _rotation = _parent == null ? _localRotation : _localRotation + _parent.Rotation;
+            _rotation = _parent == null ? _localRotation : _localRotation + (MathHelper.ToDegrees(MathF.Atan2(Position.X, -Position.Y)));
             for (int i = 0; i < _children.Count; i++)
             {
                 _children[i].UpdateGlobalRotation();
+                //Console.WriteLine($"Rotating {_children[i]} around parent with rotation {Rotation} resulting in position{_children[i].RotatePositionAroundParent(Rotation)}");
+                //_children[i].Position = _children[i].GetRotatedPositionAroundParent(this.Rotation);
             }
         }
         /// <summary>
@@ -138,5 +165,20 @@ namespace Yayen.Assignment3.Framework.Components
             }
         }
         #endregion
+
+        private float GetThreeSixtyDegrees(float pDegreeAngle)
+        {
+            if (pDegreeAngle >= 360)
+            {
+                //Console.WriteLine($"Angle % 360 = {pDegreeAngle % 360}");
+                pDegreeAngle = (pDegreeAngle % 360);
+            }
+            if (pDegreeAngle < 0)
+            {
+                //Console.WriteLine($"360 - Angle % 360 = {360 +(pDegreeAngle % -360)}");
+                pDegreeAngle = 360 + (pDegreeAngle % -360);
+            }
+            return pDegreeAngle;
+        }
     }
 }
