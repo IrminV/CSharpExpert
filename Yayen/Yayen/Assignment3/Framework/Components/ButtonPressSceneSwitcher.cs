@@ -17,7 +17,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Script to make a key switch scenes.
     /// </summary>
-    public class ButtonPressSceneSwitcher : MonoBehaviour
+    public class ButtonPressSceneSwitcher : Component
     {
         KeyboardState _keyBoardState;
         private bool _checkPressed = true;

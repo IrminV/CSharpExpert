@@ -23,7 +23,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
 
         #region Component Fields
         private Transform2D _transform;
-        private List<MonoBehaviour> _components = new();
+        private List<Component> _components = new();
         #endregion
         #endregion
 
@@ -43,7 +43,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// <param name="pScaleX">Scale on the X axis.</param>
         /// <param name="pScaleY">Scale on the Y axis.</param>
         /// <param name="pComponents">Components you want to add to this GameObject</param>
-        public GameObject(Scene pScene, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY = 1, params MonoBehaviour[] pComponents)
+        public GameObject(Scene pScene, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY = 1, params Component[] pComponents)
         {
             _scene = pScene;
 
@@ -74,7 +74,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// <param name="pScaleX">Scale on the X axis.</param>
         /// <param name="pScaleY">Scale on the Y axis.</param>
         /// <param name="pComponents">Components you want to add to this GameObject</param>
-        public GameObject(Scene pScene, string pName, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY = 1, params MonoBehaviour[] pComponents) : this(pScene, pX, pY, pRotation, pScaleX, pScaleY, pComponents) { _name = pName; }
+        public GameObject(Scene pScene, string pName, float pX = 0, float pY = 0, float pRotation = 0, float pScaleX = 1, float pScaleY = 1, params Component[] pComponents) : this(pScene, pX, pY, pRotation, pScaleX, pScaleY, pComponents) { _name = pName; }
 
         /// <summary>
         /// Create a new standard GameObject. With Vector2 position and scale.
@@ -84,7 +84,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// <param name="pRotation">2D Rotation</param>
         /// <param name="pScale">2D Scale</param>
         /// <param name="pComponents">Components you want to add to this GameObject</param>
-        public GameObject(Scene pScene, Vector2 pPosition, float pRotation, Vector2 pScale, params MonoBehaviour[] pComponents) : this(pScene, pPosition.X, pPosition.Y, pRotation, pScale.X, pScale.Y, pComponents) { }
+        public GameObject(Scene pScene, Vector2 pPosition, float pRotation, Vector2 pScale, params Component[] pComponents) : this(pScene, pPosition.X, pPosition.Y, pRotation, pScale.X, pScale.Y, pComponents) { }
 
         /// <summary>
         /// Create a new standard GameObject with name. With Vector2 position and scale.
@@ -95,7 +95,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// <param name="pRotation">2D Rotation</param>
         /// <param name="pScale">2D Scale</param>
         /// <param name="pComponents">Components you want to add to this GameObject</param>
-        public GameObject(Scene pScene, string pName, Vector2 pPosition, float pRotation, Vector2 pScale, params MonoBehaviour[] pComponents) : this(pScene, pName, pPosition.X, pPosition.Y, pRotation, pScale.X, pScale.Y, pComponents) { }
+        public GameObject(Scene pScene, string pName, Vector2 pPosition, float pRotation, Vector2 pScale, params Component[] pComponents) : this(pScene, pName, pPosition.X, pPosition.Y, pRotation, pScale.X, pScale.Y, pComponents) { }
         #endregion
 
         #region Public Methods
@@ -156,7 +156,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// Add a component to this GameObject.
         /// </summary>
         /// <param name="pComponent">Component to add.</param>
-        public void AddComponent(MonoBehaviour pComponent)
+        public void AddComponent(Component pComponent)
         {
             _components.Add(pComponent);
             pComponent.OnComponentAdded(this, _components.Count -1);
@@ -177,7 +177,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
             }
         }
 
-        public void AddComponents(params MonoBehaviour[] pComponents)
+        public void AddComponents(params Component[] pComponents)
         {
             for (int i = 0; i < pComponents.Length; i++)
             {
@@ -190,7 +190,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// </summary>
         /// <param name="pComponent">Component of type to check.</param>
         /// <returns></returns>
-        public bool HasComponentOfType(MonoBehaviour pComponent)
+        public bool HasComponentOfType(Component pComponent)
         {
             //if (_components == null || _components.Count == 0) return false;
             for (int i = 0; i < _components.Count; i++)
@@ -225,7 +225,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// </summary>
         /// <typeparam name="tValue">Type of component.</typeparam>
         /// <returns>Component of <type> found on this GameObject.</returns>
-        public tValue GetComponent<tValue>() where tValue : MonoBehaviour
+        public tValue GetComponent<tValue>() where tValue : Component
         {
             for (int i = 0; i < _components.Count; i++)
             {
@@ -237,7 +237,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
             return null;
         }
 
-        public tValue GetComponent<tValue>(int pBeginIndex) where tValue : MonoBehaviour
+        public tValue GetComponent<tValue>(int pBeginIndex) where tValue : Component
         {
             for (int i = pBeginIndex; i < _components.Count; i++)
             {
@@ -249,7 +249,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
             return null;
         }
 
-        public tValue GetComponent<tValue>(int pBeginIndex, int pEndIndex) where tValue : MonoBehaviour
+        public tValue GetComponent<tValue>(int pBeginIndex, int pEndIndex) where tValue : Component
         {
             for (int i = pBeginIndex; i < pEndIndex; i++)
             {
@@ -263,7 +263,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
 
 
 
-        public List<tValue> GetComponents<tValue>() where tValue : MonoBehaviour
+        public List<tValue> GetComponents<tValue>() where tValue : Component
         {
             List<tValue> foundComponents = new List<tValue>();
             for (int i = 0; i < _components.Count; i++)

@@ -8,7 +8,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class Button : MonoBehaviour
+    public class Button : Component
     {
         private MouseState _mouseState;
 

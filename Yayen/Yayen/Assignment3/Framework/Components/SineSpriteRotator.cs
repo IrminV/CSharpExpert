@@ -9,7 +9,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class SineSpriteRotator : MonoBehaviour
+    public class SineSpriteRotator : Component
     {
         private float _minRot;
         private float _maxRot;

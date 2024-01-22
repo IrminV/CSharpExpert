@@ -13,7 +13,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Component to create a scaling animation on a GameObjects Sprite.
     /// </summary>
-    public class SpriteScaler : MonoBehaviour
+    public class SpriteScaler : Component
     {
         Transform2D _transform;
         bool _scaleXActive = false;

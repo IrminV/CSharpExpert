@@ -9,7 +9,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class ChainBouncer : MonoBehaviour
+    public class ChainBouncer : Component
     {
         private Transform2D _transform;
         private SineWave _sineWave;

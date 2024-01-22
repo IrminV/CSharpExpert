@@ -13,7 +13,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Text Component. Displays text at position local to GameObject.
     /// </summary>
-    public class Text : MonoBehaviour
+    public class Text : Component
     {
         SpriteFont _font;
         private string _text;

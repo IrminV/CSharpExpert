@@ -14,7 +14,7 @@ namespace Yayen.Assignment3.Framework.Components.Base
     /// <summary>
     /// Base component class. All components should inherit from this.
     /// </summary>
-    public class MonoBehaviour
+    public class Component
     {
         protected GameObject _gameObject;
         protected int _index;
@@ -46,7 +46,7 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// Base component constructor.
         /// </summary>
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
-        public MonoBehaviour()
+        public Component()
         {
 
         }
