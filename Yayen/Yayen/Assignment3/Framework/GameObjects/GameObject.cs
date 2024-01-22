@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components;
 using Yayen.Assignment3.Framework.Components.Base;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.Scenes.Base;
 
 namespace Yayen.Assignment3.Framework.GameObjects
@@ -21,10 +22,10 @@ namespace Yayen.Assignment3.Framework.GameObjects
         private Scene _scene;
         private string _name = "GameObject";
 
-        #region Component Fields
         private Transform2D _transform;
         private List<Component> _components = new();
-        #endregion
+        private List<IUpdatableComponent> _updatableComponents = new();
+        private List<IDrawableComponent> _drawableComponents = new();
         #endregion
 
         #region Properties
@@ -147,11 +148,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
             _transform = null;
             _components.Clear();
         }
-        #endregion
 
-        #region ComponentMethods
-
-        #region Public Component Methods
         /// <summary>
         /// Add a component to this GameObject.
         /// </summary>
@@ -160,6 +157,9 @@ namespace Yayen.Assignment3.Framework.GameObjects
         {
             _components.Add(pComponent);
             pComponent.OnComponentAdded(this, _components.Count -1);
+
+            if (pComponent is IUpdatableComponent) _updatableComponents.Add((IUpdatableComponent)pComponent);
+            if (pComponent is IDrawableComponent) _drawableComponents.Add((IDrawableComponent)pComponent);
 
             // If this a Transform we want to threat it a little differently.
             if (pComponent is Transform2D)
@@ -182,6 +182,23 @@ namespace Yayen.Assignment3.Framework.GameObjects
             for (int i = 0; i < pComponents.Length; i++)
             {
                 AddComponent(pComponents[i]);
+            }
+        }
+
+        public void RemoveComponent(Component pComponent)
+        {
+            _components.Remove(pComponent);
+            if (pComponent is IUpdatableComponent) _updatableComponents.Remove((IUpdatableComponent)pComponent);
+            if (pComponent is IDrawableComponent) _drawableComponents.Remove((IDrawableComponent)pComponent);
+        }
+
+        public void RemoveComponents(params Component[] pComponents)
+        {
+            for (int i = 0; i < pComponents.Length; i++)
+            {
+                _components.Remove(pComponents[i]);
+                if (pComponents[i] is IUpdatableComponent) _updatableComponents.Remove((IUpdatableComponent)pComponents[i]);
+                if (pComponents[i] is IDrawableComponent) _drawableComponents.Remove((IDrawableComponent)pComponents[i]);
             }
         }
 
@@ -275,9 +292,7 @@ namespace Yayen.Assignment3.Framework.GameObjects
             }
             return foundComponents;
         }
-        #endregion
 
-        #region Utility Component Functions
         /// <summary>
         /// Update all components this GameObject has.
         /// </summary>
@@ -285,9 +300,9 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// <param name="pTransform">Reference to the Transform of the GameObject.</param>
         private void UpdateComponents(GameTime pGameTime, Transform2D pTransform)
         {
-            for (int i = 0; i < _components.Count; i++)
+            for (int i = 0; i < _updatableComponents.Count; i++)
             {
-                _components[i].Update(pGameTime);
+                _updatableComponents[i].Update(pGameTime);
             }
         }
 
@@ -298,12 +313,11 @@ namespace Yayen.Assignment3.Framework.GameObjects
         /// <param name="pTransform">Reference to the Transform of the GameObject.</param>
         private void DrawComponents(SpriteBatch pSpriteBatch, Transform2D pTransform)
         {
-            for (int i = 0; i < _components.Count; i++)
+            for (int i = 0; i < _drawableComponents.Count; i++)
             {
-                _components[i].Draw(pSpriteBatch);
+                _drawableComponents[i].Draw(pSpriteBatch);
             }
         }
-        #endregion
 
         #endregion
     }

@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class SpriteRenderer : MonoBehaviour
+    public class SpriteRenderer : Component, IDrawableComponent
     {
         /* What does a sprite renderer do?
          * 
@@ -31,7 +32,7 @@ namespace Yayen.Assignment3.Framework.Components
         private Transform2D _transform;
 
         private ContentManager _content;
-        private Timer _testTimer = new(10f);
+        //private Timer _testTimer = new(10f);
 
         //public Texture2D Sprite { get { return _sprite; } }
         public Color ColorMask { get { return _colorMask; } set { _colorMask = value; } }
@@ -62,15 +63,7 @@ namespace Yayen.Assignment3.Framework.Components
             _transform = GameObject.GetComponent<Transform2D>();
         }
 
-
-
-        public override void Update(GameTime pGameTime)
-        {
-            base.Update(pGameTime);
-            _testTimer.Update(pGameTime);
-        }
-
-        public override void Draw(SpriteBatch pSpriteBatch)
+        public void Draw(SpriteBatch pSpriteBatch)
         {
             pSpriteBatch.Draw(_sprite,
                 new Vector2(_transform.GlobalPosition.X, _transform.GlobalPosition.Y),

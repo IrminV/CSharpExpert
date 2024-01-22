@@ -4,11 +4,12 @@ using System.Drawing;
 using Yayen.Assignment3.Framework.Components.Base;
 using Yayen.Assignment3.Framework.Components.Colliders.Base;
 using Yayen.Assignment3.Framework.Components.Colliders.RectangleCollision;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class Button : Component
+    public class Button : Component, IUpdatableComponent
     {
         private MouseState _mouseState;
 
@@ -54,9 +55,9 @@ namespace Yayen.Assignment3.Framework.Components
             if(_debugMode) OnButtonPressed += DebugOnButtonPressedMessage;
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime pGameTime)
+        public void Update(Microsoft.Xna.Framework.GameTime pGameTime)
         {
-            base.Update(pGameTime);
+            //base.Update(pGameTime);
             CheckClick();
             _pressCooldownTimer.Update(pGameTime);
         }

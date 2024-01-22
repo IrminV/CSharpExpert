@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
@@ -13,7 +14,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Text Component. Displays text at position local to GameObject.
     /// </summary>
-    public class Text : Component
+    public class Text : Component, IDrawableComponent
     {
         SpriteFont _font;
         private string _text;
@@ -65,10 +66,8 @@ namespace Yayen.Assignment3.Framework.Components
         /// </summary>
         /// <param name="pSpriteBatch">SpriteBatch used to draw.</param>
         /// <param name="pTransform">Reference to the transform of the gameobject this is part of.</param>
-        public override void Draw(SpriteBatch pSpriteBatch)
+        public void Draw(SpriteBatch pSpriteBatch)
         {
-
-            base.Draw(pSpriteBatch);
             pSpriteBatch.DrawString(_font, _text, new Vector2(_transform.GlobalPosition.X - _textSize.X / 2 + _position.X, _transform.GlobalPosition.Y - _textSize.Y / 2 + _position.Y), _color, _rotation, _origin, _scale, _spriteEffects, _layerDepth);
 
         }

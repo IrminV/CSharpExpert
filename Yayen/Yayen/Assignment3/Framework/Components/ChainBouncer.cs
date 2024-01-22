@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class ChainBouncer : Component
+    public class ChainBouncer : Component, IUpdatableComponent
     {
         private Transform2D _transform;
         private SineWave _sineWave;
@@ -49,9 +50,8 @@ namespace Yayen.Assignment3.Framework.Components
         /// Update Bouncer Component.
         /// </summary>
         /// <param name="pGameTime">MonoGame GameTime.</param>
-        public override void Update(GameTime pGameTime)
+        public void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime);
             _sineWave.Update(pGameTime);
             UpdateBouncePosition();
         }

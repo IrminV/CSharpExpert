@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Yayen.Assignment3.Framework.Components.Interfaces
 {
-    public interface IUpdatable
+    public interface IUpdatableComponent
     {
         public void Update(GameTime pGameTimer);
     }

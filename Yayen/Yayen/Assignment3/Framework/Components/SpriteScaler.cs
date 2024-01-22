@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
@@ -13,7 +14,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Component to create a scaling animation on a GameObjects Sprite.
     /// </summary>
-    public class SpriteScaler : Component
+    public class SpriteScaler : Component, IUpdatableComponent
     {
         Transform2D _transform;
         bool _scaleXActive = false;
@@ -94,9 +95,8 @@ namespace Yayen.Assignment3.Framework.Components
         /// Update the SpriteScaler Component.
         /// </summary>
         /// <param name="pGameTime"></param>
-        public override void Update(GameTime pGameTime)
+        public void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime);
             _sineWaveXScale.Update(pGameTime);
             _sineWaveYScale.Update(pGameTime);
             UpdateScale();

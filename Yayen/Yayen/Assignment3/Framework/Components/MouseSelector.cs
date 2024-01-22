@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
@@ -13,7 +14,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Mouse GameObject
     /// </summary>
-    public class MouseSelector : Component
+    public class MouseSelector : Component, IUpdatableComponent
     {
         private MouseState _mouseState = new MouseState();
 
@@ -38,9 +39,8 @@ namespace Yayen.Assignment3.Framework.Components
         /// Update the position of the virtual mouse.
         /// </summary>
         /// <param name="pGameTime">MonoGame GameTime.</param>
-        public override void Update(GameTime pGameTime)
+        public void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime);
             _mouseState = Mouse.GetState();
             _transform2D.Position = new Vector2(_mouseState.Position.X, _mouseState.Position.Y);
         }

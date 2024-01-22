@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.GameObjects;
 using Yayen.Assignment3.Framework.Scenes;
 
@@ -17,7 +18,7 @@ namespace Yayen.Assignment3.Framework.Components
     /// <summary>
     /// Script to make a key switch scenes.
     /// </summary>
-    public class ButtonPressSceneSwitcher : Component
+    public class ButtonPressSceneSwitcher : Component, IUpdatableComponent
     {
         KeyboardState _keyBoardState;
         private bool _checkPressed = true;
@@ -35,9 +36,9 @@ namespace Yayen.Assignment3.Framework.Components
             _key = pKey;
         }
 
-        public override void Update(GameTime pGameTime)
+        public void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime);
+
         }
 
         private void CheckButtonPress()

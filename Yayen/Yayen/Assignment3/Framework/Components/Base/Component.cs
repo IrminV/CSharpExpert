@@ -88,18 +88,18 @@ namespace Yayen.Assignment3.Framework.Components.Base
         /// Update this components functionality.
         /// </summary>
         /// <param name="pGameTime">GameTime to use for calculations.</param>
-        public virtual void Update(GameTime pGameTime)
-        {
+        //public virtual void Update(GameTime pGameTime)
+        //{
 
-        }
+        //}
 
         /// <summary>
         /// Draw this components graphics.
         /// </summary>
         /// <param name="pSpriteBatch">Spritebatch to use for drawing.</param>
-        public virtual void Draw(SpriteBatch pSpriteBatch)
-        {
-        }
+        //public virtual void Draw(SpriteBatch pSpriteBatch)
+        //{
+        //}
 
         // This is to destroy the component and event references
         public virtual void Destroy()

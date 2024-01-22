@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment3.Framework.Components.Base;
+using Yayen.Assignment3.Framework.Components.Interfaces;
 using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class SineSpriteRotator : Component
+    public class SineSpriteRotator : Component, IUpdatableComponent
     {
         private float _minRot;
         private float _maxRot;
@@ -51,10 +52,8 @@ namespace Yayen.Assignment3.Framework.Components
         /// Update the SinSpriteRotator Component.
         /// </summary>
         /// <param name="pGameTime">MonoGame GameTime</param>
-        public override void Update(GameTime pGameTime)
+        public void Update(GameTime pGameTime)
         {
-            base.Update(pGameTime);
-            //_secondTimer.Update(pGameTime);
             _sineWave.Update(pGameTime);
             UpdateLerpValue();
             UpdateSpriteRotation();
