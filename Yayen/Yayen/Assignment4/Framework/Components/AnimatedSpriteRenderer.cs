@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Yayen.Assignment3.Framework.Components.Base;
-using Yayen.Assignment3.Framework.Components.Interfaces;
-using Yayen.Assignment3.Framework.GameObjects;
+using Yayen.Assignment4.Framework.Components.Base;
+using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment3.Framework.Components
+namespace Yayen.Assignment4.Framework.Components
 {
-    public class SpriteRenderer : Component, IDrawableComponent
+    public class AnimatedSpriteRenderer : Component, IUpdatableComponent, IDrawableComponent
     {
         /* What does a sprite renderer do?
          * 
@@ -34,8 +34,7 @@ namespace Yayen.Assignment3.Framework.Components
         private ContentManager _content;
         //private Timer _testTimer = new(10f);
 
-        public Texture2D Sprite { get { return _sprite; } set { _sprite = value; } }
-
+        //public Texture2D Sprite { get { return _sprite; } }
         public Color ColorMask { get { return _colorMask; } set { _colorMask = value; } }
         public float LayerDepth { get { return _layerDepth; } }
 
@@ -48,7 +47,7 @@ namespace Yayen.Assignment3.Framework.Components
         /// <param name="pOriginX">Draw origin X.</param>
         /// <param name="pOriginY">Draw origin Y.</param>
         /// <param name="pSpriteEffects">MonoGame SpriteEffects, used to mirror sprites.</param>
-        public SpriteRenderer(ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
+        public AnimatedSpriteRenderer(ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
         {
             _content = pContent;
             _sprite = pSprite;
@@ -62,6 +61,11 @@ namespace Yayen.Assignment3.Framework.Components
         {
             base.Start();
             _transform = GameObject.GetComponent<Transform2D>();
+        }
+
+        public void Update(GameTime pGameTimer)
+        {
+            // Update animation here
         }
 
         public void Draw(SpriteBatch pSpriteBatch)
@@ -85,5 +89,7 @@ namespace Yayen.Assignment3.Framework.Components
         {
             return new Vector2(_sprite.Width * _transform.Scale.X, _sprite.Height * _transform.Scale.Y);
         }
+
+
     }
 }

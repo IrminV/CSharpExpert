@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Yayen.Assignment3.Framework.Components.Base;
-using Yayen.Assignment3.Framework.Components.Interfaces;
-using Yayen.Assignment3.Framework.GameObjects;
+using Yayen.Assignment4.Framework.Components.Base;
+using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment3.Framework.Components
+namespace Yayen.Assignment4.Framework.Components
 {
     public class SpriteRenderer : Component, IDrawableComponent
     {
@@ -32,12 +32,16 @@ namespace Yayen.Assignment3.Framework.Components
         private Transform2D _transform;
 
         private ContentManager _content;
+
         //private Timer _testTimer = new(10f);
 
+        #region Properies
         public Texture2D Sprite { get { return _sprite; } set { _sprite = value; } }
 
         public Color ColorMask { get { return _colorMask; } set { _colorMask = value; } }
         public float LayerDepth { get { return _layerDepth; } }
+
+        #endregion
 
         /// <summary>
         /// Base constructor, which can already work with just a sprite.

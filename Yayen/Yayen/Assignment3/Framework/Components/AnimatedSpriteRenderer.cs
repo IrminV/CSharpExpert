@@ -12,7 +12,7 @@ using Yayen.Assignment3.Framework.GameObjects;
 
 namespace Yayen.Assignment3.Framework.Components
 {
-    public class AnimatedSpriteRenderer : Component, IDrawableComponent
+    public class AnimatedSpriteRenderer : Component, IUpdatableComponent, IDrawableComponent
     {
         /* What does a sprite renderer do?
          * 
@@ -63,6 +63,11 @@ namespace Yayen.Assignment3.Framework.Components
             _transform = GameObject.GetComponent<Transform2D>();
         }
 
+        public void Update(GameTime pGameTimer)
+        {
+            // Update animation here
+        }
+
         public void Draw(SpriteBatch pSpriteBatch)
         {
             pSpriteBatch.Draw(_sprite,
@@ -84,5 +89,7 @@ namespace Yayen.Assignment3.Framework.Components
         {
             return new Vector2(_sprite.Width * _transform.Scale.X, _sprite.Height * _transform.Scale.Y);
         }
+
+
     }
 }
