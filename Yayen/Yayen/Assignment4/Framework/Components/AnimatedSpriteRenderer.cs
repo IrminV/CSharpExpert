@@ -25,6 +25,7 @@ namespace Yayen.Assignment4.Framework.Components
          */
 
         private Texture2D _sprite;
+        private SpriteSheetAnimator _spriteSheetAnimator;
         private SpriteEffects _spriteEffects = SpriteEffects.None;
         private Color _colorMask = Color.White;
         private float _layerDepth = 0;
@@ -33,8 +34,7 @@ namespace Yayen.Assignment4.Framework.Components
 
         private ContentManager _content;
         //private Timer _testTimer = new(10f);
-
-        //public Texture2D Sprite { get { return _sprite; } }
+        public Texture2D Sprite { get { return _sprite; } set { _sprite = value; } }
         public Color ColorMask { get { return _colorMask; } set { _colorMask = value; } }
         public float LayerDepth { get { return _layerDepth; } }
 
@@ -47,10 +47,9 @@ namespace Yayen.Assignment4.Framework.Components
         /// <param name="pOriginX">Draw origin X.</param>
         /// <param name="pOriginY">Draw origin Y.</param>
         /// <param name="pSpriteEffects">MonoGame SpriteEffects, used to mirror sprites.</param>
-        public AnimatedSpriteRenderer(ContentManager pContent, Texture2D pSprite, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
+        public AnimatedSpriteRenderer(ContentManager pContent, float pLayerDepth = 0, float pOriginX = 0.5f, float pOriginY = 0.5f, SpriteEffects pSpriteEffects = SpriteEffects.None)
         {
             _content = pContent;
-            _sprite = pSprite;
             //_colorMask = new Color(0, 0, 0, 255);
             _layerDepth = pLayerDepth;
             _origin = new Vector2(pOriginX, pOriginY);
@@ -61,21 +60,23 @@ namespace Yayen.Assignment4.Framework.Components
         {
             base.Start();
             _transform = GameObject.GetComponent<Transform2D>();
+            _spriteSheetAnimator.Start();
         }
 
-        public void Update(GameTime pGameTimer)
+        public void Update(GameTime pGameTime)
         {
             // Update animation here
+            _spriteSheetAnimator.Update(pGameTime);
         }
 
         public void Draw(SpriteBatch pSpriteBatch)
         {
             pSpriteBatch.Draw(_sprite,
                 new Vector2(_transform.GlobalPosition.X, _transform.GlobalPosition.Y),
-                null,
+                _spriteSheetAnimator.GetSourceRectangle(),
                 _colorMask,
                 MathHelper.ToRadians(_transform.GlobalRotation),
-                new Vector2(_sprite.Width * _origin.X, _sprite.Height * _origin.Y),
+                new Vector2(_spriteSheetAnimator.GetSourceRectangle().Width * _origin.X, _spriteSheetAnimator.GetSourceRectangle().Height * _origin.Y),
                 _transform.GlobalScale,
                 _spriteEffects,
                 _layerDepth);
@@ -88,6 +89,11 @@ namespace Yayen.Assignment4.Framework.Components
         public Vector2 GetSpriteBounds()
         {
             return new Vector2(_sprite.Width * _transform.Scale.X, _sprite.Height * _transform.Scale.Y);
+        }
+
+        public void SetAnimator(SpriteSheetAnimator pSpriteSheetAnimator)
+        {
+            _spriteSheetAnimator = pSpriteSheetAnimator;
         }
 
 

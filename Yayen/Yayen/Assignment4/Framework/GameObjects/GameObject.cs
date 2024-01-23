@@ -153,7 +153,7 @@ namespace Yayen.Assignment4.Framework.GameObjects
         /// Add a component to this GameObject.
         /// </summary>
         /// <param name="pComponent">Component to add.</param>
-        public void AddComponent(Component pComponent)
+        public Component AddComponent(Component pComponent)
         {
             _components.Add(pComponent);
             pComponent.OnComponentAdded(this, _components.Count -1);
@@ -175,6 +175,7 @@ namespace Yayen.Assignment4.Framework.GameObjects
                     _components.Remove(replacedTransform);
                 }
             }
+            return pComponent;
         }
 
         public void AddComponents(params Component[] pComponents)

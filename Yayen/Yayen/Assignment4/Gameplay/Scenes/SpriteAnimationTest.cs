@@ -64,6 +64,17 @@ namespace Yayen.Assignment4.Gameplay.Scenes
 
 
             // Test Objects
+
+            // FireMage Test
+            GameObject fireMage = new(this, "FireMage", _graphicsDevice.Viewport.Width / 2, 128, 0, 2f, 2f);
+            //fireMage.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
+
+            // Creating the animation and animator
+            SpriteSheetAnimation animation = new(_content.Load<Texture2D>("Flame_jet"), new Vector2(128, 128));
+            AnimatedSpriteRenderer animRenderer = (AnimatedSpriteRenderer)fireMage.AddComponent(new AnimatedSpriteRenderer(_content));
+            SpriteSheetAnimator fireMageAnimator = new(animRenderer, 1f, animation);
+            animRenderer.SetAnimator(fireMageAnimator);
+            _GameObjects.Add(fireMage);
         }
 
         public override void Draw(SpriteBatch pSpriteBatch)
