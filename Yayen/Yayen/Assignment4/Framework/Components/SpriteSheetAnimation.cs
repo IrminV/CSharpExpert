@@ -11,6 +11,8 @@ namespace Yayen.Assignment4.Framework.Components
 {
     public class SpriteSheetAnimation
     {
+        Timer _frameTimer = new(1, "FrameTimer");
+
         private Texture2D _spriteSheet;
         private int _pixelHeight;
         private int _pixelWidth;
@@ -23,14 +25,21 @@ namespace Yayen.Assignment4.Framework.Components
         private int _finalIndex;
         private int _currentIndex;
 
+        private float _animationTime;
+
         private Rectangle _sourceRectangle;
+
+        private bool _loop = false;
+
+        //public delegate void AnimationEndDelegate();
+        //public event AnimationEndDelegate OnAnimationComplete;
 
         public Texture2D SpriteSheet { get { return _spriteSheet; } }
         public int Frames { get { return _frames; } }
         public int CurrentIndex { get { return _currentIndex; } }
         public Rectangle SourceRectangle { get { return _sourceRectangle; } }
 
-        public SpriteSheetAnimation(Texture2D pSpriteSheet, Vector2 pSpriteDimensions, int pStartingIndex, int pFinalIndex) 
+        public SpriteSheetAnimation(Texture2D pSpriteSheet, Vector2 pSpriteDimensions, int pStartingIndex, int pFinalIndex, float pAnimationTime) 
         {
             _startingIndex = pStartingIndex;
             _finalIndex = pFinalIndex;
@@ -46,9 +55,27 @@ namespace Yayen.Assignment4.Framework.Components
 
             _finalIndex = (_spriteSheet.Width / (int)pSpriteDimensions.X) * pSpriteSheet.Height;
             SetSourceRectangle(Vector2.Zero);
+
+            _animationTime = pAnimationTime;
         }
 
-        public SpriteSheetAnimation(Texture2D pSpriteSheet, Vector2 pSpriteDimensions) : this(pSpriteSheet, pSpriteDimensions, 0, ((int)MathF.Truncate(pSpriteSheet.Width / pSpriteDimensions.X) * (int)MathF.Truncate(pSpriteSheet.Height / pSpriteDimensions.Y))) { }
+        public SpriteSheetAnimation(Texture2D pSpriteSheet, Vector2 pSpriteDimensions, float pAnimationTime = 1) : this(pSpriteSheet, pSpriteDimensions, 0, ((int)MathF.Truncate(pSpriteSheet.Width / pSpriteDimensions.X) * (int)MathF.Truncate(pSpriteSheet.Height / pSpriteDimensions.Y)), pAnimationTime) {  }
+
+        public void Start()
+        {
+            _frameTimer.OnTimeElapsed += RestartFrameTimer;
+            _frameTimer.OnTimeElapsed += NextFrame;
+
+            _frameTimer.TimerTime = _animationTime / _frames - (_finalIndex - _frames);
+            //OnAnimationComplete += StopAnimation;
+
+            UpdateFrameTime();
+        }
+
+        public void Update(GameTime pGameTime)
+        {
+            _frameTimer.Update(pGameTime);
+        }
 
         public void ResetAnimation()
         {
@@ -81,11 +108,22 @@ namespace Yayen.Assignment4.Framework.Components
             
         }
 
-        public void NextFrame()
+        /// <summary>
+        /// Set the frame timer to animationtime / frames
+        /// </summary>
+        private void UpdateFrameTime()
         {
-            if (_currentIndex + 1 > _frames)
+            _frameTimer.TimerTime = _animationTime / _frames;
+        }
+
+        private void NextFrame()
+        {
+            if (_currentIndex + 1 >= _frames)
             {
                 _currentIndex = _startingIndex;
+                if (!_loop) StopAnimation();
+                
+                //OnAnimationComplete?.Invoke();
             }
             else
             {
@@ -96,12 +134,20 @@ namespace Yayen.Assignment4.Framework.Components
             Console.WriteLine($"Current SourceRectangle position is {_sourceRectangle.Location}");
         }
 
-        //for (int Y = 0; Y < _pixelHeight; Y += (int)_spriteDimensions.Y)
-        //{
-        //    for (int X = 0; X < _pixelWidth; X += (int)_spriteDimensions.X)
-        //    {
+        public void PlayAnimation()
+        {
+            _frameTimer.ResetTimer(true);
+            Console.WriteLine($"Playing animation {_frameTimer.TimerActive}");
+        }
 
-        //    }
-        //}
+        public void StopAnimation()
+        {
+            _frameTimer.ResetTimer();
+        }
+
+        public void RestartFrameTimer()
+        {
+            _frameTimer.ResetTimer(true);
+        }
     }
 }

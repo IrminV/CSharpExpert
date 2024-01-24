@@ -84,7 +84,7 @@ namespace Yayen.Assignment4.Framework.Scenes.Base
         /// </summary>
         public virtual void EnterScene()
         {
-            //Console.WriteLine("Entering Scene");
+            Console.WriteLine("Entering Scene");
             //_collisionSystem.UpdateGameObjects(_GameObjects);
             if (_sceneSystem.PreviousScene != null && _sceneSystem.PreviousScene.SceneName == SceneName)
             {

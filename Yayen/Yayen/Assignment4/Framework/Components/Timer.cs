@@ -101,11 +101,11 @@ namespace Yayen.Assignment4.Framework.Components
         /// Set Timer to value, 
         /// </summary>
         /// <param name="pTime">Value to count down from.</param>
-        public void SetTimer(float pTime)
+        public void SetTimer(float pTime, bool pSetActive = false)
         {
             _timerTime = pTime;
             ResetTimer(true);
-            _timerActive = true;
+            _timerActive = pSetActive;
         }
         /// <summary>
         /// Pause the Timer, leaving _timerCurrentTime intact.

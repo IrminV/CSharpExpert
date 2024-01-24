@@ -74,8 +74,8 @@ namespace Yayen.Assignment4.Framework.Scenes
         public void AddScene(Scene scene)
         {
             _scenes.Add(scene);
-            scene.StartScene(_content, _game1);
-            SwitchScene(scene);
+            //scene.StartScene(_content, _game1);
+            //SwitchScene(scene);
         }
 
         /// <summary>

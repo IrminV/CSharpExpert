@@ -62,7 +62,6 @@ namespace Yayen.Assignment4.Gameplay.Scenes
             SceneDescription.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "SpriteAnimationTest", 0, 0));
             _GameObjects.Add(SceneDescription);
 
-
             // Test Objects
 
             // FireMage Test
@@ -72,9 +71,19 @@ namespace Yayen.Assignment4.Gameplay.Scenes
             // Creating the animation and animator
             SpriteSheetAnimation animation = new(_content.Load<Texture2D>("Flame_jet"), new Vector2(128, 128));
             AnimatedSpriteRenderer animRenderer = (AnimatedSpriteRenderer)fireMage.AddComponent(new AnimatedSpriteRenderer(_content));
-            SpriteSheetAnimator fireMageAnimator = new(animRenderer, 1f, animation);
+            SpriteSheetAnimator fireMageAnimator = new(animRenderer, animation);
             animRenderer.SetAnimator(fireMageAnimator);
             _GameObjects.Add(fireMage);
+
+            // Play Animation Button
+            base.LoadContent(pContent, pGame1);
+            GameObject playButton = new(this, "Block", _graphicsDevice.Viewport.Width / 2, _graphicsDevice.Viewport.Height - 32, 0, 3, 1);
+            playButton.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
+            playButton.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
+            playButton.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Play Anim"));
+            playButton.AddComponent(new Button());
+            playButton.AddComponent(new ButtonStartAnimScript(fireMageAnimator));
+            _GameObjects.Add(playButton);
         }
 
         public override void Draw(SpriteBatch pSpriteBatch)
