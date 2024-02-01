@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 using Yayen.Assignment4.Framework.Scenes;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
     /// <summary>
     /// Script to make a button switch scenes.
     /// </summary>
-    public class ButtonStartAnimScript : Component
+    public class ButtonStartAnimScript : MonoBehaviour
     {
         private Button _button;
         private SpriteSheetAnimator _spriteSheetAnimator;
@@ -34,7 +35,7 @@ namespace Yayen.Assignment4.Framework.Components
         private void SetButtonEvent()
         {
             // Get the button component on this components GameObject
-            _button = (Button)GameObject.GetComponent<Button>();
+            _button = GameObject.GetComponent<Button>();
             // Add SwitchScene() to the OnButtonPressed event
             _button.OnButtonPressed += _spriteSheetAnimator.PlayAnimation;
         }

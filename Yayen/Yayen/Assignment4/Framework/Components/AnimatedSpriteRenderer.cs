@@ -12,6 +12,9 @@ using Yayen.Assignment4.Framework.GameObjects;
 
 namespace Yayen.Assignment4.Framework.Components
 {
+    /// <summary>
+    /// A SpriteRenderer used to display animation. This works together with a SpriteAnimator and SpriteAnimation. (These are not components yet)
+    /// </summary>
     public class AnimatedSpriteRenderer : Component, IUpdatableComponent, IDrawableComponent
     {
         /* What does a sprite renderer do?
@@ -35,6 +38,7 @@ namespace Yayen.Assignment4.Framework.Components
         private ContentManager _content;
         //private Timer _testTimer = new(10f);
         public Texture2D Sprite { get { return _sprite; } set { _sprite = value; } }
+        public SpriteSheetAnimator SpriteSheetAnimator { get { return _spriteSheetAnimator; } }
         public Color ColorMask { get { return _colorMask; } set { _colorMask = value; } }
         public float LayerDepth { get { return _layerDepth; } }
 

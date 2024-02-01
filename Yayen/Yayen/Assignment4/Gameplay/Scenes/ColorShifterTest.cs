@@ -13,6 +13,7 @@ using Yayen.Assignment4.Framework.Scenes;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Scenes.Base;
 using Microsoft.Xna.Framework;
+using Yayen.Assignment4.Framework.Components.Mono;
 
 namespace Yayen.Assignment4.Gameplay.Scenes
 {

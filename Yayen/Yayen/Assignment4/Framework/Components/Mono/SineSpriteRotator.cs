@@ -6,11 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
-    public class SineSpriteRotator : Component, IUpdatableComponent
+    /// <summary>
+    /// Rotates an objects sprite with a sinewave to create a waving motion.
+    /// </summary>
+    public class SineSpriteRotator : MonoBehaviour
     {
         private float _minRot;
         private float _maxRot;
@@ -18,7 +22,7 @@ namespace Yayen.Assignment4.Framework.Components
         //Timer _secondTimer;
         private float _lerpValue;
         private Transform2D _transform;
-        
+
         private SineWave _sineWave;
 
         /// <summary>
@@ -44,7 +48,7 @@ namespace Yayen.Assignment4.Framework.Components
         public override void Start()
         {
             base.Start();
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+            _transform = GameObject.GetComponent<Transform2D>();
 
         }
 
@@ -52,7 +56,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// Update the SinSpriteRotator Component.
         /// </summary>
         /// <param name="pGameTime">MonoGame GameTime</param>
-        public void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime)
         {
             _sineWave.Update(pGameTime);
             UpdateLerpValue();
@@ -72,7 +76,7 @@ namespace Yayen.Assignment4.Framework.Components
             {
                 _lerpValue = MathHelper.Lerp(_minRot, _maxRot, -_sineWave.SineValue);
             }
-            
+
         }
 
         /// <summary>

@@ -6,11 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
-    public class ChainBouncer : Component, IUpdatableComponent
+    // I created a ChainBouncer to be able to chain multiple bouncers for funny effects.
+
+    /// <summary>
+    /// A chainbouncer can be chained with other bouncers to create more complex bouncyness. The movement calculation will be added together and applied at the last bouncer in the chain.
+    /// </summary>
+    public class ChainBouncer : MonoBehaviour
     {
         private Transform2D _transform;
         private SineWave _sineWave;
@@ -41,7 +47,7 @@ namespace Yayen.Assignment4.Framework.Components
         public override void Start()
         {
             base.Start();
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+            _transform = GameObject.GetComponent<Transform2D>();
             _nextBouncer = GetNextBouncer();
             _bounceAnchor = _transform.Position;
         }
@@ -50,7 +56,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// Update Bouncer Component.
         /// </summary>
         /// <param name="pGameTime">MonoGame GameTime.</param>
-        public void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime)
         {
             _sineWave.Update(pGameTime);
             UpdateBouncePosition();
@@ -90,7 +96,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// <returns></returns>
         private ChainBouncer GetNextBouncer()
         {
-            ChainBouncer nextChainBouncer = GameObject.GetComponent<ChainBouncer>(_index +1);
+            ChainBouncer nextChainBouncer = GameObject.GetComponent<ChainBouncer>(_index + 1);
             return nextChainBouncer;
         }
 

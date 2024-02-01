@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
 namespace Yayen.Assignment4.Framework.Components
@@ -17,7 +18,7 @@ namespace Yayen.Assignment4.Framework.Components
     public class Text : Component, IDrawableComponent
     {
         SpriteFont _font;
-        private string _text;
+        private string _string;
         //float _fontSize;
         //Vector2 _position;
         Vector2 _textSize;
@@ -32,6 +33,7 @@ namespace Yayen.Assignment4.Framework.Components
         Transform2D _transform;
         SpriteRenderer _spriteRenderer;
 
+        public string String { get { return _string; } set { _string = value; } }
         public Color Color { get { return _color; } set { _color = value; } }
         /// <summary>
         /// Create a Text component which displays text at a position local to the GameObject it is part of.
@@ -43,12 +45,9 @@ namespace Yayen.Assignment4.Framework.Components
         public Text(SpriteFont pFont, string text, float pPosX = 0, float pPosY = 0, float pLayerDepth = -1)
         {
             _font = pFont;
-            _text = text;
+            _string = text;
             _position = new Vector2(pPosX, pPosY);
             _layerDepth = pLayerDepth;
-            
-
-            
         }
 
         public override void Start()
@@ -68,7 +67,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// <param name="pTransform">Reference to the transform of the gameobject this is part of.</param>
         public void Draw(SpriteBatch pSpriteBatch)
         {
-            pSpriteBatch.DrawString(_font, _text, new Vector2(_transform.GlobalPosition.X - _textSize.X / 2 + _position.X, _transform.GlobalPosition.Y - _textSize.Y / 2 + _position.Y), _color, _rotation, _origin, _scale, _spriteEffects, _layerDepth);
+            pSpriteBatch.DrawString(_font, _string, new Vector2(_transform.GlobalPosition.X - _textSize.X / 2 + _position.X, _transform.GlobalPosition.Y - _textSize.Y / 2 + _position.Y), _color, _rotation, _origin, _scale, _spriteEffects, _layerDepth);
 
         }
 
@@ -77,7 +76,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// </summary>
         public void UpdateTextSize()
         {
-            _textSize = _font.MeasureString(_text);
+            _textSize = _font.MeasureString(_string);
         }
 
         /// <summary>

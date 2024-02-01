@@ -13,12 +13,13 @@ using Yayen.Assignment4.Framework.Scenes;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Scenes.Base;
 using Microsoft.Xna.Framework;
+using Yayen.Assignment4.Framework.Components.Mono;
 
 namespace Yayen.Assignment4.Gameplay.Scenes
 {
-    public class SpriteAnimationTest: Scene
+    public class MegamanAnimTest: Scene
     {
-        public SpriteAnimationTest(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
+        public MegamanAnimTest(SceneSystem sceneSystem, ContentManager content, Game1 game1, string name = "Scene") : base(sceneSystem, content, game1, name) { }
 
         /// <summary>
         /// Method where we load all objects for this scene.
@@ -42,9 +43,9 @@ namespace Yayen.Assignment4.Gameplay.Scenes
             GameObject newGameObject2 = new(this, "Block", 96, _graphicsDevice.Viewport.Height - 96, 0, 3, 1);
             newGameObject2.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("GreyBlock64"), 0f));
             newGameObject2.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
-            newGameObject2.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "To MixTest"));
+            newGameObject2.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "To FireMageAnimTest"));
             newGameObject2.AddComponent(new Button());
-            newGameObject2.AddComponent(new ButtonSceneSwitchScript(_sceneSystem, "MixTest"));
+            newGameObject2.AddComponent(new ButtonSceneSwitchScript(_sceneSystem, "FireMageAnimTest"));
             _GameObjects.Add(newGameObject2);
 
             // Mouse Object
@@ -59,21 +60,21 @@ namespace Yayen.Assignment4.Gameplay.Scenes
             GameObject SceneDescription = new(this, "SceneDescription", _graphicsDevice.Viewport.Width / 2, 32, 0, 0.5f, 0.5f);
             //SceneDescription.AddComponent(new SpriteRenderer(SceneDescription, pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
             //SceneDescription.AddComponent(new RectangleCollider(SceneDescription, _RectangleCollisionSystem));
-            SceneDescription.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "SpriteAnimationTest", 0, 0));
+            SceneDescription.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "FireMageAnimTest", 0, 0));
             _GameObjects.Add(SceneDescription);
 
             // Test Objects
 
             // FireMage Test
-            GameObject fireMage = new(this, "FireMage", _graphicsDevice.Viewport.Width / 2, 128, 0, 2f, 2f);
+            GameObject megaman = new(this, "Megaman", _graphicsDevice.Viewport.Width / 2, 128, 0, 1f, 1f);
             //fireMage.AddComponent(new SpriteRenderer(pContent, pContent.Load<Texture2D>("LittleStar"), 0f));
 
             // Creating the animation and animator
-            SpriteSheetAnimation animation = new(_content.Load<Texture2D>("Flame_jet"), new Vector2(128, 128));
-            AnimatedSpriteRenderer animRenderer = (AnimatedSpriteRenderer)fireMage.AddComponent(new AnimatedSpriteRenderer(_content));
-            SpriteSheetAnimator fireMageAnimator = new(animRenderer, animation);
-            animRenderer.SetAnimator(fireMageAnimator);
-            _GameObjects.Add(fireMage);
+            SpriteSheetAnimation animation = new(_content.Load<Texture2D>("Megaman"), new Vector2(140, 140), 1);
+            AnimatedSpriteRenderer animRenderer = (AnimatedSpriteRenderer)megaman.AddComponent(new AnimatedSpriteRenderer(_content));
+            SpriteSheetAnimator megamanAnimator = new(animRenderer, animation);
+            animRenderer.SetAnimator(megamanAnimator);
+            _GameObjects.Add(megaman);
 
             // Play Animation Button
             base.LoadContent(pContent, pGame1);
@@ -82,7 +83,7 @@ namespace Yayen.Assignment4.Gameplay.Scenes
             playButton.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
             playButton.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Play Anim"));
             playButton.AddComponent(new Button());
-            playButton.AddComponent(new ButtonStartAnimScript(fireMageAnimator));
+            playButton.AddComponent(new ButtonStartAnimScript(megamanAnimator));
             _GameObjects.Add(playButton);
         }
 

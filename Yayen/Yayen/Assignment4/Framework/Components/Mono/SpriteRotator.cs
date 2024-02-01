@@ -6,18 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
-    public class SpriteRotator : Component, IUpdatableComponent
+    /// <summary>
+    /// Rotate a sprite around it's Z axis with a speed of input _revolutionsPerSecond.
+    /// </summary>
+    public class SpriteRotator : MonoBehaviour
     {
         private bool _clockwise;
         private float _revolutionsPerSecond;
         private Timer _secondTimer;
         private float _lerpValue;
         private Transform2D _transform;
-        
+
         /// <summary>
         /// Create a SpriteRotator which rotates the sprite of the attached GameObject.
         /// </summary>
@@ -27,15 +31,15 @@ namespace Yayen.Assignment4.Framework.Components
         {
             _clockwise = pClockwise;
             _revolutionsPerSecond = pRevolutionsPerSecond;
-            
+
             _secondTimer = new(1 / pRevolutionsPerSecond, "Second Timer");
-            
+
         }
 
         public override void Start()
         {
             base.Start();
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+            _transform = GameObject.GetComponent<Transform2D>();
             _secondTimer.OnTimeElapsed += ResetSecondTimer;
             _secondTimer.StartTimer();
         }
@@ -44,7 +48,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// Update SpriteRotator Component.
         /// </summary>
         /// <param name="pGameTime">MonoGame GameTime.</param>
-        public void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime)
         {
             _secondTimer.Update(pGameTime);
             UpdateLerpValue();
@@ -64,7 +68,7 @@ namespace Yayen.Assignment4.Framework.Components
             {
                 _lerpValue = MathHelper.Lerp(0, 360 * _revolutionsPerSecond, _secondTimer.TimerCurrentTime);
             }
-            
+
         }
 
         /// <summary>

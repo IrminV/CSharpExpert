@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 using Yayen.Assignment4.Framework.Scenes;
+using Yayen.Assignment4.Framework.Scenes.Base;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
     /// <summary>
     /// Script to make a button switch scenes.
     /// </summary>
-    public class ButtonSceneSwitchScript : Component
+    public class ButtonSceneSwitchScript : MonoBehaviour
     {
         private Button _button;
         private SceneSystem _sceneSystem;
-        private string _sceneName;
+        private Scene _sceneToSwitchTo;
 
         /// <summary>
         /// Create a ButtonSceneSwitchScript Component.
@@ -26,7 +28,19 @@ namespace Yayen.Assignment4.Framework.Components
         public ButtonSceneSwitchScript(SceneSystem pSceneSystem, string pSceneName)
         {
             _sceneSystem = pSceneSystem;
-            _sceneName = pSceneName;
+            _sceneToSwitchTo = _sceneSystem.GetSceneByName(pSceneName);
+        }
+
+        public ButtonSceneSwitchScript(SceneSystem pSceneSystem, Scene pScene)
+        {
+            _sceneSystem = pSceneSystem;
+            _sceneToSwitchTo = pScene;
+        }
+
+        public ButtonSceneSwitchScript(SceneSystem pSceneSystem, int pIndex)
+        {
+            _sceneSystem = pSceneSystem;
+            _sceneToSwitchTo = _sceneSystem.GetSceneByIndex(pIndex);
         }
 
         public override void Start()
@@ -38,14 +52,14 @@ namespace Yayen.Assignment4.Framework.Components
         private void SetButtonEvent()
         {
             // Get the button component on this components GameObject
-            _button = (Button)GameObject.GetComponent<Button>();
+            _button = GameObject.GetComponent<Button>();
             // Add SwitchScene() to the OnButtonPressed event
             _button.OnButtonPressed += SwitchScene;
         }
 
         private void SwitchScene()
         {
-            _sceneSystem.SwitchScene(_sceneName);
+            _sceneSystem.SwitchScene(_sceneToSwitchTo);
         }
     }
 }

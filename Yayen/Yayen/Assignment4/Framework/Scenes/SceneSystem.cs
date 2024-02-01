@@ -129,7 +129,7 @@ namespace Yayen.Assignment4.Framework.Scenes
         }
 
         /// <summary>
-        /// Get scene by name.
+        /// Get first scene by name.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -148,13 +148,59 @@ namespace Yayen.Assignment4.Framework.Scenes
         }
 
         /// <summary>
+        /// Get first scene by index.
+        /// </summary>
+        /// <param name="pIndex">Index of Scene.</param>
+        /// <returns></returns>
+        public Scene GetSceneByIndex(int pIndex)
+        {
+            return _scenes[pIndex];
+        }
+
+        /// <summary>
+        /// Get next scene in scenes list.
+        /// </summary>
+        /// <returns></returns>
+        public Scene GetNextScene(Scene pScene)
+        {
+            //Scene currentScene = _loadedScenes[0];
+            int nextIndex = _scenes.IndexOf(pScene) + 1;
+            if (nextIndex < 0) nextIndex = _scenes.Count - 1;
+            else if (nextIndex > _scenes.Count - 1) nextIndex = 0;
+            return _scenes[nextIndex];
+        }
+
+        /// <summary>
         /// Get next scene in scenes list.
         /// </summary>
         /// <returns></returns>
         public Scene GetNextScene()
         {
-            Scene currentScene = _loadedScenes[0];
-            return _scenes[_scenes.IndexOf(currentScene) + 1];
+            return GetNextScene(GetActiveScene());
+        }
+
+        public string GetNextSceneName(Scene pScene)
+        {
+            return GetNextScene(pScene).SceneName;
+        }
+
+
+        public Scene GetPreviousScene(Scene pScene)
+        {
+            int indexBefore = _scenes.IndexOf(pScene) - 1;
+            if (indexBefore < 0) indexBefore = _scenes.Count - 1;
+            else if (indexBefore > _scenes.Count - 1) indexBefore = 0;
+            return _scenes[indexBefore];
+        }
+
+        public Scene GetPreviousScene()
+        {
+            return GetPreviousScene(GetActiveScene());
+        }
+
+        public string GetPreviousSceneName(Scene pScene)
+        {
+            return GetPreviousScene(pScene).SceneName;
         }
 
         /// <summary>
@@ -193,10 +239,10 @@ namespace Yayen.Assignment4.Framework.Scenes
         }
 
         /// <summary>
-        /// Get currently loaded scene.
+        /// Get the first, currently loaded scene.
         /// </summary>
         /// <returns></returns>
-        public Scene GetScene()
+        public Scene GetActiveScene()
         {
             return _loadedScenes[0];
         }

@@ -9,6 +9,9 @@ using Yayen.Assignment4.Framework.Components.Interfaces;
 
 namespace Yayen.Assignment4.Framework.Components
 {
+    /// <summary>
+    /// An animator used to play SpriteSheetAnimations.
+    /// </summary>
     public class SpriteSheetAnimator
     {
         
@@ -16,6 +19,9 @@ namespace Yayen.Assignment4.Framework.Components
         private AnimatedSpriteRenderer _animSpriteRenderer;
         private List<SpriteSheetAnimation> _animations = new List<SpriteSheetAnimation>();
         int _currentAnimIndex = 0;
+
+        public int AnimationAmount { get { return _animations.Count; } }
+        public int CurrentAnimIndex {  get { return _currentAnimIndex; } }
 
         public SpriteSheetAnimator(AnimatedSpriteRenderer pAnimSpriteRenderer, params SpriteSheetAnimation[] pAnimations)
         {
@@ -60,6 +66,11 @@ namespace Yayen.Assignment4.Framework.Components
         public Rectangle GetSourceRectangle()
         {
             return _animations[_currentAnimIndex].SourceRectangle;
+        }
+
+        public string GetSpriteSheetName()
+        {
+            return _animations[_currentAnimIndex].SpriteSheet.Name;
         }
     }
 }

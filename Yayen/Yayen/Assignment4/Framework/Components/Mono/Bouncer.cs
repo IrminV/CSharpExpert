@@ -6,11 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
-    public class Bouncer : Component, IUpdatableComponent
+    public class Bouncer : MonoBehaviour
     {
         private Transform2D _transform;
         private SineWave _sineWave;
@@ -41,7 +42,7 @@ namespace Yayen.Assignment4.Framework.Components
         public override void Start()
         {
             base.Start();
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+            _transform = GameObject.GetComponent<Transform2D>();
             //_nextBouncer = GetNextBouncer();
             _bounceAnchor = _transform.Position;
         }
@@ -50,7 +51,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// Update Bouncer Component.
         /// </summary>
         /// <param name="pGameTime">MonoGame GameTime.</param>
-        public void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime)
         {
             //base.Update(pGameTime);
             _sineWave.Update(pGameTime);
@@ -82,7 +83,7 @@ namespace Yayen.Assignment4.Framework.Components
                 //    _addedPosition.Y = 0;
                 //}
             }
-            
+
         }
 
         /// <summary>

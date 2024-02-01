@@ -12,6 +12,9 @@ using Yayen.Assignment4.Framework.GameObjects;
 
 namespace Yayen.Assignment4.Framework.Components
 {
+    /// <summary>
+    /// A spriteRenderer used to display a sprite on screen.
+    /// </summary>
     public class SpriteRenderer : Component, IDrawableComponent
     {
         /* What does a sprite renderer do?

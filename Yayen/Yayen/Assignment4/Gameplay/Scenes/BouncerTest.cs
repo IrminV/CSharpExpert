@@ -13,6 +13,7 @@ using Yayen.Assignment4.Framework.Scenes;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Scenes.Base;
 using Microsoft.Xna.Framework;
+using Yayen.Assignment4.Framework.Components.Mono;
 
 namespace Yayen.Assignment4.Gameplay.Scenes
 {
@@ -34,7 +35,7 @@ namespace Yayen.Assignment4.Gameplay.Scenes
             newGameObject.AddComponent(new RectangleCollider(_RectangleCollisionSystem));
             newGameObject.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "To Scaler Test"));
             newGameObject.AddComponent(new Button());
-            newGameObject.AddComponent(new ButtonSceneSwitchScript(_sceneSystem, "ScalerTest"));
+            newGameObject.AddComponent(new ButtonSceneSwitchScript(_sceneSystem, _sceneSystem.GetNextScene(_sceneSystem.GetActiveScene())));
             _GameObjects.Add(newGameObject);
 
             // Previous Test Button
@@ -61,8 +62,6 @@ namespace Yayen.Assignment4.Gameplay.Scenes
             //SceneDescription.AddComponent(new RectangleCollider(SceneDescription, _RectangleCollisionSystem));
             SceneDescription.AddComponent(new Text(pContent.Load<SpriteFont>("DefaultSpritefont"), "Bouncer Test", 0, 0));
             _GameObjects.Add(SceneDescription);
-
-
 
             /*
              

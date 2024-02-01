@@ -5,11 +5,12 @@ using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Colliders.Base;
 using Yayen.Assignment4.Framework.Components.Colliders.RectangleCollision;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
-    public class Button : Component, IUpdatableComponent
+    public class Button : MonoBehaviour
     {
         private MouseState _mouseState;
 
@@ -52,10 +53,11 @@ namespace Yayen.Assignment4.Framework.Components
         {
             base.Start();
             SetColliderEvents();
-            if(_debugMode) OnButtonPressed += DebugOnButtonPressedMessage;
+            OnButtonPressed += PressCooldown;
+            if (_debugMode) OnButtonPressed += DebugOnButtonPressedMessage;
         }
 
-        public void Update(Microsoft.Xna.Framework.GameTime pGameTime)
+        public override void Update(Microsoft.Xna.Framework.GameTime pGameTime)
         {
             //base.Update(pGameTime);
             CheckClick();
@@ -64,7 +66,7 @@ namespace Yayen.Assignment4.Framework.Components
 
         public void GetCollider()
         {
-            if(GameObject.GetComponent<RectangleCollider>() == null) { Console.WriteLine($"Button could not find collider"); }
+            if (GameObject.GetComponent<RectangleCollider>() == null) { Console.WriteLine($"Button could not find collider"); }
             _collider = GameObject.GetComponent<RectangleCollider>();
         }
 
@@ -100,10 +102,14 @@ namespace Yayen.Assignment4.Framework.Components
         private void CheckClick()
         {
             _mouseState = Mouse.GetState();
-            if (_canPress && _mouseOverlap && _mouseState.LeftButton == ButtonState.Pressed)
+            if (_canPress && _mouseOverlap)
             {
-                //Console.WriteLine("Pressing Button");
-                OnButtonPressed.Invoke();
+                if (_mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    //Console.WriteLine("Pressing Button");
+                    OnButtonPressed.Invoke();
+                }
+
             }
         }
 
@@ -142,7 +148,7 @@ namespace Yayen.Assignment4.Framework.Components
         private void PressCooldown()
         {
             _canPress = false;
-            _pressCooldownTimer.StartTimer();
+            _pressCooldownTimer.ResetTimer(true);
         }
         #endregion
     }

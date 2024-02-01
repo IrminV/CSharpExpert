@@ -10,7 +10,7 @@ using Yayen.Assignment4.Framework.GameObjects;
 namespace Yayen.Assignment4.Framework.Components
 {
     /// <summary>
-    /// A SineWave
+    /// A SineWave.
     /// </summary>
     public class SineWave
     {

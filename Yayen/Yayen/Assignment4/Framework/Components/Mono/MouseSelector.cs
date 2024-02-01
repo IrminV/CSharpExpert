@@ -7,14 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
     /// <summary>
-    /// Mouse GameObject
+    /// Mouse GameObject Component. It's like the in game virtual mouse.
     /// </summary>
-    public class MouseSelector : Component, IUpdatableComponent
+    public class MouseSelector : MonoBehaviour
     {
         private MouseState _mouseState = new MouseState();
 
@@ -26,7 +27,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// <param name="pGameObject">Reference to GameObject this component is part of.</param>
         public MouseSelector()
         {
-            
+
         }
 
         public override void Start()
@@ -39,7 +40,7 @@ namespace Yayen.Assignment4.Framework.Components
         /// Update the position of the virtual mouse.
         /// </summary>
         /// <param name="pGameTime">MonoGame GameTime.</param>
-        public void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime)
         {
             _mouseState = Mouse.GetState();
             _transform2D.Position = new Vector2(_mouseState.Position.X, _mouseState.Position.Y);

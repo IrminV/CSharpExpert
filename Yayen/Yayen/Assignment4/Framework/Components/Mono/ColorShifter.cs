@@ -2,11 +2,14 @@
 using Microsoft.Xna.Framework;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
-    public class ColorShifter : Component, IUpdatableComponent
+    //ColorShifter imported from C# Expert Assignment.
+
+    public class ColorShifter : MonoBehaviour
     {
         //Fields - configurable
         private float _shiftSpeed;
@@ -35,7 +38,7 @@ namespace Yayen.Assignment4.Framework.Components
         }
 
         //Methods - overridden
-        public void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime)
         {
             //Updating the _hue value according to the passed time since the last Update call, multiplied with the configured shift speed.
             _hue += (float)(pGameTime.ElapsedGameTime.TotalSeconds * _shiftSpeed);

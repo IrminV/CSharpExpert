@@ -7,14 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 
-namespace Yayen.Assignment4.Framework.Components
+namespace Yayen.Assignment4.Framework.Components.Mono
 {
     /// <summary>
     /// Component to create a scaling animation on a GameObjects Sprite.
     /// </summary>
-    public class SpriteScaler : Component, IUpdatableComponent
+    public class SpriteScaler : MonoBehaviour
     {
         Transform2D _transform;
         bool _scaleXActive = false;
@@ -37,7 +38,7 @@ namespace Yayen.Assignment4.Framework.Components
             }
         }
 
-        public Vector2 ScalesPerSecond { get { return new Vector2(_sineWaveXScale.PeriodsPerSecond, _sineWaveXScale.PeriodsPerSecond); } set { _sineWaveXScale.PeriodsPerSecond = value.X; _sineWaveYScale.PeriodsPerSecond = value.Y;} }
+        public Vector2 ScalesPerSecond { get { return new Vector2(_sineWaveXScale.PeriodsPerSecond, _sineWaveXScale.PeriodsPerSecond); } set { _sineWaveXScale.PeriodsPerSecond = value.X; _sineWaveYScale.PeriodsPerSecond = value.Y; } }
 
         /// <summary>
         /// Create a SpriteScaler Component. This creates a scaling animation for the connected GameObjects Sprite. This constructor gives the most indept configuration. This Constructor expects non uniform scaling with Vector 2s.
@@ -88,14 +89,14 @@ namespace Yayen.Assignment4.Framework.Components
         public override void Start()
         {
             base.Start();
-            _transform = (Transform2D)GameObject.GetComponent<Transform2D>();
+            _transform = GameObject.GetComponent<Transform2D>();
         }
 
         /// <summary>
         /// Update the SpriteScaler Component.
         /// </summary>
         /// <param name="pGameTime"></param>
-        public void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime)
         {
             _sineWaveXScale.Update(pGameTime);
             _sineWaveYScale.Update(pGameTime);

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yayen.Assignment4.Framework.Components.Base;
 using Yayen.Assignment4.Framework.Components.Interfaces;
+using Yayen.Assignment4.Framework.Components.Mono.Base;
 using Yayen.Assignment4.Framework.GameObjects;
 using Yayen.Assignment4.Framework.Scenes;
 
@@ -18,7 +19,7 @@ namespace Yayen.Assignment4.Framework.Components
     /// <summary>
     /// Script to make a key switch scenes.
     /// </summary>
-    public class ButtonPressSceneSwitcher : Component, IUpdatableComponent
+    public class ButtonPressSceneSwitcher : MonoBehaviour
     {
         KeyboardState _keyBoardState;
         private bool _checkPressed = true;
@@ -36,7 +37,7 @@ namespace Yayen.Assignment4.Framework.Components
             _key = pKey;
         }
 
-        public void Update(GameTime pGameTime)
+        public override void Update(GameTime pGameTime)
         {
 
         }

@@ -12,6 +12,7 @@ using Yayen.Assignment4.Framework.GameObjects;
 using Yayen.Assignment4.Framework.MonoGameBase;
 using Yayen.Assignment4.Framework.Scenes;
 using Yayen.Assignment4.Framework.Scenes.Base;
+using Yayen.Assignment4.Framework.Components.Mono;
 
 namespace Yayen.Assignment4.Gameplay.Scenes
 {
